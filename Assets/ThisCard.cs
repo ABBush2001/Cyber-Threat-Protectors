@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,13 @@ public class ThisCard : MonoBehaviour
     public Text nameText;
     public Text descriptionText;
 
+    public bool cardBack;
+    public static bool staticCardBack;
+
     // Start is called before the first frame update
     void Start()
     {
-        int randomNumber = Random.Range(0, 3);
+        int randomNumber = UnityEngine.Random.Range(0, 3);
         thisId = randomNumber;
         CardDatabase.fillList(cList);
 
@@ -28,11 +32,23 @@ public class ThisCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        try
+        {
+            staticCardBack = cardBack;
+        }
+        catch(NullReferenceException e)
+        {
+
+        }
+        
+
         cardDesc = cList[thisId].cardDesc;
         cardName = cList[thisId].cardName;
 
 
         nameText.text = "" + cardName;
         descriptionText.text = "" + cardDesc;
+
+        
     }
 }

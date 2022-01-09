@@ -10,6 +10,10 @@ public class Deck : MonoBehaviour
     public int x;
     public int deckSize;
 
+    public GameObject cardInDeck1;
+    public GameObject cardInDeck2;
+    public GameObject cardInDeck3;
+
     // Start is called before the first frame update
     void Start()
     {
