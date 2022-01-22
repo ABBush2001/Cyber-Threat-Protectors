@@ -5,11 +5,12 @@ Welcome to the cyber threat protectors repo! Stay tuned for future updates.
 
 # Menu Scene
 
-The menu scene currently has a "play game" button (takes player to the game scene), a "tutorial" button (not programmed yet, will eventually take players to a tutorial scene) and a "quit" button.
+The menu scene currently has a "play game" button (takes player to the game scene), a "tutorial" button (not programmed yet, will eventually take players to a tutorial scene), a "settings" button and a "quit" button.
 
 **tasks for menu scene**
-- create a "settings" button and implement its appropriate functions
+- implement the "settings"
 - revise the visual design of the main menu
+- implement "tutorial button"
 
 
 # Game Scene
@@ -23,4 +24,4 @@ When the game begins, a player hand of 4 cards is automatically generated.
 
 **known issues for game scene**
 - initially generated player's hand does not seem to draw cards from the deck
-- need to determine how to implement drag and drop
+- drag and drop mostly works, but allows player to "drop" cards where they shouldn't
