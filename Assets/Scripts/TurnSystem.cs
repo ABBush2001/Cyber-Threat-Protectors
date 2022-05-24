@@ -31,30 +31,42 @@ public class TurnSystem : MonoBehaviour
         enemyMaxPoints = 20;
         playerCurPoints = 0;
         enemyCurPoints = 0;
+        turnText.text = "Your Turn";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isYourTurn == true)
-        {
-            turnText.text = "Your Turn";
-        }
-        else
-        {
-            turnText.text = "Opponent Turn";
-        }
+
     }
 
     public void PlayerEndTurn()
     {
         isYourTurn = false;
         enemyTurn += 1; 
+        turnText.text = "Opponent Turn";
+        EnemyTurn();
     }
 
     public void EnemyEndTurn()
     {
         isYourTurn = true;
         yourTurn += 1;
+        turnText.text = "Your Turn";
     }
+
+    public void EnemyTurn()
+    {
+        StartCoroutine(waitCoroutine());
+    }
+
+    IEnumerator waitCoroutine()
+    {
+        Debug.Log("Started enemy turn at timestamp: " + Time.time);
+        yield return new WaitForSeconds(5);
+
+        Debug.Log("Ended enemy turn at timestamp : " + Time.time);
+        EnemyEndTurn();
+    }
+
 }
