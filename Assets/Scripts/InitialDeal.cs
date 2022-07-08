@@ -6,7 +6,9 @@ using UnityEngine;
 public class InitialDeal : MonoBehaviour
 {
 	public GameObject CardToHand;
-	
+	public GameObject CardToHandEnemy;
+    public GameObject CardToHandEnemyTwo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,8 @@ public class InitialDeal : MonoBehaviour
 		{
 			yield return new WaitForSeconds(1);
 			Instantiate(CardToHand, transform.position, transform.rotation);
+            Instantiate(CardToHandEnemy, transform.position, transform.rotation);
+            Instantiate(CardToHandEnemyTwo, transform.position, transform.rotation);
 		}
 	}
 }
