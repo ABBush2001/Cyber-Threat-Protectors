@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 
 /*Script representing a specific instance of the card object*/
-public class ThisCard : MonoBehaviour
+public class ThisCardEnemy : MonoBehaviour
 {
 	public List<Card> cList = new List<Card>();
     public int thisId;
@@ -33,10 +33,10 @@ public class ThisCard : MonoBehaviour
 
         numberOfCardsInDeck = Deck.deckSize;
 
-        cardDesc = Deck.staticPlayerDeck[0].cardDesc;
-        cardName = Deck.staticPlayerDeck[0].cardName;
+        cardDesc = Deck.staticEnemyDeck[0].cardDesc;
+        cardName = Deck.staticEnemyDeck[0].cardName;
 
-        Deck.staticPlayerDeck.RemoveAt(0);
+        Deck.staticEnemyDeck.RemoveAt(0);
 
     }
 
@@ -44,10 +44,10 @@ public class ThisCard : MonoBehaviour
     void Update()
     {
 
-        Hand = GameObject.Find("Player Card Area");
+        Hand = GameObject.Find("Enemy Card Area");
         if(this.transform.parent == Hand.transform.parent)
         {
-            cardBack = false;
+            cardBack = true;
         }
 
         try
@@ -59,8 +59,9 @@ public class ThisCard : MonoBehaviour
 
         }
         
-        nameText.text = "" + cardName;
-        descriptionText.text = "" + cardDesc;
+
+        //nameText.text = "" + cardName;
+        //descriptionText.text = "" + cardDesc;
 
         if(this.tag == "Clone")
         {

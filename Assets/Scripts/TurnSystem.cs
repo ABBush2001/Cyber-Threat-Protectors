@@ -65,6 +65,12 @@ public class TurnSystem : MonoBehaviour
         Debug.Log("Started enemy turn at timestamp: " + Time.time);
         yield return new WaitForSeconds(5);
 
+        int randNum = Random.Range(0, 3);
+        GameObject cards = GameObject.Find("Enemy Card Area");
+
+
+        CardToPlayEnemy.MoveToPlay(cards.transform.GetChild(randNum).gameObject);
+
         Debug.Log("Ended enemy turn at timestamp : " + Time.time);
         EnemyEndTurn();
     }

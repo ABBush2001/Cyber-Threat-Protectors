@@ -627,9 +627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d62cb2e4ad0b44b8431193841849fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deck: []
+  playerDeck: []
+  enemyDeck: []
   cardValues: []
   x: 0
+  y: 0
 --- !u!114 &266155134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +646,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardToHand: {fileID: 1901475081029691327, guid: b4081e032d142e74eb12b872c579a372, type: 3}
   CardToHandEnemy: {fileID: 1901475081029691327, guid: 05edb9856f612d7479e0d0ba4bde250d, type: 3}
-  CardToHandEnemyTwo: {fileID: 1901475081029691327, guid: 3c072e77ed9c6554aa60c5eaecbb2215, type: 3}
 --- !u!1 &650182050
 GameObject:
   m_ObjectHideFlags: 0
