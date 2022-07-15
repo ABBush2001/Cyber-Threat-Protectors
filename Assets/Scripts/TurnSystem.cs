@@ -7,6 +7,8 @@ using TMPro;
 public class TurnSystem : MonoBehaviour
 {
 
+    public GameObject CardToPlay;
+
     public bool isYourTurn;
     public int yourTurn;
     public int enemyTurn;
@@ -65,11 +67,9 @@ public class TurnSystem : MonoBehaviour
         Debug.Log("Started enemy turn at timestamp: " + Time.time);
         yield return new WaitForSeconds(5);
 
-        int randNum = Random.Range(0, 3);
-        GameObject cards = GameObject.Find("Enemy Card Area");
+        //instantiate card from enemy deck to play
 
-
-        CardToPlayEnemy.MoveToPlay(cards.transform.GetChild(randNum).gameObject);
+        Instantiate(CardToPlay, transform.position, transform.rotation);
 
         Debug.Log("Ended enemy turn at timestamp : " + Time.time);
         EnemyEndTurn();

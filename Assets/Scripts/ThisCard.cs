@@ -61,6 +61,7 @@ public class ThisCard : MonoBehaviour
         
         nameText.text = "" + cardName;
         descriptionText.text = "" + cardDesc;
+        
 
         if(this.tag == "Clone")
         {

@@ -605,6 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c7259876028e040be11a0b486baee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CardToPlay: {fileID: 1901475081029691327, guid: 05edb9856f612d7479e0d0ba4bde250d, type: 3}
   isYourTurn: 0
   yourTurn: 0
   enemyTurn: 0
@@ -645,7 +646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardToHand: {fileID: 1901475081029691327, guid: b4081e032d142e74eb12b872c579a372, type: 3}
-  CardToHandEnemy: {fileID: 1901475081029691327, guid: 05edb9856f612d7479e0d0ba4bde250d, type: 3}
+  CardToHandEnemy: {fileID: 1901475081029691327, guid: f7c8d9f4cf6a565448392142381f5931, type: 3}
 --- !u!1 &650182050
 GameObject:
   m_ObjectHideFlags: 0

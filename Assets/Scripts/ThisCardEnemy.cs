@@ -60,8 +60,8 @@ public class ThisCardEnemy : MonoBehaviour
         }
         
 
-        //nameText.text = "" + cardName;
-        //descriptionText.text = "" + cardDesc;
+        nameText.text = "" + cardName;
+        descriptionText.text = "" + cardDesc;
 
         if(this.tag == "Clone")
         {
