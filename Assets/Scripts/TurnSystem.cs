@@ -14,11 +14,16 @@ public class TurnSystem : MonoBehaviour
 
     public int playerMaxPoints;
     public int playerCurPoints;
-    public Text playerPointText;
+    public TextMeshProUGUI playerPointText;
 
     public int enemyMaxPoints;
     public int enemyCurPoints;
-    public Text enemyPointText;
+    public TextMeshProUGUI enemyPointText;
+
+    public GameObject playArea;
+    public GameObject playAreaEnemy;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +50,8 @@ public class TurnSystem : MonoBehaviour
         isYourTurn = false;
         enemyTurn += 1; 
         turnText.text = "Opponent Turn";
+        getScore();
+        
         EnemyTurn();
     }
 
@@ -72,7 +79,45 @@ public class TurnSystem : MonoBehaviour
         CardToPlayEnemy.MoveToPlay(cards.transform.GetChild(randNum).gameObject);
 
         Debug.Log("Ended enemy turn at timestamp : " + Time.time);
+        
         EnemyEndTurn();
+    }
+
+    public void getScore(){
+        //int numOfPlayerChildren = playArea.transform.childCount;
+        //int numOfEnemyChildren = playAreaEnemy.transform.childCount;
+        int pDefense = 0;
+        int pAttack = 0;
+        int eDefense = 0;
+        int eAttack = 0;
+
+        foreach (Transform child in playArea.transform)
+        {
+            playerCurPoints += child.GetComponent<ThisCard>().cardPoints;
+            pAttack += child.GetComponent<ThisCard>().cardDamage;
+            pDefense += child.GetComponent<ThisCard>().cardDefense; 
+        }
+        // foreach (Transform child in playAreaEnemy.transform)
+        // {
+        //     enemyCurPoints += child.GetComponent<ThisCard>().cardPoints;
+        //     eAttack += child.GetComponent<ThisCard>().cardDamage;
+        //     eDefense += child.GetComponent<ThisCard>().cardDefense; 
+        // }
+        if(pDefense >= eAttack){
+            pDefense=0;
+            eAttack=0;
+        }
+        if(eDefense >= pAttack){
+            eDefense=0;
+            pAttack=0;
+        }
+        playerCurPoints = playerCurPoints - (eAttack - pDefense);
+        enemyCurPoints = enemyCurPoints - (pAttack - eDefense);
+        Debug.Log("current points: " + playerCurPoints);
+        playerPointText.text = playerCurPoints.ToString();
+        enemyPointText.text = enemyCurPoints.ToString();
+
+
     }
 
 }

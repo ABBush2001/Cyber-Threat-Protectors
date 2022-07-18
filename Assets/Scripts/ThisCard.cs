@@ -24,6 +24,11 @@ public class ThisCard : MonoBehaviour
     public GameObject Hand;
     public int numberOfCardsInDeck;
 
+    public int cardTypeID;
+    public int cardPoints;
+    public int cardDamage;
+    public int cardDefense;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +40,11 @@ public class ThisCard : MonoBehaviour
 
         cardDesc = Deck.staticPlayerDeck[0].cardDesc;
         cardName = Deck.staticPlayerDeck[0].cardName;
+
+        cardTypeID = Deck.staticPlayerDeck[0].cardType;
+        cardPoints = Deck.staticPlayerDeck[0].points;
+        cardDamage = Deck.staticPlayerDeck[0].damage;
+        cardDefense = Deck.staticPlayerDeck[0].defense;
 
         Deck.staticPlayerDeck.RemoveAt(0);
 
