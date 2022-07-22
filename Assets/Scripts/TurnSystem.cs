@@ -97,12 +97,12 @@ public class TurnSystem : MonoBehaviour
             pAttack += child.GetComponent<ThisCard>().cardDamage;
             pDefense += child.GetComponent<ThisCard>().cardDefense; 
         }
-        // foreach (Transform child in playAreaEnemy.transform)
-        // {
-        //     enemyCurPoints += child.GetComponent<ThisCard>().cardPoints;
-        //     eAttack += child.GetComponent<ThisCard>().cardDamage;
-        //     eDefense += child.GetComponent<ThisCard>().cardDefense; 
-        // }
+        foreach (Transform child in playAreaEnemy.transform)
+        {
+            enemyCurPoints += child.GetComponent<ThisCardEnemy>().cardPoints;
+            eAttack += child.GetComponent<ThisCardEnemy>().cardDamage;
+            eDefense += child.GetComponent<ThisCardEnemy>().cardDefense; 
+        }
         if(pDefense >= eAttack){
             pDefense=0;
             eAttack=0;
@@ -113,6 +113,12 @@ public class TurnSystem : MonoBehaviour
         }
         playerCurPoints = playerCurPoints - (eAttack - pDefense);
         enemyCurPoints = enemyCurPoints - (pAttack - eDefense);
+        if(playerCurPoints >= playerMaxPoints){
+            //play victory screen
+        }
+        if(enemyCurPoints >= enemyMaxPoints){
+            //play losing screen
+        }
         Debug.Log("current points: " + playerCurPoints);
         playerPointText.text = playerCurPoints.ToString();
         enemyPointText.text = enemyCurPoints.ToString();

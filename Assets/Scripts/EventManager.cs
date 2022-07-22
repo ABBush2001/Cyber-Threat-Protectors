@@ -9,6 +9,7 @@ public class EventManager : MonoBehaviour
     public List<Card> discardPile = new List<Card>();
     public TextMeshProUGUI discardPileText;
     // Start is called before the first frame update
+    private Card card;
     void Start()
     {
         
@@ -18,5 +19,7 @@ public class EventManager : MonoBehaviour
     void Update()
     {
         discardPileText.text = discardPile.Count.ToString();
+        
     }
+
 }

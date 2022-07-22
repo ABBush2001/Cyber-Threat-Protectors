@@ -17,8 +17,21 @@ public class Card : MonoBehaviour
 
 	private EventManager em;
 
+	public Transform myTarget { get; set;}
+
+	
+
 	private void Start(){
 		em = FindObjectOfType<EventManager>();
+	}
+
+	void Update()
+	{
+		if(cardActive){
+			ClickTarget();
+		}
+		
+		
 	}
 	
 	public Card()
@@ -42,5 +55,30 @@ public class Card : MonoBehaviour
 		em.discardPile.Add(this);
 		gameObject.SetActive(false);
 	}
+
+	public void cardEffect(){
+		//select enemy card
+		cardActive = true;
+		//call its discard method
+	}
+
+	public void ClickTarget(){
+        if(Input.GetMouseButtonDown(0))
+        {
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),Vector2.zero,Mathf.Infinity,256);
+
+            if(hit.collider != null)
+            {
+                myTarget = hit.transform;
+				hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+				//myTarget.GetComponent<Card>().MoveToDiscardPile();
+
+            }
+            else
+            {
+                myTarget = null;
+            }
+        }
+    }
 	
 }
