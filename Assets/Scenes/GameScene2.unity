@@ -538,6 +538,7 @@ GameObject:
   - component: {fileID: 266155133}
   - component: {fileID: 266155132}
   - component: {fileID: 266155135}
+  - component: {fileID: 266155136}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -664,6 +665,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   discardPile: []
   discardPileText: {fileID: 1735952463}
+--- !u!114 &266155136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266155128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934e231c0a511b4418937733b1548f0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &521127882
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,6 +686,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 521127883}
+  - component: {fileID: 521127884}
   m_Layer: 5
   m_Name: DiscardPile
   m_TagString: Untagged
@@ -703,6 +717,32 @@ RectTransform:
   m_AnchoredPosition: {x: 351.75, y: 15.8933}
   m_SizeDelta: {x: 95.858, y: 98.1866}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!61 &521127884
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521127882}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 80, y: 80}
+  m_EdgeRadius: 0
 --- !u!1 &650182050
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,7 +888,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -874,8 +914,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676717833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 735, y: 469, z: -10}
+  m_LocalScale: {x: 0.89393, y: 0.89393, z: 0.89393}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1185,7 +1225,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
 --- !u!114 &1047050792
 MonoBehaviour:
   m_ObjectHideFlags: 0

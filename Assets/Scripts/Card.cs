@@ -26,11 +26,7 @@ public class Card : MonoBehaviour
 	}
 
 	void Update()
-	{
-		if(cardActive){
-			ClickTarget();
-		}
-		
+	{	
 		
 	}
 	
