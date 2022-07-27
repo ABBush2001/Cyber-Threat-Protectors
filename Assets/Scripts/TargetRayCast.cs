@@ -23,8 +23,8 @@ public class TargetRayCast : MonoBehaviour
             if(hit.collider != null)
             {
                 Debug.Log(hit.collider.gameObject.name);
-                Debug.Log(hit.collider.bounds);
                 hit.collider.gameObject.GetComponent<Card>().MoveToDiscardPile();
+                Debug.Log(hit.collider.gameObject.name);
 				//hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
 				//myTarget.GetComponent<Card>().MoveToDiscardPile();
 
