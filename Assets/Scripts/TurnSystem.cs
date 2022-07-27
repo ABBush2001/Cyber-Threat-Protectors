@@ -25,6 +25,9 @@ public class TurnSystem : MonoBehaviour
     public GameObject playArea;
     public GameObject playAreaEnemy;
 
+    public GameObject victoryScreen;
+    public GameObject defeatScreen;
+
     
 
     // Start is called before the first frame update
@@ -115,9 +118,11 @@ public class TurnSystem : MonoBehaviour
         enemyCurPoints = enemyCurPoints - (pAttack - eDefense);
         if(playerCurPoints >= playerMaxPoints){
             //play victory screen
+            victoryScreen.SetActive(true);
         }
         if(enemyCurPoints >= enemyMaxPoints){
             //play losing screen
+            defeatScreen.SetActive(true);
         }
         Debug.Log("current points: " + playerCurPoints);
         playerPointText.text = playerCurPoints.ToString();
