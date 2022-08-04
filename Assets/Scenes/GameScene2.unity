@@ -802,6 +802,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   discardPile: []
   discardPileText: {fileID: 1996204321}
+  targetOn: 0
+  card: {fileID: 0}
+  playArea: {fileID: 815855172}
+  playAreaEnemy: {fileID: 1697954959}
 --- !u!114 &266155136
 MonoBehaviour:
   m_ObjectHideFlags: 0
