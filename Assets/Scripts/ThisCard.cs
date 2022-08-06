@@ -27,12 +27,9 @@ public class ThisCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int randomNumber = UnityEngine.Random.Range(0, 3);
-        thisId = randomNumber;
-        CardDatabase.FillList(cList);
-
         numberOfCardsInDeck = Deck.deckSize;
 
+        thisId = Deck.staticPlayerDeck[0].id;
         cardDesc = Deck.staticPlayerDeck[0].cardDesc;
         cardName = Deck.staticPlayerDeck[0].cardName;
 

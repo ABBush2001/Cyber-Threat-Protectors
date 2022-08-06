@@ -747,10 +747,10 @@ MonoBehaviour:
   turnText: {fileID: 1733359145}
   playerMaxPoints: 0
   playerCurPoints: 0
-  playerPointText: {fileID: 0}
+  playerPointText: {fileID: 84843740}
   enemyMaxPoints: 0
   enemyCurPoints: 0
-  enemyPointText: {fileID: 0}
+  enemyPointText: {fileID: 1263304294}
 --- !u!114 &266155133
 MonoBehaviour:
   m_ObjectHideFlags: 0
