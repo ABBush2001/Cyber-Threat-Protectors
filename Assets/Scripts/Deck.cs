@@ -24,8 +24,8 @@ public class Deck : MonoBehaviour
 		
 		for(int i = 0; i < deckSize; i++)
 		{
-			x = Random.Range(0, 3);
-			y = Random.Range(0, 3);
+			x = Random.Range(0, 20);
+			y = Random.Range(0, 20);
 			playerDeck.Add(cardValues[x]);
 			enemyDeck.Add(cardValues[y]);
 		}

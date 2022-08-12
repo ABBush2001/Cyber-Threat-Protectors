@@ -191,7 +191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 849, y: 95}
+  m_AnchoredPosition: {x: 833.6, y: 95}
   m_SizeDelta: {x: 42.6438, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84843740
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -40.375328, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -741,9 +741,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardToPlay: {fileID: 1901475081029691327, guid: 05edb9856f612d7479e0d0ba4bde250d, type: 3}
+  CardToHand: {fileID: 1901475081029691327, guid: b4081e032d142e74eb12b872c579a372, type: 3}
   isYourTurn: 0
   yourTurn: 0
   enemyTurn: 0
+  halt: 0
+  done: 0
   turnText: {fileID: 1733359145}
   playerMaxPoints: 0
   playerCurPoints: 0
@@ -2286,7 +2289,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -525, y: 96}
+  m_AnchoredPosition: {x: -551.6, y: 96}
   m_SizeDelta: {x: 42.6438, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1263304294
@@ -2372,7 +2375,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -48.22784, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
