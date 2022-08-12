@@ -23,6 +23,13 @@ public class TurnSystem : MonoBehaviour
     public int enemyCurPoints;
     public TextMeshProUGUI enemyPointText;
 
+    public GameObject playArea;
+    public GameObject playAreaEnemy;
+
+    public GameObject victoryScreen;
+    public GameObject defeatScreen;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,14 +49,21 @@ public class TurnSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(playerCurPoints >= playerMaxPoints){
+            //play victory screen
+            victoryScreen.SetActive(true);
+        }
+        if(enemyCurPoints >= enemyMaxPoints){
+            //play losing screen
+            defeatScreen.SetActive(true);
+        }
 
     }
 
     public void PlayerTurn()
     {
         
-        /*GameObject player = GameObject.Find("Player Card Area");
+        GameObject player = GameObject.Find("Player Card Area");
         GameObject enemy = GameObject.Find("Enemy Play Area");
 
 
@@ -63,48 +77,65 @@ public class TurnSystem : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < player.transform.childCount; i++)
+        //search for defense cards in enemy's hand
+        for(int i = 0; i < enemy.transform.childCount; i++)
         {
-            //if attack card found
-            if(player.transform.GetChild(i).GetComponent<ThisCard>().thisId >= 4 && player.transform.GetChild(i).GetComponent<ThisCard>().thisId <= 13)
+            
+            //Anti-Malware
+            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 0)
             {
-                //check enemy play area to see if card is being blocked from play
-                for(int j = 0; j < enemy.transform.childCount; j++)
+                for(int k = 0; k < player.transform.childCount; k++)
                 {
-                    GameObject playerCard = player.transform.GetChild(i).gameObject;
-                    GameObject enemyCard = enemy.transform.GetChild(j).gameObject;
-
-                    //Anti-Malware
-                    if((playerCard.GetComponent<ThisCard>().thisId == 6 || playerCard.GetComponent<ThisCard>().thisId == 10) && (enemyCard.GetComponent<ThisCardEnemy>().thisId == 0))
+                    if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 6 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 10)
                     {
-                        Destroy(playerCard.GetComponent<Drag>());
+                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
                     }
+                }
+            }
 
-                    //Encryption
-                    if((playerCard.GetComponent<ThisCard>().thisId == 4 || playerCard.GetComponent<ThisCard>().thisId == 5) && (enemyCard.GetComponent<ThisCardEnemy>().thisId == 1))
+            //Encryption
+            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 1)
+            {
+                for(int k = 0; k < player.transform.childCount; k++)
+                {
+                    if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 4 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 5)
                     {
-                        Destroy(playerCard.GetComponent<Drag>());
+                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
                     }
+                }
+            }
 
-                    //Firewall
-                    if((playerCard.GetComponent<ThisCard>().thisId == 9 || playerCard.GetComponent<ThisCard>().thisId == 12) && (enemyCard.GetComponent<ThisCardEnemy>().thisId == 2))
+            //Firewall
+            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 2)
+            {
+                for(int k = 0; k < player.transform.childCount; k++)
+                {
+                    if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 9 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 12)
                     {
-                        Destroy(playerCard.GetComponent<Drag>());
+                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
                     }
+                }
+            }
 
-                    //Security Training
-                    if((playerCard.GetComponent<ThisCard>().thisId == 7 || playerCard.GetComponent<ThisCard>().thisId == 8) && (enemyCard.GetComponent<ThisCardEnemy>().thisId == 3))
+            //Security Training
+            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 3)
+            {
+                for(int k = 0; k < player.transform.childCount; k++)
+                {
+                    if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 7 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 8)
                     {
-                        Destroy(playerCard.GetComponent<Drag>());
+                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
                     }
                 }
             }
         }
+        
+    
 
         //DETERMINING BLOCKED DEFENSE CARDS*
 
         //check player play area - if one of a defense card type is already in play, disable drag for other ones in hand
-        GameObject playerPlay = GameObject.Find("Player Play Area");
+        /*GameObject playerPlay = GameObject.Find("Player Play Area");
 
         for(int i = 0; i < playerPlay.transform.childCount; i++)
         {
@@ -118,7 +149,7 @@ public class TurnSystem : MonoBehaviour
                     }
                 }
             }
-        }*/ 
+        }*/
     }
 
     public void PlayerEndTurn()
@@ -131,6 +162,13 @@ public class TurnSystem : MonoBehaviour
         //grab list of all cards in play area
         GameObject player = GameObject.Find("Player Play Area");
         GameObject enemy = GameObject.Find("Enemy Play Area");
+
+
+        //disable the drag script for any cards in play
+        for(int i = 0; i < player.transform.childCount; i++)
+        {
+            Destroy(player.transform.GetChild(i).gameObject.GetComponent<Drag>());
+        }
 
         //look for asset cards, and get their points increase
         for(int i = 0; i < player.transform.childCount; i++)
@@ -213,6 +251,7 @@ public class TurnSystem : MonoBehaviour
             }
         }
 
+
         //update player score
         playerCurPoints += tempPlayerPoints;
         enemyCurPoints = enemyCurPoints - tempDamagePoints;
@@ -225,6 +264,8 @@ public class TurnSystem : MonoBehaviour
         isYourTurn = false;
         enemyTurn += 1; 
         turnText.text = "Opponent Turn";
+        //getScore();
+        
         EnemyTurn();
     }
 
@@ -240,9 +281,10 @@ public class TurnSystem : MonoBehaviour
 
         //look for asset cards, and get their points increase
         for(int i = 0; i < enemy.transform.childCount; i++)
-        {
-            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId >= 14 && player.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId <= 18)
+        {   
+            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId >= 14 && enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId <= 18)
             {
+                Debug.Log(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId);
                 tempEnemyPoints += 1;
             }
         }
@@ -329,7 +371,7 @@ public class TurnSystem : MonoBehaviour
         yourTurn += 1;
         turnText.text = "Your Turn";
 
-        
+        PlayerTurn();
     }
 
     public void EnemyTurn()
@@ -350,7 +392,47 @@ public class TurnSystem : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         Debug.Log("Ended enemy turn at timestamp : " + Time.time);
+        
         EnemyEndTurn();
     }
+
+    /*public void getScore(){
+        //int numOfPlayerChildren = playArea.transform.childCount;
+        //int numOfEnemyChildren = playAreaEnemy.transform.childCount;
+        int pDefense = 0;
+        int pAttack = 0;
+        int eDefense = 0;
+        int eAttack = 0;
+
+        foreach (Transform child in playArea.transform)
+        {
+            playerCurPoints += child.GetComponent<ThisCard>().cardPoints;
+            pAttack += child.GetComponent<ThisCard>().cardDamage;
+            pDefense += child.GetComponent<ThisCard>().cardDefense; 
+        }
+        foreach (Transform child in playAreaEnemy.transform)
+        {
+            enemyCurPoints += child.GetComponent<ThisCardEnemy>().cardPoints;
+            eAttack += child.GetComponent<ThisCardEnemy>().cardDamage;
+            eDefense += child.GetComponent<ThisCardEnemy>().cardDefense; 
+        }
+        if(pDefense >= eAttack){
+            pDefense=0;
+            eAttack=0;
+        }
+        if(eDefense >= pAttack){
+            eDefense=0;
+            pAttack=0;
+        }
+        playerCurPoints = playerCurPoints - (eAttack - pDefense);
+        enemyCurPoints = enemyCurPoints - (pAttack - eDefense);
+        
+        }
+        Debug.Log("current points: " + playerCurPoints);
+        playerPointText.text = playerCurPoints.ToString();
+        enemyPointText.text = enemyCurPoints.ToString();
+
+
+    }*/
 
 }

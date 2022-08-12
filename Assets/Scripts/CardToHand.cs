@@ -14,7 +14,7 @@ public class CardToHand : MonoBehaviour
         Hand = GameObject.Find("Player Card Area");
 		It.transform.SetParent(Hand.transform);
 		It.transform.localScale = Vector3.one;
-		It.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
+		It.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		It.transform.eulerAngles = new Vector3(25, 0, 0);
     }
 
