@@ -8,6 +8,10 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 {	
     private RectTransform rectTransform;
 	private CanvasGroup canvasGroup;
+	public bool isDraggable = true;
+
+
+	public Transform parentToReturnTo = null;
 	
 	private void Awake()
 	{
@@ -17,12 +21,22 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 	
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		canvasGroup.blocksRaycasts = false;
+		if(isDraggable)
+		{
+			canvasGroup.blocksRaycasts = false;
+
+			//trying to fix drag/drop
+			parentToReturnTo = this.transform.parent;
+			this.transform.SetParent(this.transform.parent.parent );
+		}
+		
 	}
 	
 	public void OnEndDrag(PointerEventData eventData)
 	{
 		canvasGroup.blocksRaycasts = true;
+		//
+		this.transform.SetParent(parentToReturnTo);
 	}
 	
 	public void OnDrag(PointerEventData eventData)

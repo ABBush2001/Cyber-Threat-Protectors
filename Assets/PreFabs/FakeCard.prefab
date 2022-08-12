@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3157301457905446117}
   - component: {fileID: 4774440514220860726}
   - component: {fileID: 3406268072379850250}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TitlePanel
   m_TagString: title
   m_Icon: {fileID: 0}
@@ -91,7 +91,9 @@ GameObject:
   - component: {fileID: 7795962265367555235}
   - component: {fileID: -733513620567742443}
   - component: {fileID: -9003516608777971478}
-  m_Layer: 5
+  - component: {fileID: 8448830788452611830}
+  - component: {fileID: -3529403801234087664}
+  m_Layer: 8
   m_Name: FakeCard
   m_TagString: EnemyCard
   m_Icon: {fileID: 0}
@@ -106,7 +108,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901475081029691327}
   m_LocalRotation: {x: 0.21643962, y: 0, z: 0, w: 0.976296}
-  m_LocalPosition: {x: 0, y: 0, z: -48}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0001, y: 0.0001, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -116,7 +118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 1091.4999, y: 347}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 142.8279, y: 202.3477}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1901475081029691324
@@ -190,6 +192,10 @@ MonoBehaviour:
   cardBack: 0
   Hand: {fileID: 0}
   numberOfCardsInDeck: 0
+  cardTypeID: 0
+  cardPoints: 0
+  cardDamage: 0
+  cardDefense: 0
 --- !u!114 &-9003516608777971478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +210,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hand: {fileID: 0}
   It: {fileID: 1901475081029691327}
+--- !u!61 &8448830788452611830
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901475081029691327}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.8358612, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 140, y: 200}
+  m_EdgeRadius: 0
+--- !u!114 &-3529403801234087664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901475081029691327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf48f78cb4ba98d408ba444a754fc17c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  cardName: 
+  cardType: 0
+  damage: 0
+  points: 0
+  defense: 0
+  cardDesc: 
+  cardActive: 0
 --- !u!1 &4682065340742760215
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +267,7 @@ GameObject:
   - component: {fileID: 333928401734813472}
   - component: {fileID: 2699660574951333387}
   - component: {fileID: 5115276289592961814}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Des Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +402,7 @@ GameObject:
   - component: {fileID: 8078985502561495719}
   - component: {fileID: 7376764655498104195}
   - component: {fileID: 5771326710985095143}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: DesPanel
   m_TagString: desc
   m_Icon: {fileID: 0}
@@ -427,7 +479,7 @@ GameObject:
   - component: {fileID: 281864112771047015}
   - component: {fileID: 5638472339644658285}
   - component: {fileID: 6362574422748237810}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CardBackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +557,7 @@ GameObject:
   - component: {fileID: 1915657189734355334}
   - component: {fileID: 5941511386355708057}
   - component: {fileID: 7514861073554279674}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Title Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
