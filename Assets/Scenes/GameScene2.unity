@@ -757,6 +757,8 @@ MonoBehaviour:
   playAreaEnemy: {fileID: 1697954959}
   victoryScreen: {fileID: 1389332299}
   defeatScreen: {fileID: 569154318}
+  playerHand: {fileID: 1973317456}
+  CardToHand: {fileID: 1901475081029691327, guid: b4081e032d142e74eb12b872c579a372, type: 3}
 --- !u!114 &266155133
 MonoBehaviour:
   m_ObjectHideFlags: 0

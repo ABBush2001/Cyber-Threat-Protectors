@@ -28,6 +28,10 @@ public class TurnSystem : MonoBehaviour
     public GameObject victoryScreen;
     public GameObject defeatScreen;
 
+    public GameObject playerHand;
+    public GameObject CardToHand;
+    public int maxHand;
+
     
 
     // Start is called before the first frame update
@@ -36,6 +40,7 @@ public class TurnSystem : MonoBehaviour
         isYourTurn = true;
         yourTurn = 1;
         enemyTurn = 0;
+        maxHand = 7;
 
         playerMaxPoints = 20;
         enemyMaxPoints = 20;
@@ -65,6 +70,12 @@ public class TurnSystem : MonoBehaviour
         isYourTurn = true;
         yourTurn += 1;
         turnText.text = "Your Turn";
+         Debug.Log("nummber of cards in hand: " + playerHand.transform.childCount);
+         //StartCoroutine(drawCard());
+        if(playerHand.transform.childCount < maxHand){
+            
+            StartCoroutine(drawCard());
+        }
     }
 
     public void EnemyTurn()
@@ -124,11 +135,20 @@ public class TurnSystem : MonoBehaviour
             //play losing screen
             defeatScreen.SetActive(true);
         }
-        Debug.Log("current points: " + playerCurPoints);
         playerPointText.text = playerCurPoints.ToString();
         enemyPointText.text = enemyCurPoints.ToString();
 
 
     }
+
+    IEnumerator drawCard(){
+        yield return new WaitForSeconds(1);
+		Instantiate(CardToHand, transform.position, transform.rotation);
+    }
+
+    // IEnumerator drawCardEnemy(){
+    //     yield return new WaitForSeconds(1);
+    //     Instantiate(CardToHandEnemy, transform.position, transform.rotation);
+    // }
 
 }
