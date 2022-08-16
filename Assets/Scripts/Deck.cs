@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Deck : MonoBehaviour
@@ -10,36 +12,48 @@ public class Deck : MonoBehaviour
 	public static List<Card> staticEnemyDeck = new List<Card>();
 	public List<Card> cardValues = new List<Card>();
 	
-	public int x;
-	public int y;
 	public static int deckSize;
-	
+
+	private static System.Random rng = new System.Random();
+
     // Start is called before the first frame update
     void Start()
     {
-        x = 0;
-		y = 0;
 		deckSize = 54;
 		CardDatabase.FillList(cardValues);
 		
-		for(int i = 0; i < deckSize; i++)
+		//for each card type, iterate through its numInDeck and generate that many cards
+		for(int i = 0; i < 21; i++)
 		{
-			x = Random.Range(0, 20);
-			y = Random.Range(0, 20);
-			playerDeck.Add(cardValues[x]);
-			enemyDeck.Add(cardValues[y]);
+			for(int j = 0; j < cardValues[i].numInDeck; j++)
+			{
+				playerDeck.Add(cardValues[i]);
+				enemyDeck.Add(cardValues[i]);
+			}
 		}
 		
+		//shuffle the decks
+		Shuffle(playerDeck);
+		Shuffle(enemyDeck);
+
 		staticPlayerDeck = playerDeck;
 		staticEnemyDeck = enemyDeck;
 		
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //staticPlayerDeck = playerDeck;
-		//staticEnemyDeck = enemyDeck;
-		
-    }
+	//shuffled with the fisher-yates algorithm
+	public static void Shuffle(List<Card> list)
+	{
+		int n = list.Count;
+		while(n > 1)
+		{
+			n--;
+			int k = rng.Next(n + 1);
+			Card value = list[k];
+			list[k] = list[n];
+			list[n] = value;
+		}
+
+	}
+
 }

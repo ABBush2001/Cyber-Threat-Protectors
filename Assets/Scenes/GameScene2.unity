@@ -755,8 +755,8 @@ MonoBehaviour:
   enemyPointText: {fileID: 1263304294}
   playArea: {fileID: 1299316995}
   playAreaEnemy: {fileID: 1697954959}
-  victoryScreen: {fileID: 0}
-  defeatScreen: {fileID: 0}
+  victoryScreen: {fileID: 1389332299}
+  defeatScreen: {fileID: 569154318}
   playerHand: {fileID: 1299316995}
   CardToHand: {fileID: 1901475081029691327, guid: b4081e032d142e74eb12b872c579a372, type: 3}
   maxHand: 0
@@ -775,8 +775,6 @@ MonoBehaviour:
   playerDeck: []
   enemyDeck: []
   cardValues: []
-  x: 0
-  y: 0
 --- !u!114 &266155134
 MonoBehaviour:
   m_ObjectHideFlags: 0

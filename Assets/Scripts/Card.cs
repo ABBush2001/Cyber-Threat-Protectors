@@ -14,6 +14,7 @@ public class Card : MonoBehaviour
 	public int defense;
 	public string cardDesc;
 	public bool cardActive;
+	public int numInDeck;
 
 	private EventManager em;
 
@@ -47,7 +48,7 @@ public class Card : MonoBehaviour
 		
 	}
 	
-	public Card(int Id, string CardType, string CardName, int Damage, int Points, int Defense, string CardDesc)
+	public Card(int Id, string CardType, string CardName, int Damage, int Points, int Defense, string CardDesc, int NumInDeck)
 	{
 		id = Id;
 		cardType = CardType;
@@ -57,6 +58,7 @@ public class Card : MonoBehaviour
 		defense = Defense;
 		cardDesc = CardDesc;
 		cardActive = false;
+		numInDeck = NumInDeck;
 	}
 
 	public void MoveToDiscardPile(){
