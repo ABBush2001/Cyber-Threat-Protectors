@@ -743,7 +743,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardToPlay: {fileID: 1901475081029691327, guid: 05edb9856f612d7479e0d0ba4bde250d, type: 3}
-  CardToHand: {fileID: 1901475081029691327, guid: b4081e032d142e74eb12b872c579a372, type: 3}
   isYourTurn: 0
   yourTurn: 0
   enemyTurn: 0
@@ -758,6 +757,9 @@ MonoBehaviour:
   playAreaEnemy: {fileID: 1697954959}
   victoryScreen: {fileID: 0}
   defeatScreen: {fileID: 0}
+  playerHand: {fileID: 1299316995}
+  CardToHand: {fileID: 1901475081029691327, guid: b4081e032d142e74eb12b872c579a372, type: 3}
+  maxHand: 0
 --- !u!114 &266155133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3505,7 +3507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
