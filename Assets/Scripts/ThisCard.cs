@@ -82,5 +82,6 @@ public class ThisCard : MonoBehaviour
 
             Debug.Log("Num of Cards: " + numberOfCardsInDeck + ", " + Deck.deckSize);
         }
+
     }
 }

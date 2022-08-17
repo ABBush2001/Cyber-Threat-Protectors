@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class PlayDrop : MonoBehaviour, IDropHandler
 {
 	public GameObject playArea;
+	public GameObject cardArea;
 	
     public void OnDrop(PointerEventData eventData)
 	{
@@ -24,6 +25,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 			//eventData.pointerDrag.transform.GetComponent<Card>().MoveToDiscardPile();
 			//Debug.Log ("Card discarded");
 		}
+		cardArea.transform.GetComponent<PlayerCardArea>().checkForDefense();
+
 	}
 
 	void Update(){

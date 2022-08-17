@@ -70,6 +70,9 @@ public class TurnSystem : MonoBehaviour
         GameObject player = GameObject.Find("Player Card Area");
         GameObject enemy = GameObject.Find("Enemy Play Area");
 
+        
+
+
 
         //DETERMINING BLOCKED ATTACK CARDS
         //temporarily unblock all cards until blocked cards are determined
@@ -134,26 +137,6 @@ public class TurnSystem : MonoBehaviour
             }
         }
         
-    
-
-        //DETERMINING BLOCKED DEFENSE CARDS*
-
-        //check player play area - if one of a defense card type is already in play, disable drag for other ones in hand
-        /*GameObject playerPlay = GameObject.Find("Player Play Area");
-
-        for(int i = 0; i < playerPlay.transform.childCount; i++)
-        {
-            if(playerPlay.transform.GetChild(i).GetComponent<ThisCard>().thisId >= 0 && playerPlay.transform.GetChild(i).GetComponent<ThisCard>().thisId <= 3)
-            {
-                for(int j = 0; j < player.transform.childCount; j++)
-                {
-                    if(player.transform.GetChild(j).GetComponent<ThisCard>().thisId == playerPlay.transform.GetChild(i).GetComponent<ThisCard>().thisId)
-                    {
-                        Destroy(player.transform.GetChild(j).gameObject.GetComponent<Drag>());
-                    }
-                }
-            }
-        }*/
     }
 
     public void PlayerEndTurn()
@@ -166,6 +149,8 @@ public class TurnSystem : MonoBehaviour
         //grab list of all cards in play area
         GameObject player = GameObject.Find("Player Play Area");
         GameObject enemy = GameObject.Find("Enemy Play Area");
+
+        
 
 
         //disable the drag script for any cards in play
@@ -376,9 +361,7 @@ public class TurnSystem : MonoBehaviour
         turnText.text = "Your Turn";
 
         PlayerTurn();
-
-         Debug.Log("nummber of cards in hand: " + playerHand.transform.childCount);
-         //StartCoroutine(drawCard());
+        //StartCoroutine(drawCard());
         if(playerHand.transform.childCount < maxHand){
             
             StartCoroutine(drawCard());
