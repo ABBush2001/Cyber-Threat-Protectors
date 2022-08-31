@@ -16,6 +16,8 @@ public class CardToHand : MonoBehaviour
 		It.transform.localScale = Vector3.one;
 		It.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		It.transform.eulerAngles = new Vector3(25, 0, 0);
+        
+        
     }
 
     // Update is called once per frame

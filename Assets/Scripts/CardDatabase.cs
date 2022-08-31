@@ -11,12 +11,12 @@ public class CardDatabase : MonoBehaviour
 	{
 		//defense
 		cList.Add(new Card(0, "Defense", "Anti-Malware", 0, 0, 1, "Blocks:\n I Love You Virus \n Trojan Horse \n\nRemoves \n I Love You Virus \n Trojan Horse \n Anti-Malware Not Updated \n\n You may only have 1 of this card in play at any time", 3));
-		cList.Add(new Card(1, "Defense", "Encryption", 0, 0, 1, "Blocks:\n Wireless Sniffing \n Weak Encryption Key \n\nRemoves \n Wireless Sniffing \n Weak Encryption Key \n\n You may only have 1 of this card in play at any time", 3));
+		cList.Add(new Card(1, "Defense", "Encryption", 0, 0, 1, "Blocks:\n Wireless Sniffing \n Weak Encryption Key \n\nRemoves \n Wireless Sniffing \n Weak Encryption Key \n\n You may only have 1 of this card in play at any time", 100));
 		cList.Add(new Card(2, "Defense", "Firewall", 0, 0, 1, "Blocks:\n Denial of Service \n IP Spoofing \n\nRemoves \n Denial of Service \n Firewall Rules Not Updated \n IP Spoofing \n\n You may only have 1 of this card in play at any time", 3));
 		cList.Add(new Card(3, "Defense", "Security Training", 0, 0, 1, "Blocks:\n Password Cracked \n Phishing \n\nRemoves \n Password Cracked \n Phishing \n\n You may only have 1 of this card in play at any time", 3));
 		//attack
 		cList.Add(new Card(4, "Attack", "Wireless Sniffing", 1, 0, 0, "Subtract:\n -1\n\n Can only be played if your opponent does not have an 'Encryption' card in play", 3));
-		cList.Add(new Card(5, "Attack", "Weak Encryption Key", 1, 0, 0, "Subtract:\n -1\n\n Can only be played if your opponent has an 'Encryption' card in play. Remove your opponent's 'Encryption' card. You may only have 1 of this card in play at any time.", 2));
+		cList.Add(new Card(5, "Attack", "Weak Encryption Key", 1, 0, 0, "Subtract:\n -1\n\n Can only be played if your opponent has an 'Encryption' card in play. Remove your opponent's 'Encryption' card. You may only have 1 of this card in play at any time.", 100));
 		cList.Add(new Card(6, "Attack", "Trojan Horse", 1, 0, 0, "Subtract:\n -1\n\n Can only be played if your opponent does not have an 'Anti-Malware' card in play", 2));
 		cList.Add(new Card(7, "Attack", "Phishing", 1, 0, 0, "Subtract:\n -1\n\n Can only be played if your opponent does not have a 'Security Training' card in play", 3));
 		cList.Add(new Card(8, "Attack", "Password Cracked", 1, 0, 0, "Subtract:\n -1\n\n Can only be played if your opponent does not have a 'Security Training' card in play", 3));
