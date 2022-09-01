@@ -66,6 +66,15 @@ public class Card : MonoBehaviour
 		Destroy(gameObject);
 	}
 
+	public void addToDeck(bool playerCard){
+		if(playerCard){
+			//em.staticPlayerDeck.Add(this);
+		}
+		else
+			//em.staticEnemyDeck.Add(this);
+		Destroy(gameObject);
+	}
+
 	public void cardEffect(){
 		//select enemy card
 		if(myTarget != null){

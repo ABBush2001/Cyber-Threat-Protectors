@@ -22,7 +22,8 @@ public class EventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*discardPileText.text = discardPile.Count.ToString();
+        discardPileText.text = discardPile.Count.ToString();
+        /*
             if(targetOn){
                 if(Input.GetMouseButtonDown(0))
                 {

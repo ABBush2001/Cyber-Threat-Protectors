@@ -3467,6 +3467,7 @@ GameObject:
   - component: {fileID: 1697954962}
   - component: {fileID: 1697954961}
   - component: {fileID: 1697954963}
+  - component: {fileID: 1697954964}
   m_Layer: 5
   m_Name: Enemy Play Area
   m_TagString: Untagged
@@ -3558,6 +3559,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &1697954964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697954959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54cfe6140bc558b46aa757108bd3fd23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CardToPlay: {fileID: 1901475081029691327, guid: 05edb9856f612d7479e0d0ba4bde250d, type: 3}
+  playArea: {fileID: 815855172}
+  enemyPlayArea: {fileID: 1697954959}
 --- !u!1 &1729717685
 GameObject:
   m_ObjectHideFlags: 0
@@ -4444,14 +4460,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 10
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: -10
+  m_Spacing: 20
   m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 1
