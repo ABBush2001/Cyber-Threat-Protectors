@@ -29,7 +29,8 @@ public class CardToPlay : MonoBehaviour
         else{
             //It.GetComponent<Card>().addToDeck(false);
             Debug.Log("Card ID being sent to discard: " + It.GetComponent<ThisCardEnemy>().thisId);
-            Destroy(It); //need to make it so it adds it back to the deck
+            Deck.staticEnemyDeck.Add(It.GetComponent<Card>());
+            //Destroy(It); //need to make it so it adds it back to the deck
         }
     }
 
