@@ -9,11 +9,12 @@ public class CardToPlay : MonoBehaviour
 
     public GameObject enemyPlayArea;
     private bool validCard;
+    private ThisCardEnemy enemyCard;
     // Start is called before the first frame update
     void Start()
     {
         
-        
+        enemyCard = It.GetComponent<ThisCardEnemy>();
         Hand = GameObject.Find("Enemy Play Area");
         It.SetActive(false);
         validCard = Hand.GetComponent<EnemyPlayArea>().checkDefenseEnemy(It);
@@ -29,8 +30,9 @@ public class CardToPlay : MonoBehaviour
         else{
             //It.GetComponent<Card>().addToDeck(false);
             Debug.Log("Card ID being sent to discard: " + It.GetComponent<ThisCardEnemy>().thisId);
-            Deck.staticEnemyDeck.Add(It.GetComponent<Card>());
-            //Destroy(It); //need to make it so it adds it back to the deck
+            Deck.staticEnemyDeck.Add(new Card(enemyCard.thisId, enemyCard.cardTypeID, enemyCard.cardName, enemyCard.cardDamage,
+             enemyCard.cardPoints, enemyCard.cardDefense, enemyCard.cardDesc, enemyCard.numberOfCardsInDeck));
+            Destroy(It); //need to make it so it adds it back to the deck
         }
     }
 
