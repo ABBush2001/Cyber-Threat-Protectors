@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.Serialization;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -36,6 +38,10 @@ public class TurnSystem : MonoBehaviour
     bool malw = false;
     bool fire = false;
 
+    bool doublee = false;
+    bool doublem = false;
+    bool doublef = false;
+
     int turn = 1;
 
 
@@ -58,7 +64,8 @@ public class TurnSystem : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        LimitDoubles();
         LimitPlayerAttackCard();
 
 
@@ -146,43 +153,75 @@ public class TurnSystem : MonoBehaviour
             }
         }
 
-        
+    }
 
-        //DETERMINING BLOCKED DEFENSE CARDS*
 
-        //check player play area - if one of a defense card type is already in play, disable drag for other ones in hand
-        /*GameObject playerPlay = GameObject.Find("Player Play Area");
+    public void LimitDoubles()
+    {
+        //method called every turn that checks if a special attack card is in play and, if so, to block other cards upon it being played
 
-        for(int i = 0; i < playerPlay.transform.childCount; i++)
+        GameObject hand = GameObject.Find("Player Card Area");
+        GameObject play = GameObject.Find("Player Play Area");
+
+        //check if special attack card is in play; if so, disable drag on any instance of the card in hand
+        for(int i = 0; i < play.transform.childCount; i++)
         {
-            if(playerPlay.transform.GetChild(i).GetComponent<ThisCard>().thisId >= 0 && playerPlay.transform.GetChild(i).GetComponent<ThisCard>().thisId <= 3)
+            //Weak Encryption Key
+            if(play.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5)
             {
-                for(int j = 0; j < player.transform.childCount; j++)
+                Debug.Log("Encryp found in play");
+                for(int j = 0; j < hand.transform.childCount; j++)
                 {
-                    if(player.transform.GetChild(j).GetComponent<ThisCard>().thisId == playerPlay.transform.GetChild(i).GetComponent<ThisCard>().thisId)
+                    if(hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() != null)
                     {
-                        Destroy(player.transform.GetChild(j).gameObject.GetComponent<Drag>());
+                        Destroy(hand.transform.GetChild(j).gameObject.GetComponent<Drag>());
+                        doublee = true;
                     }
                 }
             }
-        }*/
+
+            //Anti-Malware
+            if (play.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
+            {
+                Debug.Log("Encryp found in play");
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() != null)
+                    {
+                        Destroy(hand.transform.GetChild(j).gameObject.GetComponent<Drag>());
+                        doublem = true;
+                    }
+                }
+            }
+
+            //Firewall Rules
+            if (play.transform.GetChild(i).GetComponent<ThisCard>().thisId == 11)
+            {
+                Debug.Log("Encryp found in play");
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() != null)
+                    {
+                        Destroy(hand.transform.GetChild(j).gameObject.GetComponent<Drag>());
+                        doublef = true;
+                    }
+                }
+            }
+        }
     }
 
     public void LimitPlayerAttackCard()
     {
-        
         GameObject enemy = GameObject.Find("Enemy Play Area");
         GameObject hand = GameObject.Find("Player Card Area");
-        GameObject play = GameObject.Find("Player Play Area");
+       
 
         //disable all special cards in hand to start, if the associated defense card is not in play
-
-
-        if(encryp == false)
+        if (encryp == false)
         {
-            for(int i = 0; i < hand.transform.childCount; i++)
+            for (int i = 0; i < hand.transform.childCount; i++)
             {
-                if(hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5 && hand.transform.GetChild(i).gameObject.GetComponent<Drag>() != null)
+                if (hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5 && hand.transform.GetChild(i).gameObject.GetComponent<Drag>() != null)
                 {
                     Destroy(hand.transform.GetChild(i).gameObject.GetComponent<Drag>());
                 }
@@ -211,73 +250,62 @@ public class TurnSystem : MonoBehaviour
             }
         }
 
-
+        //check for appropriate defense cards
         for(int i = 0; i < enemy.transform.childCount; i++)
         {
             //Anti-Malware
-            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 0)
+            if (enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 0)
             {
-                for(int j = 0; j < hand.transform.childCount; j++)
+                for (int j = 0; j < hand.transform.childCount; j++)
                 {
-                    if(hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
                     {
-                        malw = true;
-
-                        for(int k = 0; k < play.transform.childCount; k++)
+                        if(doublem == false)
                         {
-                            if(play.transform.GetChild(k).GetComponent<ThisCard>().thisId == 13)
-                            {
-                                malw = false;
-                            }
-                        }
-                        
-                        if(malw)
-                        {
+                            malw = true;
                             hand.transform.GetChild(j).gameObject.AddComponent<Drag>();
                         }
-                        
-                    }
-                }
-            }
 
-            //Weak Encryption Key
-            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 1)
-            {
-                for(int j = 0; j < hand.transform.childCount; j++)
-                {
-                    if(hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
-                    {
-                        encryp = true;
-                        hand.transform.GetChild(j).gameObject.AddComponent<Drag>();
                     }
                 }
             }
             
-            //Firewall Rules
-            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 2)
-            {
-                for(int j = 0; j < hand.transform.childCount; j++)
-                {
-                    if(hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
-                    {
-                        fire = true;
 
-                        for(int k = 0; k < play.transform.childCount; k++)
+            //Weak Encryption Key
+            if (enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 1)
+            {
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
+                    {
+                        if(doublee == false)
                         {
-                            if(play.transform.GetChild(k).GetComponent<ThisCard>().thisId == 11)
-                            {
-                                fire = false;
-                            }
-                        }
-                        
-                        if(fire)
-                        {
+                            encryp = true;
                             hand.transform.GetChild(j).gameObject.AddComponent<Drag>();
                         }
+
                     }
                 }
             }
-
+            
+            
+            //Firewall Rules
+            if (enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 2)
+            {
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
+                    {
+                        if(doublef == false)
+                        {
+                            fire = true;
+                            hand.transform.GetChild(j).gameObject.AddComponent<Drag>();
+                        }
+                        
+                    }
+                }
+            }
+            
         }
     }
 
@@ -545,6 +573,10 @@ public class TurnSystem : MonoBehaviour
         isYourTurn = true;
         yourTurn += 1;
         turnText.text = "Your Turn";
+
+        doublee = false;
+        doublem = false;
+        doublef = false;
 
         PlayerTurn();
 
