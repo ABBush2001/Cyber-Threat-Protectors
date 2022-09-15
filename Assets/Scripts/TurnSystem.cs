@@ -86,6 +86,9 @@ public class TurnSystem : MonoBehaviour
         GameObject player = GameObject.Find("Player Card Area");
         GameObject enemy = GameObject.Find("Enemy Play Area");
 
+        
+
+
 
         //DETERMINING BLOCKED ATTACK CARDS
         
@@ -152,6 +155,7 @@ public class TurnSystem : MonoBehaviour
                 }
             }
         }
+
 
     }
 
@@ -320,12 +324,14 @@ public class TurnSystem : MonoBehaviour
         GameObject player = GameObject.Find("Player Play Area");
         GameObject enemy = GameObject.Find("Enemy Play Area");
 
+        
+
 
         //disable the drag script for any cards in play
-        for(int i = 0; i < player.transform.childCount; i++)
-        {
-            Destroy(player.transform.GetChild(i).gameObject.GetComponent<Drag>());
-        }
+        // for(int i = 0; i < player.transform.childCount; i++)
+        // {
+        //     Destroy(player.transform.GetChild(i).gameObject.GetComponent<Drag>());
+        // }
 
         //look for asset cards, and get their points increase
         for(int i = 0; i < player.transform.childCount; i++)
@@ -598,16 +604,16 @@ public class TurnSystem : MonoBehaviour
 
     IEnumerator waitCoroutine()
     {
-        Debug.Log("Started enemy turn at timestamp: " + Time.time);
-        yield return new WaitForSeconds(5);
+        //Debug.Log("Started enemy turn at timestamp: " + Time.time);
+        yield return new WaitForSeconds(1);
 
         //instantiate card from enemy deck to play
 
         Instantiate(CardToPlay, transform.position, transform.rotation);
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
 
-        Debug.Log("Ended enemy turn at timestamp : " + Time.time);
+        //Debug.Log("Ended enemy turn at timestamp : " + Time.time);
         
         EnemyEndTurn();
     }

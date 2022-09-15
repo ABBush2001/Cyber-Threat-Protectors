@@ -31,8 +31,10 @@ public class CardDatabase : MonoBehaviour
 		cList.Add(new Card(16, "Asset", "Laptop", 0, 1, 0, "Generate 1 Point Per Round", 3));
 		cList.Add(new Card(17, "Asset", "ISP Connection", 0, 1, 0, "Generate 1 Point Per Round", 4));
 		cList.Add(new Card(18, "Asset", "Desktop Computer", 0, 1, 0, "Generate 1 Point Per Round", 3));
-		//special
+		// // //special
 		cList.Add(new Card(19, "Special", "Hardware Failure", 0, 0, 0, "Select one Asset from your opponents field. Remove both the selected card and this card", 3));
 		cList.Add(new Card(20, "Special", "Forgot To Patch", 0, 0, 0, "If 'Security Training' is in play, send this card and the 'Security Training' card to the discard pile. \n\nElse, choose 2 cards frm your opponent's hand and remove both those cards and this card.", 2));
+	
+	
 	}
 }
