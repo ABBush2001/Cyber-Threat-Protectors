@@ -26,14 +26,14 @@ public class CardDatabase : MonoBehaviour
 		cList.Add(new Card(12, "Attack", "Denial of Service", 1, 0, 0, "Subtract:\n -1\n\n Can only be played if your opponent does not have a 'Firewall' card in play", 2));
 		cList.Add(new Card(13, "Attack", "Anti-Malware Not Updated", 1, 0, 0, "Subtract:\n -1\n\n Can only be played if your opponent has an 'Anti-Malware' card in play. Remove your opponent's 'Anti-Malware' card. You may only have 1 'Anti-Malware Not Updated' card in play at a time", 2));
 		//asset
-		// cList.Add(new Card(14, "Asset", "Wireless Router", 0, 1, 0, "Generate 1 Point Per Round", 2));
-		// cList.Add(new Card(15, "Asset", "Server", 0, 1, 0, "Generate 1 Point Per Round", 2));
-		// cList.Add(new Card(16, "Asset", "Laptop", 0, 1, 0, "Generate 1 Point Per Round", 3));
-		// cList.Add(new Card(17, "Asset", "ISP Connection", 0, 1, 0, "Generate 1 Point Per Round", 4));
-		// cList.Add(new Card(18, "Asset", "Desktop Computer", 0, 1, 0, "Generate 1 Point Per Round", 3));
+		cList.Add(new Card(14, "Asset", "Wireless Router", 0, 1, 0, "Generate 1 Point Per Round", 2));
+		cList.Add(new Card(15, "Asset", "Server", 0, 1, 0, "Generate 1 Point Per Round", 2));
+		cList.Add(new Card(16, "Asset", "Laptop", 0, 1, 0, "Generate 1 Point Per Round", 3));
+		cList.Add(new Card(17, "Asset", "ISP Connection", 0, 1, 0, "Generate 1 Point Per Round", 4));
+		cList.Add(new Card(18, "Asset", "Desktop Computer", 0, 1, 0, "Generate 1 Point Per Round", 3));
 		// // //special
-		// cList.Add(new Card(19, "Special", "Hardware Failure", 0, 0, 0, "Select one Asset from your opponents field. Remove both the selected card and this card", 3));
-		// cList.Add(new Card(20, "Special", "Forgot To Patch", 0, 0, 0, "If 'Security Training' is in play, send this card and the 'Security Training' card to the discard pile. \n\nElse, choose 2 cards frm your opponent's hand and remove both those cards and this card.", 2));
+		cList.Add(new Card(19, "Special", "Hardware Failure", 0, 0, 0, "Select one Asset from your opponents field. Remove both the selected card and this card", 3));
+		cList.Add(new Card(20, "Special", "Forgot To Patch", 0, 0, 0, "If 'Security Training' is in play, send this card and the 'Security Training' card to the discard pile. \n\nElse, choose 2 cards frm your opponent's hand and remove both those cards and this card.", 2));
 	
 	
 	}
