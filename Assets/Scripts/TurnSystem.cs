@@ -66,7 +66,7 @@ public class TurnSystem : MonoBehaviour
     void Update()
     {
         LimitDoubles();
-        LimitPlayerAttackCard();
+        //LimitPlayerAttackCard();
 
 
         if(playerCurPoints >= playerMaxPoints){
@@ -214,7 +214,7 @@ public class TurnSystem : MonoBehaviour
         }
     }
 
-    public void LimitPlayerAttackCard()
+    /*public void LimitPlayerAttackCard()
     {
         GameObject enemy = GameObject.Find("Enemy Play Area");
         GameObject hand = GameObject.Find("Player Card Area");
@@ -311,7 +311,7 @@ public class TurnSystem : MonoBehaviour
             }
             
         }
-    }
+    }*/
 
     public void PlayerEndTurn()
     {

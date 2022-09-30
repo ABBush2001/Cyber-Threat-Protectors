@@ -24,11 +24,12 @@ public class Deck : MonoBehaviour
 		
 		//for each card type, iterate through its numInDeck and generate that many cards
 		//21
-		for(int i = 0; i < 14; i++)
+		for(int i = 0; i < 21; i++)
 		{
 			for(int j = 0; j < cardValues[i].numInDeck; j++)
 			{
 				playerDeck.Add(cardValues[i]);
+				Debug.Log(cardValues[i].getName());
 				enemyDeck.Add(cardValues[i]);
 			}
 		}

@@ -40,10 +40,10 @@ public class ThisCardEnemy : MonoBehaviour
         cardDesc = Deck.staticEnemyDeck[0].cardDesc;
         cardName = Deck.staticEnemyDeck[0].cardName;
 
-        cardTypeID = Deck.staticPlayerDeck[0].cardType;
-        cardPoints = Deck.staticPlayerDeck[0].points;
-        cardDamage = Deck.staticPlayerDeck[0].damage;
-        cardDefense = Deck.staticPlayerDeck[0].defense;
+        cardTypeID = Deck.staticEnemyDeck[0].cardType;
+        cardPoints = Deck.staticEnemyDeck[0].points;
+        cardDamage = Deck.staticEnemyDeck[0].damage;
+        cardDefense = Deck.staticEnemyDeck[0].defense;
 
         Deck.staticEnemyDeck.RemoveAt(0);
 
@@ -76,7 +76,7 @@ public class ThisCardEnemy : MonoBehaviour
         {
             
 
-            thisId = Deck.staticPlayerDeck[numberOfCardsInDeck - 1].id;
+            thisId = Deck.staticEnemyDeck[numberOfCardsInDeck - 1].id;
             numberOfCardsInDeck -= 1;
             Deck.deckSize -= 1;
             cardBack = false;
