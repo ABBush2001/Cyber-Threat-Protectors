@@ -32,6 +32,9 @@ public class TurnSystem : MonoBehaviour
     public GameObject CardToHand;
     public int maxHand;
 
+    //
+    public string cardPref;
+
 
     // Start is called before the first frame update
     void Start()
@@ -381,8 +384,39 @@ public class TurnSystem : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         //instantiate card from enemy deck to play
+        bool foundCardPref;
+        int cardCount;
 
-        Instantiate(CardToPlay, transform.position, transform.rotation);
+        foundCardPref = false;
+        cardCount = 0;
+        
+        while(cardCount < 5 && foundCardPref == false){
+            Instantiate(CardToPlay, transform.position, transform.rotation);
+            yield return new WaitForSeconds(2);
+            int lastChildIndex = playAreaEnemy.transform.childCount - 1;
+            //Debug.Log("recent child pos: " + lastChildIndex);
+             ThisCardEnemy recentCardPlayed = playAreaEnemy.transform.GetChild(lastChildIndex).GetComponent<ThisCardEnemy>();
+             recentCardPlayed.gameObject.SetActive(false);
+            if(string.Equals(recentCardPlayed.cardTypeID,cardPref)){
+                foundCardPref = true;
+                Debug.Log("Card matches card pref: " + recentCardPlayed.cardTypeID);
+                recentCardPlayed.gameObject.SetActive(true);
+            }
+            else{
+                cardCount++;
+                Deck.staticEnemyDeck.Add(new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
+             recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
+                Destroy(recentCardPlayed.gameObject);
+            }
+            
+        }
+        if(foundCardPref == false){
+            Debug.Log("couldn't find card pref, playing next available card");
+            Instantiate(CardToPlay, transform.position, transform.rotation);
+        }
+
+
+       
 
         yield return new WaitForSeconds(1);
 
