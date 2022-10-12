@@ -86,4 +86,9 @@ public class Card : MonoBehaviour
 		
 	}
 
+	public string getName()
+	{
+		return cardName;
+	}
+
 }
