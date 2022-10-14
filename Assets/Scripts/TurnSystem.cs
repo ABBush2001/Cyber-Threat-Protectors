@@ -68,7 +68,7 @@ public class TurnSystem : MonoBehaviour
     void Update()
     {
         LimitDoubles();
-        //LimitPlayerAttackCard();
+        LimitPlayerAttackCard();
 
 
         if(playerCurPoints >= playerMaxPoints){
@@ -98,9 +98,9 @@ public class TurnSystem : MonoBehaviour
         //temporarily unblock all cards (except special attack cards) until blocked cards are determined
         for(int i = 0; i < player.transform.childCount; i++)
         {
-            if(player.transform.GetChild(i).gameObject.GetComponent<Drag>() == null && player.transform.GetChild(i).GetComponent<ThisCard>().thisId != 5 && player.transform.GetChild(i).GetComponent<ThisCard>().thisId != 11 && player.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
+            if(player.transform.GetChild(i).GetComponent<ThisCard>().thisId != 5 && player.transform.GetChild(i).GetComponent<ThisCard>().thisId != 11 && player.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
             {
-                player.transform.GetChild(i).gameObject.AddComponent<Drag>();
+                player.transform.GetChild(i).gameObject.GetComponent<ThisCard>().isBlocked = false;
             }
 
         }
@@ -116,7 +116,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 6 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 10)
                     {
-                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
+                        player.transform.GetChild(k).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -128,7 +128,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 4 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 5)
                     {
-                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
+                        player.transform.GetChild(k).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -140,7 +140,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 9 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 12)
                     {
-                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
+                        player.transform.GetChild(k).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -152,7 +152,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 7 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 8)
                     {
-                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
+                        player.transform.GetChild(k).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -178,10 +178,10 @@ public class TurnSystem : MonoBehaviour
                 Debug.Log("Encryp found in play");
                 for(int j = 0; j < hand.transform.childCount; j++)
                 {
-                    if(hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() != null)
+                    if(hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5)
                     {
-                        Destroy(hand.transform.GetChild(j).gameObject.GetComponent<Drag>());
                         doublee = true;
+                        hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -192,10 +192,10 @@ public class TurnSystem : MonoBehaviour
                 Debug.Log("Encryp found in play");
                 for (int j = 0; j < hand.transform.childCount; j++)
                 {
-                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() != null)
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13)
                     {
-                        Destroy(hand.transform.GetChild(j).gameObject.GetComponent<Drag>());
                         doublem = true;
+                        hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -206,17 +206,17 @@ public class TurnSystem : MonoBehaviour
                 Debug.Log("Encryp found in play");
                 for (int j = 0; j < hand.transform.childCount; j++)
                 {
-                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() != null)
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11)
                     {
-                        Destroy(hand.transform.GetChild(j).gameObject.GetComponent<Drag>());
                         doublef = true;
+                        hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
         }
     }
 
-    /*public void LimitPlayerAttackCard()
+    public void LimitPlayerAttackCard()
     {
         GameObject enemy = GameObject.Find("Enemy Play Area");
         GameObject hand = GameObject.Find("Player Card Area");
@@ -227,9 +227,9 @@ public class TurnSystem : MonoBehaviour
         {
             for (int i = 0; i < hand.transform.childCount; i++)
             {
-                if (hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5 && hand.transform.GetChild(i).gameObject.GetComponent<Drag>() != null)
+                if (hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5)
                 {
-                    Destroy(hand.transform.GetChild(i).gameObject.GetComponent<Drag>());
+                    hand.transform.GetChild(i).gameObject.GetComponent<ThisCard>().isBlocked = true;
                 }
             }
         }
@@ -238,9 +238,9 @@ public class TurnSystem : MonoBehaviour
         {
             for(int i = 0; i < hand.transform.childCount; i++)
             {
-                if(hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13 && hand.transform.GetChild(i).gameObject.GetComponent<Drag>() != null)
+                if(hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
                 {
-                    Destroy(hand.transform.GetChild(i).gameObject.GetComponent<Drag>());
+                    hand.transform.GetChild(i).gameObject.GetComponent<ThisCard>().isBlocked = true;
                 }
             }
         }
@@ -249,9 +249,9 @@ public class TurnSystem : MonoBehaviour
         {
             for(int i = 0; i < hand.transform.childCount; i++)
             {
-                if(hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 11 && hand.transform.GetChild(i).gameObject.GetComponent<Drag>() != null)
+                if(hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 11)
                 {
-                    Destroy(hand.transform.GetChild(i).gameObject.GetComponent<Drag>());
+                    hand.transform.GetChild(i).gameObject.GetComponent<ThisCard>().isBlocked = true;
                 }
             }
         }
@@ -264,12 +264,12 @@ public class TurnSystem : MonoBehaviour
             {
                 for (int j = 0; j < hand.transform.childCount; j++)
                 {
-                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13)
                     {
                         if(doublem == false)
                         {
                             malw = true;
-                            hand.transform.GetChild(j).gameObject.AddComponent<Drag>();
+                            hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
                         }
 
                     }
@@ -282,12 +282,12 @@ public class TurnSystem : MonoBehaviour
             {
                 for (int j = 0; j < hand.transform.childCount; j++)
                 {
-                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5)
                     {
                         if(doublee == false)
                         {
                             encryp = true;
-                            hand.transform.GetChild(j).gameObject.AddComponent<Drag>();
+                            hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
                         }
 
                     }
@@ -300,12 +300,12 @@ public class TurnSystem : MonoBehaviour
             {
                 for (int j = 0; j < hand.transform.childCount; j++)
                 {
-                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11 && hand.transform.GetChild(j).gameObject.GetComponent<Drag>() == null)
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11)
                     {
                         if(doublef == false)
                         {
                             fire = true;
-                            hand.transform.GetChild(j).gameObject.AddComponent<Drag>();
+                            hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
                         }
                         
                     }
@@ -313,7 +313,7 @@ public class TurnSystem : MonoBehaviour
             }
             
         }
-    }*/
+    }
 
     public void PlayerEndTurn()
     {
