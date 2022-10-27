@@ -8,12 +8,15 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 {
 	public GameObject playArea;
 	public GameObject cardArea;
-	
+
+	public GameObject hardwareScreen;
+
     public void OnDrop(PointerEventData eventData)
 	{
 		if(eventData.pointerDrag != null)
 		{
-			
+
+			//if called card is unplayable at the moment
 			if(eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true)
             {
 				eventData.pointerDrag.transform.SetParent(cardArea.transform);
@@ -24,6 +27,13 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 				//eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
 				eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
 			}
+			//else if card played is hardware failure
+			else if(eventData.pointerDrag.gameObject.GetComponent<ThisCard>().thisId == 19)
+            {
+				//call hardware failure script
+				hardwareScreen.GetComponent<HardwareFailure>().StartUI();
+				Destroy(eventData.pointerDrag.gameObject);
+            }
 			else
             {
 				eventData.pointerDrag.transform.SetParent(playArea.transform);

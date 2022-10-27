@@ -88,10 +88,6 @@ public class TurnSystem : MonoBehaviour
         GameObject player = GameObject.Find("Player Card Area");
         GameObject enemy = GameObject.Find("Enemy Play Area");
 
-        
-
-
-
         //DETERMINING BLOCKED ATTACK CARDS
         
         //if enemy has a defense card in play that blocks certain attack cards, disable their drag
