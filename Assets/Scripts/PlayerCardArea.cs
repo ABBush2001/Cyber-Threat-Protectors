@@ -39,4 +39,6 @@ public class PlayerCardArea : MonoBehaviour
         }
         //Debug.Log("num of defense cards in hand: " + numOfDefense);
     }
+
+    
 }

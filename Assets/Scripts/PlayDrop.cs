@@ -26,6 +26,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 			//Debug.Log ("Card discarded");
 		}
 		cardArea.transform.GetComponent<PlayerCardArea>().checkForDefense();
+		
 
 	}
 
