@@ -13,19 +13,24 @@ public class ForgotToPatchDestroy : MonoBehaviour, IPointerDownHandler
        
 
         //if security training in play
-        if (secTrain == true && this.gameObject.GetComponent<ThisCardEnemy>().thisId == 3)
+        if (this.gameObject.GetComponent<ThisCardEnemy>().thisId == 3)
         {
             if (GameObject.Find("Forgot To Patch Canvas"))
             {
                 Debug.Log(this.gameObject.name);
                 Destroy(this.gameObject);
                 GameObject.Find("Forgot To Patch Canvas").SetActive(false);
+                secTrain = false;
             }
         }
         //else, delete two cards
         else
         {
-            if(secTrain == false)
+            if(GameObject.Find("Enemy Play Area").transform.GetComponentInChildren<ThisCardEnemy>().thisId == 3)
+            {
+
+            }
+            else
             {
                 Debug.Log(this.gameObject.name);
                 Destroy(this.gameObject);
@@ -42,5 +47,6 @@ public class ForgotToPatchDestroy : MonoBehaviour, IPointerDownHandler
             }
             
         }
+            
     }
 }
