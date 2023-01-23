@@ -29,6 +29,8 @@ public class ThisCard : MonoBehaviour
     public int cardDamage;
     public int cardDefense;
 
+    public bool isBlocked = false;
+
     // Start is called before the first frame update
     void Start()
     {

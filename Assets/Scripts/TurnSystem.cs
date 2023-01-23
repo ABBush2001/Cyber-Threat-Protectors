@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.Serialization;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -31,8 +33,17 @@ public class TurnSystem : MonoBehaviour
     public GameObject playerHand;
     public GameObject CardToHand;
     public int maxHand;
+    
+    bool encryp = false;
+    bool malw = false;
+    bool fire = false;
 
-    //
+    bool doublee = false;
+    bool doublem = false;
+    bool doublef = false;
+
+    int turn = 1;
+
     public string cardPref;
 
 
@@ -56,6 +67,10 @@ public class TurnSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        LimitDoubles();
+        LimitPlayerAttackCard();
+
+
         if(playerCurPoints >= playerMaxPoints){
             //play victory screen
             victoryScreen.SetActive(true);
@@ -69,22 +84,21 @@ public class TurnSystem : MonoBehaviour
 
     public void PlayerTurn()
     {
-        
+
         GameObject player = GameObject.Find("Player Card Area");
         GameObject enemy = GameObject.Find("Enemy Play Area");
 
-        
-
-
-
         //DETERMINING BLOCKED ATTACK CARDS
-        //temporarily unblock all cards until blocked cards are determined
+        
+        //if enemy has a defense card in play that blocks certain attack cards, disable their drag
+        //temporarily unblock all cards (except special attack cards) until blocked cards are determined
         for(int i = 0; i < player.transform.childCount; i++)
         {
-            if(player.transform.GetChild(i).gameObject.GetComponent<Drag>() == null)
+            if(player.transform.GetChild(i).GetComponent<ThisCard>().thisId != 5 && player.transform.GetChild(i).GetComponent<ThisCard>().thisId != 11 && player.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
             {
-                player.transform.GetChild(i).gameObject.AddComponent<Drag>();
+                player.transform.GetChild(i).gameObject.GetComponent<ThisCard>().isBlocked = false;
             }
+
         }
 
         //search for defense cards in enemy's hand
@@ -98,7 +112,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 6 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 10)
                     {
-                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
+                        player.transform.GetChild(k).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -110,7 +124,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 4 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 5)
                     {
-                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
+                        player.transform.GetChild(k).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -122,7 +136,7 @@ public class TurnSystem : MonoBehaviour
                 {
                     if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 9 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 12)
                     {
-                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
+                        player.transform.GetChild(k).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
@@ -134,12 +148,167 @@ public class TurnSystem : MonoBehaviour
                 {
                     if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 7 || player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 8)
                     {
-                        Destroy(player.transform.GetChild(k).gameObject.GetComponent<Drag>());
+                        player.transform.GetChild(k).gameObject.GetComponent<ThisCard>().isBlocked = true;
                     }
                 }
             }
         }
+
+
+    }
+
+
+    public void LimitDoubles()
+    {
+        //method called every turn that checks if a special attack card is in play and, if so, to block other cards upon it being played
+
+        GameObject hand = GameObject.Find("Player Card Area");
+        GameObject play = GameObject.Find("Player Play Area");
+
+        //check if special attack card is in play; if so, disable drag on any instance of the card in hand
+        for(int i = 0; i < play.transform.childCount; i++)
+        {
+            //Weak Encryption Key
+            if(play.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5)
+            {
+                Debug.Log("Encryp found in play");
+                for(int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if(hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5)
+                    {
+                        doublee = true;
+                        hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                    }
+                }
+            }
+
+            //Anti-Malware
+            if (play.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
+            {
+                Debug.Log("Encryp found in play");
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13)
+                    {
+                        doublem = true;
+                        hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                    }
+                }
+            }
+
+            //Firewall Rules
+            if (play.transform.GetChild(i).GetComponent<ThisCard>().thisId == 11)
+            {
+                Debug.Log("Encryp found in play");
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11)
+                    {
+                        doublef = true;
+                        hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                    }
+                }
+            }
+        }
+    }
+
+    public void LimitPlayerAttackCard()
+    {
+        GameObject enemy = GameObject.Find("Enemy Play Area");
+        GameObject hand = GameObject.Find("Player Card Area");
+       
+
+        //disable all special cards in hand to start, if the associated defense card is not in play
+        if (encryp == false)
+        {
+            for (int i = 0; i < hand.transform.childCount; i++)
+            {
+                if (hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5)
+                {
+                    hand.transform.GetChild(i).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                }
+            }
+        }
+
+        if(malw == false)
+        {
+            for(int i = 0; i < hand.transform.childCount; i++)
+            {
+                if(hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
+                {
+                    hand.transform.GetChild(i).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                }
+            }
+        }
         
+        if(fire == false)
+        {
+            for(int i = 0; i < hand.transform.childCount; i++)
+            {
+                if(hand.transform.GetChild(i).GetComponent<ThisCard>().thisId == 11)
+                {
+                    hand.transform.GetChild(i).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                }
+            }
+        }
+
+        //check for appropriate defense cards
+        for(int i = 0; i < enemy.transform.childCount; i++)
+        {
+            //Anti-Malware
+            if (enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 0)
+            {
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13)
+                    {
+                        if(doublem == false)
+                        {
+                            malw = true;
+                            hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
+                        }
+
+                    }
+                }
+            }
+            
+
+            //Weak Encryption Key
+            if (enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 1)
+            {
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5)
+                    {
+                        if(doublee == false)
+                        {
+                            encryp = true;
+                            hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
+                        }
+
+                    }
+                }
+            }
+            
+            
+            //Firewall Rules
+            if (enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 2)
+            {
+                for (int j = 0; j < hand.transform.childCount; j++)
+                {
+                    if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11)
+                    {
+                        if(doublef == false)
+                        {
+                            fire = true;
+                            hand.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
+                        }
+                        
+                    }
+                }
+            }
+            
+        }
     }
 
     public void PlayerEndTurn()
@@ -168,6 +337,52 @@ public class TurnSystem : MonoBehaviour
             if(player.transform.GetChild(i).GetComponent<ThisCard>().thisId >= 14 && player.transform.GetChild(i).GetComponent<ThisCard>().thisId <= 18)
             {
                 tempPlayerPoints += 1;
+            }
+        }
+
+        //look for special attack cards, calculate damage and removed associated cards
+        for(int i = 0; i < player.transform.childCount; i++)
+        {
+            //Weak Encryption
+            if(player.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5)
+            {
+                for(int j = 0; j < enemy.transform.childCount; j++)
+                {
+                    if(enemy.transform.GetChild(j).GetComponent<ThisCardEnemy>().thisId == 1)
+                    {
+                        Destroy(enemy.transform.GetChild(j).gameObject);
+                        Destroy(player.transform.GetChild(i).gameObject);
+                        encryp = false;
+                    }
+                }
+            }
+
+            //Firewall Rules
+            if(player.transform.GetChild(i).GetComponent<ThisCard>().thisId == 11)
+            {
+                for(int j = 0; j < enemy.transform.childCount; j++)
+                {
+                    if(enemy.transform.GetChild(j).GetComponent<ThisCardEnemy>().thisId == 2)
+                    {
+                        Destroy(enemy.transform.GetChild(j).gameObject);
+                        Destroy(player.transform.GetChild(i).gameObject);
+                        fire = false;
+                    }
+                }
+            }
+
+            //Anti-Malware
+            if(player.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
+            {
+                for(int j = 0; j < enemy.transform.childCount; j++)
+                {
+                    if(enemy.transform.GetChild(j).GetComponent<ThisCardEnemy>().thisId == 0)
+                    {
+                        Destroy(enemy.transform.GetChild(j).gameObject);
+                        Destroy(player.transform.GetChild(i).gameObject);
+                        malw = false;
+                    }
+                }
             }
         }
 
@@ -363,8 +578,14 @@ public class TurnSystem : MonoBehaviour
         yourTurn += 1;
         turnText.text = "Your Turn";
 
+        doublee = false;
+        doublem = false;
+        doublef = false;
+
         PlayerTurn();
-        //StartCoroutine(drawCard());
+
+         Debug.Log("number of cards in hand: " + playerHand.transform.childCount);
+         //StartCoroutine(drawCard());
         if(playerHand.transform.childCount < maxHand){
             
             StartCoroutine(drawCard());
@@ -377,6 +598,7 @@ public class TurnSystem : MonoBehaviour
         //call couroutine to execute enemy's move that turn
         StartCoroutine(waitCoroutine());
     }
+
 
     IEnumerator waitCoroutine()
     {
@@ -468,6 +690,11 @@ public class TurnSystem : MonoBehaviour
     IEnumerator drawCard(){
         yield return new WaitForSeconds(1);
 		Instantiate(CardToHand, transform.position, transform.rotation);
+    }
+
+    IEnumerator waitAMin()
+    {
+        yield return new WaitForSeconds(5);
     }
 
     // IEnumerator drawCardEnemy(){

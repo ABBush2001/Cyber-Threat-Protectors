@@ -14,7 +14,7 @@ public class Card : MonoBehaviour
 	public int defense;
 	public string cardDesc;
 	public bool cardActive;
-	public int numInDeck;
+	public int numInDeck; 
 
 	private EventManager em;
 
@@ -84,6 +84,11 @@ public class Card : MonoBehaviour
 			myTarget = null;
 		}
 		
+	}
+
+	public string getName()
+	{
+		return cardName;
 	}
 
 }

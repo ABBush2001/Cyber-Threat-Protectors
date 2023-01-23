@@ -29,6 +29,7 @@ public class Deck : MonoBehaviour
 			for(int j = 0; j < cardValues[i].numInDeck; j++)
 			{
 				playerDeck.Add(cardValues[i]);
+				Debug.Log(cardValues[i].getName());
 				enemyDeck.Add(cardValues[i]);
 			}
 		}

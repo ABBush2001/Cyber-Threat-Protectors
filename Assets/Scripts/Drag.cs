@@ -36,7 +36,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 	{
 		canvasGroup.blocksRaycasts = true;
 		//
-		this.transform.SetParent(parentToReturnTo);
+		//this.transform.SetParent(parentToReturnTo);
 	}
 	
 	public void OnDrag(PointerEventData eventData)

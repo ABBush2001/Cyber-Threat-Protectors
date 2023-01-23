@@ -76,7 +76,7 @@ public class ThisCardEnemy : MonoBehaviour
         {
             
 
-            thisId = Deck.staticPlayerDeck[numberOfCardsInDeck - 1].id;
+            thisId = Deck.staticEnemyDeck[numberOfCardsInDeck - 1].id;
             numberOfCardsInDeck -= 1;
             Deck.deckSize -= 1;
             cardBack = false;
@@ -85,4 +85,6 @@ public class ThisCardEnemy : MonoBehaviour
             Debug.Log("Num of Cards: " + numberOfCardsInDeck + ", " + Deck.deckSize);
         }
     }
+
+    
 }

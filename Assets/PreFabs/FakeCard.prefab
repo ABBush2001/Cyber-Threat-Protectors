@@ -93,6 +93,8 @@ GameObject:
   - component: {fileID: -9003516608777971478}
   - component: {fileID: 8448830788452611830}
   - component: {fileID: -3529403801234087664}
+  - component: {fileID: -854052181160666255}
+  - component: {fileID: 8826634245156989530}
   m_Layer: 8
   m_Name: FakeCard
   m_TagString: EnemyCard
@@ -210,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hand: {fileID: 0}
   It: {fileID: 1901475081029691327}
+  enemyPlayArea: {fileID: 0}
 --- !u!61 &8448830788452611830
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -256,6 +259,31 @@ MonoBehaviour:
   defense: 0
   cardDesc: 
   cardActive: 0
+  numInDeck: 0
+--- !u!114 &-854052181160666255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901475081029691327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c24976af3009b444b472ecca21a5eec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8826634245156989530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901475081029691327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a234c37219784cb4ead9ab26003d6451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4682065340742760215
 GameObject:
   m_ObjectHideFlags: 0
