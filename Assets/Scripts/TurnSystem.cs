@@ -491,7 +491,7 @@ public class TurnSystem : MonoBehaviour
         {   
             if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId >= 14 && enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId <= 18)
             {
-                Debug.Log(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId);
+                //Debug.Log(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId);
                 tempEnemyPoints += 1;
             }
         }
@@ -626,7 +626,9 @@ public class TurnSystem : MonoBehaviour
             }
             else{
                 cardCount++;
-                Deck.staticEnemyDeck.Add(new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
+                //Deck.staticEnemyDeck.Add(new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
+             //recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
+                Deck.staticEnemyDeck.Insert(4, new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
              recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
                 Destroy(recentCardPlayed.gameObject);
             }
