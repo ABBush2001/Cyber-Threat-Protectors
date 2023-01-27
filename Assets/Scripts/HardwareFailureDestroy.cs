@@ -11,9 +11,9 @@ public class HardwareFailureDestroy : MonoBehaviour, IPointerDownHandler
 
         if(this.gameObject.GetComponent<ThisCardEnemy>().thisId >= 14 && this.gameObject.GetComponent<ThisCardEnemy>().thisId <= 18)
         {
-            if (GameObject.Find("Hardware Failure Canvas"))
+            if (GameObject.Find("Hardware Failure Canvas").activeSelf == true)
             {
-                Debug.Log(this.gameObject.name);
+                Debug.Log(this.gameObject.name + "was destroyed");
                 Destroy(this.gameObject);
                 GameObject.Find("Hardware Failure Canvas").SetActive(false);
             }
