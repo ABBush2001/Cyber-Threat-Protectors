@@ -34,7 +34,7 @@ public class CardDatabase : MonoBehaviour
 
 		//special
 		cList.Add(new Card(19, "Special", "Hardware Failure", 0, 0, 0, "Select one Asset from your opponents field. Remove both the selected card and this card", 3));
-		cList.Add(new Card(20, "Special", "Forgot To Patch", 0, 0, 0, "If 'Security Training' is in play, send this card and the 'Security Training' card to the discard pile. \n\nElse, choose 2 cards frm your opponent's hand and remove both those cards and this card.", 2));
+		cList.Add(new Card(20, "Special", "Forgot To Patch", 0, 0, 0, "If 'Security Training' is in play, send this card and the 'Security Training' card to the discard pile. \n\nElse, choose 2 cards frm your opponent's hand and remove both those cards and this card.", 3));
 	
 	
 	}
