@@ -20,7 +20,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 			//if called card is unplayable at the moment
 			if(eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true)
             {
-				eventData.pointerDrag.transform.SetParent(cardArea.transform);
+                eventData.pointerDrag.GetComponent<ThisCard>().lastParent = cardArea.transform.name;
+                eventData.pointerDrag.transform.SetParent(cardArea.transform);
 				eventData.pointerDrag.transform.localScale = Vector3.one;
 				eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
 				eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
@@ -45,6 +46,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 				}
 
                 //else
+                eventData.pointerDrag.GetComponent<ThisCard>().lastParent = cardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(cardArea.transform);
                 eventData.pointerDrag.transform.localScale = Vector3.one;
                 eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
@@ -83,6 +85,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 }
 
                 //else
+                eventData.pointerDrag.GetComponent<ThisCard>().lastParent = cardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(cardArea.transform);
                 eventData.pointerDrag.transform.localScale = Vector3.one;
                 eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
@@ -93,13 +96,17 @@ public class PlayDrop : MonoBehaviour, IDropHandler
             }
 			else
             {
-				eventData.pointerDrag.transform.SetParent(playArea.transform);
+                eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playArea.transform.name;
+                eventData.pointerDrag.transform.SetParent(playArea.transform);
 				eventData.pointerDrag.transform.localScale = Vector3.one;
 				eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
 				eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
 				//calls card effect
 				//eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
-				eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
+				//eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
+
+                //destroy card's drag component
+                Destroy(eventData.pointerDrag.gameObject.GetComponent<Drag>());
 			}
 			
 

@@ -10,6 +10,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 	private CanvasGroup canvasGroup;
 	public bool isDraggable = true;
 
+	[SerializeField] private Canvas canvas;
 
 	public Transform parentToReturnTo = null;
 	
@@ -17,6 +18,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 	{
 		rectTransform = GetComponent<RectTransform>();
 		canvasGroup = GetComponent<CanvasGroup>();
+		canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 	}
 	
 	public void OnBeginDrag(PointerEventData eventData)
@@ -41,7 +43,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 	
 	public void OnDrag(PointerEventData eventData)
 	{
-		rectTransform.anchoredPosition += eventData.delta;
+		rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 	}
 	
 	public void OnPointerDown(PointerEventData eventData)

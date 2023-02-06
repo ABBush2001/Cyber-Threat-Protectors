@@ -31,6 +31,8 @@ public class ThisCard : MonoBehaviour
 
     public bool isBlocked = false;
 
+    public string lastParent;
+
     // Start is called before the first frame update
     void Start()
     {

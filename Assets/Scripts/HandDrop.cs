@@ -11,6 +11,7 @@ public class HandDrop : MonoBehaviour
 	{
 		if(eventData.pointerDrag != null)
 		{
+			eventData.pointerDrag.GetComponent<ThisCard>().lastParent = cardArea.transform.name;
 			eventData.pointerDrag.transform.SetParent(cardArea.transform);
 			eventData.pointerDrag.transform.localScale = Vector3.one;
 			eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
