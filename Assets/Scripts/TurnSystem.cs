@@ -185,7 +185,7 @@ public class TurnSystem : MonoBehaviour
             //Anti-Malware
             if (play.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
             {
-                Debug.Log("Encryp found in play");
+                Debug.Log("Anti-Mal found in play");
                 for (int j = 0; j < hand.transform.childCount; j++)
                 {
                     if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13)
@@ -199,7 +199,7 @@ public class TurnSystem : MonoBehaviour
             //Firewall Rules
             if (play.transform.GetChild(i).GetComponent<ThisCard>().thisId == 11)
             {
-                Debug.Log("Encryp found in play");
+                Debug.Log("Firewall Rules found in play");
                 for (int j = 0; j < hand.transform.childCount; j++)
                 {
                     if (hand.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11)
@@ -476,8 +476,10 @@ public class TurnSystem : MonoBehaviour
         EnemyTurn();
     }
 
-    public void EnemyEndTurn()
+    IEnumerator EnemyEndTurn()
     {
+        yield return new WaitForSeconds(1);
+
         //variable to hold player points gained or lost in this turn that will be calculated
         int tempEnemyPoints = 0;
         int tempDamagePoints = 0;
@@ -499,7 +501,39 @@ public class TurnSystem : MonoBehaviour
         //look for attack cards, play them and discard them
         for(int i = 0; i < enemy.transform.childCount; i++)
         {
-            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId >= 4 && enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId <= 13)
+            //if firewall rules not updated in play, look for firewall in player hand and delete it
+            if(enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 11)
+            {
+                Debug.Log("Firewall rules not updated found in enemy!");
+
+                for (int k = 0; k < player.transform.childCount; k++)
+                {
+                    if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 2)
+                    {
+                        Destroy(player.transform.GetChild(k).gameObject);
+                        Destroy(enemy.transform.GetChild(i).gameObject);
+                        break;
+                    }
+                }
+            }
+
+            //if weak encryption key in play, look for encryption in player hand and delete it
+            if (enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 5)
+            {
+                Debug.Log("weak encryption key found in enemy!");
+
+                for (int k = 0; k < player.transform.childCount; k++)
+                {
+                    if (player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 1)
+                    {
+                        Destroy(player.transform.GetChild(k).gameObject);
+                        Destroy(enemy.transform.GetChild(i).gameObject);
+                        break;
+                    }
+                }
+            }
+
+            if (enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId >= 4 && enemy.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId <= 13)
             {
                 tempDamagePoints += 1;
             }
@@ -563,6 +597,64 @@ public class TurnSystem : MonoBehaviour
                             Destroy(enemy.transform.GetChild(j).gameObject);
                             break;
                         }
+                    }
+                }
+            }
+        }
+
+        //look for special cards in enemy play, remove appropriate cards in player play
+        for(int j = 0; j < enemy.transform.childCount; j++)
+        {
+            //if hardware failure found
+            if(enemy.transform.GetChild(j).GetComponent<ThisCardEnemy>().thisId == 19)
+            {
+                for(int k = 0; k < player.transform.childCount; k++)
+                {
+                    if(player.transform.GetChild(k).GetComponent<ThisCard>().thisId >= 14 && player.transform.GetChild(k).GetComponent<ThisCard>().thisId <= 18)
+                    {
+                        Destroy(player.transform.GetChild(k).gameObject);
+                        Destroy(enemy.transform.GetChild(j).gameObject);
+                        break;
+                    }
+                }
+            }
+
+            bool secTrainFound = false;
+
+            //if forgot to patch found
+            if(enemy.transform.GetChild(j).GetComponent<ThisCardEnemy>().thisId == 20)
+            {
+                Debug.Log("Forgot to patch found!");
+
+                for (int k = 0; k < player.transform.childCount; k++)
+                {
+                    if (player.transform.GetChild(k).GetComponent<ThisCard>().thisId == 3)
+                    {
+                        secTrainFound = true;
+                        Destroy(player.transform.GetChild(k).gameObject);
+                        Destroy(enemy.transform.GetChild(j).gameObject);
+                        break;
+                    }
+                }
+
+                if(secTrainFound == false)
+                {
+                    Debug.Log("Security Training not found!");
+
+                    //if security training not found, grab up to two random cards from player's hand and destroy them
+                    if(playerHand.transform.childCount >= 2)
+                    {
+                        Destroy(playerHand.transform.GetChild(0).gameObject);   
+                        Destroy(playerHand.transform.GetChild(1).gameObject);
+
+                        Destroy(enemy.transform.GetChild(j).gameObject);
+                        break;
+                    }
+                    else if(playerHand.transform.childCount == 1)
+                    {
+                        Destroy(playerHand.transform.GetChild(0));
+                        Destroy(enemy.transform.GetChild(j).gameObject);
+                        break;
                     }
                 }
             }
@@ -640,9 +732,10 @@ public class TurnSystem : MonoBehaviour
             }
 
             cardCount++;
+            Destroy(temp);
         }
 
-
+        cardCount = 0;
 
         //if no card with pref is found, play first valid card
         if (foundCardPref == false)
@@ -678,6 +771,7 @@ public class TurnSystem : MonoBehaviour
                 }
 
                 cardCount++;
+                Destroy(temp);
             }
         }
 
@@ -686,11 +780,11 @@ public class TurnSystem : MonoBehaviour
             Debug.Log("No valid card found to play");
         }
 
-        EnemyEndTurn();
+        StartCoroutine(EnemyEndTurn());
     }
 
 
-    IEnumerator waitCoroutine()
+    /*IEnumerator waitCoroutine()
     {
         //Debug.Log("Started enemy turn at timestamp: " + Time.time);
         yield return new WaitForSeconds(1);
@@ -702,7 +796,7 @@ public class TurnSystem : MonoBehaviour
         foundCardPref = false;
         cardCount = 0;
 
-        /*check for preference - goes through card in hand, if card matches pref play it, else cycle until end*/
+        //check for preference - goes through card in hand, if card matches pref play it, else cycle until end
         while (cardCount < 5 && foundCardPref == false){
 
             Instantiate(CardToPlay, transform.position, transform.rotation);
@@ -748,7 +842,7 @@ public class TurnSystem : MonoBehaviour
         //Debug.Log("Ended enemy turn at timestamp : " + Time.time);
         
         EnemyEndTurn();
-    }
+    }*/
 
     /*public void getScore(){
         //int numOfPlayerChildren = playArea.transform.childCount;

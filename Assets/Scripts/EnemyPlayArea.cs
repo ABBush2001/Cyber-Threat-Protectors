@@ -27,7 +27,7 @@ public class EnemyPlayArea : MonoBehaviour
 
     public bool checkDefenseEnemy(GameObject It){
         cardID = It.GetComponent<ThisCardEnemy>().thisId;
-        if (cardID == 11 || cardID == 5)
+        if (cardID == 11 || cardID == 5 || cardID == 19)
         {
             validCard = false;
         }
@@ -43,8 +43,8 @@ public class EnemyPlayArea : MonoBehaviour
                 validCard = false;
                 //Instantiate(CardToPlay, transform.position, transform.rotation);
             }
-            //1 blocks 4 and 5
-            else if(playerChildID == 1 && (cardID == 4 || cardID == 5)){
+            //1 blocks 4
+            else if(playerChildID == 1 && (cardID == 4)){
                 validCard = false;
                 //Instantiate(CardToPlay, transform.position, transform.rotation);
             }
@@ -68,6 +68,12 @@ public class EnemyPlayArea : MonoBehaviour
                 validCard = true;
             }
             else if(playerChildID == 1 && cardID == 5)
+            {
+                validCard = true;
+            }
+
+            //check for hardware failure - can only be played when enemy has asset card in play
+            else if(cardID == 19 && (playerChildID >= 14 && playerChildID <= 18))
             {
                 validCard = true;
             }
