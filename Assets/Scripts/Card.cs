@@ -61,7 +61,8 @@ public class Card : MonoBehaviour
 		numInDeck = NumInDeck;
 	}
 
-	public void MoveToDiscardPile(){
+
+    public void MoveToDiscardPile(){
 		em.discardPile.Add(this);
 		Destroy(gameObject);
 	}

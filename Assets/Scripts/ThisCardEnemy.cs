@@ -52,39 +52,51 @@ public class ThisCardEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Hand = GameObject.Find("Enemy Card Area");
-        if(this.transform.parent == Hand.transform.parent)
-        {
-            cardBack = true;
-        }
-
         try
         {
-            staticCardBack = cardBack;
+            Hand = GameObject.Find("Enemy Card Area");
+            if (this.transform.parent == Hand.transform.parent)
+            {
+                cardBack = true;
+            }
+
+            try
+            {
+                staticCardBack = cardBack;
+            }
+            catch (NullReferenceException e)
+            {
+
+            }
+
+
+            nameText.text = "" + cardName;
+            descriptionText.text = "" + cardDesc;
+
+            if (this.tag == "Clone")
+            {
+
+
+                thisId = Deck.staticEnemyDeck[numberOfCardsInDeck - 1].id;
+                numberOfCardsInDeck -= 1;
+                Deck.deckSize -= 1;
+                cardBack = false;
+                this.tag = "Untagged";
+
+                Debug.Log("Num of Cards: " + numberOfCardsInDeck + ", " + Deck.deckSize);
+            }
         }
-        catch(NullReferenceException e)
+        catch
         {
-
-        }
-        
-
-        nameText.text = "" + cardName;
-        descriptionText.text = "" + cardDesc;
-
-        if(this.tag == "Clone")
-        {
-            
-
-            thisId = Deck.staticEnemyDeck[numberOfCardsInDeck - 1].id;
-            numberOfCardsInDeck -= 1;
-            Deck.deckSize -= 1;
-            cardBack = false;
-            this.tag = "Untagged";
-
-            Debug.Log("Num of Cards: " + numberOfCardsInDeck + ", " + Deck.deckSize);
+            //Must be from turn system
         }
     }
 
-    
+    public void SetIDAndType(int id2, String type)
+    {
+        thisId = id2;
+        cardTypeID = type;
+    }
+
+
 }

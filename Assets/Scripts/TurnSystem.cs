@@ -596,7 +596,97 @@ public class TurnSystem : MonoBehaviour
     public void EnemyTurn()
     {
         //call couroutine to execute enemy's move that turn
-        StartCoroutine(waitCoroutine());
+        //StartCoroutine(waitCoroutine());
+
+        /*Check if card is valid, then if so check if it matches pref. If not, go to next card. 
+         * If none match pref, do a second loop and find the first card that is valid and play it*/
+
+        bool foundCardPref;
+        bool validCard = true;
+        int cardCount;
+
+        foundCardPref = false;
+        cardCount = 0;
+
+        
+
+        while (cardCount < 5 && foundCardPref == false)
+        {
+            //grab first card from deck, pass it into checkDefense
+       
+            GameObject temp = new GameObject();
+            temp.AddComponent<ThisCardEnemy>();
+            temp.GetComponent<ThisCardEnemy>().SetIDAndType(Deck.staticEnemyDeck[cardCount].id, Deck.staticEnemyDeck[cardCount].cardType);
+            validCard = playAreaEnemy.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
+            //if card is valid, check preference - else, continue
+            if(validCard)
+            {
+                if (string.Equals(temp.GetComponent<ThisCardEnemy>().cardTypeID, cardPref))
+                {
+                    foundCardPref = true;
+                    //swap card to index 0 in deck, then instantiate and break out of loop
+                    if(string.Equals(temp.GetComponent<ThisCardEnemy>().thisId, Deck.staticEnemyDeck[0].id))
+                    {
+                        Instantiate(CardToPlay, transform.position, transform.rotation);
+                    }
+                    else
+                    {
+                        Card swap = Deck.staticEnemyDeck[0];
+                        Deck.staticEnemyDeck[0] = Deck.staticEnemyDeck[cardCount];
+                        Deck.staticEnemyDeck[cardCount] = swap;
+                        Instantiate(CardToPlay, transform.position, transform.rotation);
+                    }
+                }
+            }
+
+            cardCount++;
+        }
+
+
+
+        //if no card with pref is found, play first valid card
+        if (foundCardPref == false)
+        {
+            validCard = false;
+
+            while (cardCount < 5 && validCard == false)
+            {
+                //grab first card from deck, pass it into checkDefense
+
+                GameObject temp = new GameObject();
+                temp.AddComponent<ThisCardEnemy>();
+                temp.GetComponent<ThisCardEnemy>().SetIDAndType(Deck.staticEnemyDeck[cardCount].id, Deck.staticEnemyDeck[cardCount].cardType);
+                validCard = playAreaEnemy.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
+
+                //if card is valid, check preference - else, continue
+                if (validCard)
+                {
+
+                    //swap card to index 0 in deck, then instantiate and break out of loop
+                    if (string.Equals(temp.GetComponent<ThisCardEnemy>().thisId, Deck.staticEnemyDeck[0].id))
+                    {
+                        Instantiate(CardToPlay, transform.position, transform.rotation);
+                    }
+                    else
+                    {
+                        Card swap = Deck.staticEnemyDeck[0];
+                        Deck.staticEnemyDeck[0] = Deck.staticEnemyDeck[cardCount];
+                        Deck.staticEnemyDeck[cardCount] = swap;
+                        Instantiate(CardToPlay, transform.position, transform.rotation);
+                    }
+
+                }
+
+                cardCount++;
+            }
+        }
+
+        if(validCard == false)
+        {
+            Debug.Log("No valid card found to play");
+        }
+
+        EnemyEndTurn();
     }
 
 
@@ -611,29 +701,40 @@ public class TurnSystem : MonoBehaviour
 
         foundCardPref = false;
         cardCount = 0;
-        
-        while(cardCount < 5 && foundCardPref == false){
+
+        /*check for preference - goes through card in hand, if card matches pref play it, else cycle until end*/
+        while (cardCount < 5 && foundCardPref == false){
+
             Instantiate(CardToPlay, transform.position, transform.rotation);
             yield return new WaitForSeconds(2);
-            int lastChildIndex = playAreaEnemy.transform.childCount - 1;
-            //Debug.Log("recent child pos: " + lastChildIndex);
-             ThisCardEnemy recentCardPlayed = playAreaEnemy.transform.GetChild(lastChildIndex).GetComponent<ThisCardEnemy>();
-             recentCardPlayed.gameObject.SetActive(false);
-            if(string.Equals(recentCardPlayed.cardTypeID,cardPref)){
-                foundCardPref = true;
-                Debug.Log("Card matches card pref: " + recentCardPlayed.cardTypeID);
-                recentCardPlayed.gameObject.SetActive(true);
-            }
-            else{
-                cardCount++;
-                //Deck.staticEnemyDeck.Add(new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
-             //recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
-                Deck.staticEnemyDeck.Insert(4, new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
-             recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
-                Destroy(recentCardPlayed.gameObject);
+            if (playAreaEnemy.transform.childCount > 0)
+            {
+
+                int lastChildIndex = playAreaEnemy.transform.childCount - 1;
+
+                ThisCardEnemy recentCardPlayed = playAreaEnemy.transform.GetChild(lastChildIndex).GetComponent<ThisCardEnemy>();
+                recentCardPlayed.gameObject.SetActive(false);
+                if (string.Equals(recentCardPlayed.cardTypeID, cardPref))
+                {
+                    foundCardPref = true;
+                    Debug.Log("Card matches card pref: " + recentCardPlayed.cardTypeID);
+                    recentCardPlayed.gameObject.SetActive(true);
+                }
+                else
+                {
+                    cardCount++;
+                    //Deck.staticEnemyDeck.Add(new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
+                    //recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
+                    Deck.staticEnemyDeck.Insert(4, new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
+                 recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
+                    Destroy(recentCardPlayed.gameObject);
+                }
             }
             
         }
+
+        Debug.Log(playAreaEnemy.transform.childCount);
+
         if(foundCardPref == false){
             Debug.Log("couldn't find card pref, playing next available card");
             Instantiate(CardToPlay, transform.position, transform.rotation);
