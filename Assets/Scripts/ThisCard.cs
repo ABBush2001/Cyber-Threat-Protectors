@@ -48,6 +48,8 @@ public class ThisCard : MonoBehaviour
         cardDefense = Deck.staticPlayerDeck[0].defense;
 
         Deck.staticPlayerDeck.RemoveAt(0);
+        nameText.raycastTarget = false;
+        descriptionText.raycastTarget = false;
 
     }
 
