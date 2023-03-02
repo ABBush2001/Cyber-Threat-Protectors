@@ -15,7 +15,25 @@ public class CardToPlay : MonoBehaviour
     {
         
         enemyCard = It.GetComponent<ThisCardEnemy>();
-        Hand = GameObject.Find("Enemy Play Area");
+
+        //set hand based on card type
+        if(enemyCard.thisId >= 0 && enemyCard.thisId <= 3)
+        {
+            Hand = GameObject.Find("Enemy Defense Area");
+        }
+        else if(enemyCard.thisId >= 4 && enemyCard.thisId <= 13)
+        {
+            Hand = GameObject.Find("Enemy Attack Area");
+        }
+        else if(enemyCard.thisId >= 14 && enemyCard.thisId <= 18)
+        {
+            Hand = GameObject.Find("Enemy Asset Area");
+        }
+        else
+        {
+            Hand = GameObject.Find("Enemy Attack Area");
+        }
+        
         It.SetActive(false);
         validCard = Hand.GetComponent<EnemyPlayArea>().checkDefenseEnemy(It);
         

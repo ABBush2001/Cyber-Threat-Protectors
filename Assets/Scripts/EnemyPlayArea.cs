@@ -6,15 +6,16 @@ public class EnemyPlayArea : MonoBehaviour
 {
     public GameObject CardToPlay;
 
-    public GameObject playArea;
-    public GameObject enemyPlayArea;
+    public GameObject defenseArea;
+    public GameObject assetArea;
 	private int playerChildID;
     private int cardID;
     private bool validCard;
     // Start is called before the first frame update
     void Start()
     {
-        
+        defenseArea = GameObject.Find("Enemy Defense Area");
+        assetArea = GameObject.Find("Enemy Asset Area");
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class EnemyPlayArea : MonoBehaviour
             validCard = true;
         }
         //check if player played a defense card that blocks this card being played
-        foreach(Transform playAreaChild in playArea.transform){
+        foreach(Transform playAreaChild in defenseArea.transform){
             playerChildID = playAreaChild.GetComponent<ThisCard>().thisId;
             //0 blocks 6 and 10
             if(playerChildID == 0 && (cardID == 6 || cardID == 10)){
@@ -72,15 +73,20 @@ public class EnemyPlayArea : MonoBehaviour
                 validCard = true;
             }
 
+        }
+
+        foreach (Transform playAreaChild in assetArea.transform)
+        {
             //check for hardware failure - can only be played when enemy has asset card in play
-            else if(cardID == 19 && (playerChildID >= 14 && playerChildID <= 18))
+            if (cardID == 19 && (playerChildID >= 14 && playerChildID <= 18))
             {
                 validCard = true;
             }
         }
+
         //check if the same card is on the field aswell 
-        if(cardID <= 3){
-            foreach(Transform enemyCard in enemyPlayArea.transform){
+        if (cardID <= 3){
+            foreach(Transform enemyCard in defenseArea.transform){
             if(enemyCard.GetComponent<ThisCardEnemy>().thisId == cardID){
                 Debug.Log("Same card already in play");
                 validCard = false;
