@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.UI;
 
 public class CardHover : MonoBehaviour
 {
@@ -27,9 +27,10 @@ public class CardHover : MonoBehaviour
         {
             isHovering = true;
             enlargedCardInstance = Instantiate(enlargedCardPrefab, transform.position + Vector3.up * 230.5f, Quaternion.identity);
-            enlargedCardInstance.transform.localScale = originalScale * 3.0f;
+            enlargedCardInstance.transform.localScale = originalScale * 5.0f;
             enlargedCardInstance.GetComponent<cardHoverInfo>().cardName = "" + GetComponent<ThisCard>().cardName;
             enlargedCardInstance.GetComponent<cardHoverInfo>().cardDesc = "" + GetComponent<ThisCard>().cardDesc;
+            enlargedCardInstance.GetComponent<Image>().sprite = GetComponent<Image>().sprite;
         }
     }
 

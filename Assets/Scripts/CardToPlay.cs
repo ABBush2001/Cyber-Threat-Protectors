@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardToPlay : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class CardToPlay : MonoBehaviour
 		It.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
 		It.transform.eulerAngles = new Vector3(25, 0, 0);
             It.SetActive(true);
+            StartCoroutine(addSprite());
             //Debug.Log("Card ID being played: " + It.GetComponent<ThisCardEnemy>().thisId);
         }
         else{
@@ -58,6 +60,12 @@ public class CardToPlay : MonoBehaviour
     void Update()
     {
         
+    }
+
+    IEnumerator addSprite()
+    {
+        yield return new WaitForSeconds(0.001f);
+        It.gameObject.GetComponent<Image>().sprite = GameObject.Find("ImageManager").GetComponent<ImageList>().sprites[It.GetComponent<ThisCardEnemy>().thisId];
     }
 
 }

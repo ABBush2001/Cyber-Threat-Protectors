@@ -11,8 +11,10 @@ public class Deck : MonoBehaviour
 	public List<Card> enemyDeck = new List<Card>();
 	public static List<Card> staticEnemyDeck = new List<Card>();
 	public List<Card> cardValues = new List<Card>();
-	
-	public static int deckSize;
+
+    public List<Sprite> sprites = new List<Sprite>();
+
+    public static int deckSize;
 
 	private static System.Random rng = new System.Random();
 

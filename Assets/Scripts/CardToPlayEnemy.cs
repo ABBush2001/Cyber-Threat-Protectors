@@ -18,4 +18,6 @@ public class CardToPlayEnemy : MonoBehaviour
 		It.transform.eulerAngles = new Vector3(25, 0, 0);
     }
 
+
+
 }

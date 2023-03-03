@@ -7,6 +7,7 @@ public class CardDatabase : MonoBehaviour
 {
     public static List<Card> cardList = new List<Card> ();
 	
+
 	public static void FillList(List<Card> cList)
 	{
 		//defense
