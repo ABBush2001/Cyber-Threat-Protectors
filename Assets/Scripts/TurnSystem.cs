@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Runtime.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -24,6 +26,7 @@ public class TurnSystem : MonoBehaviour
     public int enemyCurPoints;
     public TextMeshProUGUI enemyPointText;
 
+    public GameObject playerCardArea;
     public GameObject playerAttackArea;
     public GameObject playerAssetArea;
     public GameObject playerDefenseArea;
@@ -37,7 +40,9 @@ public class TurnSystem : MonoBehaviour
     public GameObject playerHand;
     public GameObject CardToHand;
     public int maxHand;
-    
+
+    public Button button;
+
     bool encryp = false;
     bool malw = false;
     bool fire = false;
@@ -635,15 +640,43 @@ public class TurnSystem : MonoBehaviour
                     if(playerAssetArea.transform.childCount + playerAttackArea.transform.childCount + playerDefenseArea.transform.childCount >= 2)
                     {
                         //destroy an asset and attack card
-                        Destroy(playerAssetArea.transform.GetChild(0).gameObject);   
-                        Destroy(playerAttackArea.transform.GetChild(1).gameObject);
+                        if (playerAssetArea.transform.childCount > 0)
+                        {
+                            Destroy(playerAssetArea.transform.GetChild(0).gameObject);
+                        }
+                        else if (playerDefenseArea.transform.childCount > 0)
+                        {
+                            Destroy(playerDefenseArea.transform.GetChild(0).gameObject);
+                        }
+
+
+                        if (playerAttackArea.transform.childCount > 0)
+                        {
+                            Destroy(playerAttackArea.transform.GetChild(0).gameObject);
+                        }
+                        else if(playerDefenseArea.transform.childCount > 0)
+                        {
+                            Destroy(playerDefenseArea.transform.GetChild(0).gameObject);
+                        }
 
                         Destroy(enemyAttackArea.transform.GetChild(j).gameObject);
                         break;
                     }
                     else if(playerAssetArea.transform.childCount + playerAttackArea.transform.childCount + playerDefenseArea.transform.childCount == 1)
                     {
-                        Destroy(playerAssetArea.transform.GetChild(0));
+                        if (playerAssetArea.transform.childCount > 0)
+                        {
+                            Destroy(playerAssetArea.transform.GetChild(0).gameObject);
+                        }
+                        else if (playerDefenseArea.transform.childCount > 0)
+                        {
+                            Destroy(playerDefenseArea.transform.GetChild(0).gameObject);
+                        }
+                        else if (playerAttackArea.transform.childCount > 0)
+                        {
+                            Destroy(playerAttackArea.transform.GetChild(0).gameObject);
+                        }
+
                         Destroy(enemyAttackArea.transform.GetChild(j).gameObject);
                         break;
                     }
@@ -670,7 +703,7 @@ public class TurnSystem : MonoBehaviour
          //Debug.Log("number of cards in hand: " + playerHand.transform.childCount);
          //StartCoroutine(drawCard());
         if(playerAssetArea.transform.childCount + playerAttackArea.transform.childCount + playerDefenseArea.transform.childCount < maxHand){
-            
+            button.enabled = false;
             StartCoroutine(drawCard());
         }
 
@@ -918,8 +951,15 @@ public class TurnSystem : MonoBehaviour
     }*/
 
     IEnumerator drawCard(){
+        int curCount = playerCardArea.transform.childCount;
+        Debug.Log("current count is " + curCount);
         yield return new WaitForSeconds(1);
-		Instantiate(CardToHand, transform.position, transform.rotation);
+        for (int i = curCount; i < 4; i++)
+        {
+            Instantiate(CardToHand, transform.position, transform.rotation);
+            yield return new WaitForSeconds(1);
+        }
+        button.enabled = true;
     }
 
     IEnumerator waitAMin()

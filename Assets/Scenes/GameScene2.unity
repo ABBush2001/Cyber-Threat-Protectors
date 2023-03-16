@@ -1052,6 +1052,7 @@ MonoBehaviour:
   enemyMaxPoints: 0
   enemyCurPoints: 0
   enemyPointText: {fileID: 1263304294}
+  playerCardArea: {fileID: 1973317456}
   playerAttackArea: {fileID: 815855172}
   playerAssetArea: {fileID: 108773497}
   playerDefenseArea: {fileID: 2122834646}
@@ -1063,6 +1064,7 @@ MonoBehaviour:
   playerHand: {fileID: 1973317456}
   CardToHand: {fileID: 1901475081029691327, guid: b4081e032d142e74eb12b872c579a372, type: 3}
   maxHand: 0
+  button: {fileID: 1649654470}
   cardPref: Asset
 --- !u!114 &266155133
 MonoBehaviour:

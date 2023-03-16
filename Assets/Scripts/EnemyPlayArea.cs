@@ -38,7 +38,14 @@ public class EnemyPlayArea : MonoBehaviour
         }
         //check if player played a defense card that blocks this card being played
         foreach(Transform playAreaChild in defenseArea.transform){
-            playerChildID = playAreaChild.GetComponent<ThisCard>().thisId;
+            try
+            {
+                playerChildID = playAreaChild.GetComponent<ThisCard>().thisId;
+            }
+            catch
+            {
+                Debug.Log("None");
+            }
             //0 blocks 6 and 10
             if(playerChildID == 0 && (cardID == 6 || cardID == 10)){
                 validCard = false;

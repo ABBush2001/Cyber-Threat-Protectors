@@ -106,6 +106,20 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 //defense card
                 if(eventData.pointerDrag.GetComponent<ThisCard>().thisId >= 0 && eventData.pointerDrag.GetComponent<ThisCard>().thisId <= 3)
                 {
+                    //check to see if this defense card is already in play
+                    for(int i = 0; i < playerDefenseArea.transform.childCount; i++)
+                    {
+                        if(playerDefenseArea.transform.GetChild(i).GetComponent<ThisCard>().thisId == eventData.pointerDrag.GetComponent<ThisCard>().thisId)
+                        {
+                            eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
+                            eventData.pointerDrag.transform.SetParent(playercardArea.transform);
+                            eventData.pointerDrag.transform.localScale = Vector3.one;
+                            eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
+                            eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
+                            return;
+                        }
+                    }
+
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Defense Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Defense Area").transform);
                     eventData.pointerDrag.transform.localScale = Vector3.one;
