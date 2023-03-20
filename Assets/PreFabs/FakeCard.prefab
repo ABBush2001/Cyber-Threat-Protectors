@@ -95,6 +95,8 @@ GameObject:
   - component: {fileID: -3529403801234087664}
   - component: {fileID: -854052181160666255}
   - component: {fileID: 8826634245156989530}
+  - component: {fileID: -3480928087630097922}
+  - component: {fileID: -2140933977906323664}
   m_Layer: 8
   m_Name: FakeCard
   m_TagString: EnemyCard
@@ -285,6 +287,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secTrain: 0
+--- !u!114 &-3480928087630097922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901475081029691327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac1c9efac00dd9c41a6da463ba07b9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enlargedCardPrefab: {fileID: 1501995504976720624, guid: 39b85df7555fae64caffc93d181c35c6, type: 3}
+  nameText: {fileID: 0}
+  descriptionText: {fileID: 0}
+--- !u!114 &-2140933977906323664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901475081029691327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -3480928087630097922}
+          m_TargetAssemblyTypeName: CardHoverEnemy, Assembly-CSharp
+          m_MethodName: OnMouseEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: -3480928087630097922}
+          m_TargetAssemblyTypeName: CardHoverEnemy, Assembly-CSharp
+          m_MethodName: OnMouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4682065340742760215
 GameObject:
   m_ObjectHideFlags: 0

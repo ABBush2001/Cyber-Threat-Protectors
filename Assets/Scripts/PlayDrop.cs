@@ -19,11 +19,15 @@ public class PlayDrop : MonoBehaviour, IDropHandler
     public GameObject hardwareScreen;
 	public GameObject forgotToPatchScreen;
 
+    private CanvasGroup canvasGroup;
+
     public void OnDrop(PointerEventData eventData)
 	{
+        canvasGroup = eventData.pointerDrag.gameObject.GetComponent<CanvasGroup>();
+        canvasGroup.blocksRaycasts = true;
 		if(eventData.pointerDrag != null)
 		{
-
+            
 			//if called card is unplayable at the moment
 			if(eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true)
             {
