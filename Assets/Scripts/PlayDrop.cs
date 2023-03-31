@@ -25,12 +25,18 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 	{
         canvasGroup = eventData.pointerDrag.gameObject.GetComponent<CanvasGroup>();
         canvasGroup.blocksRaycasts = true;
-		if(eventData.pointerDrag != null)
+		if(eventData.pointerDrag != null && eventData.pointerDrag.gameObject.GetComponent<Drag>())
 		{
-            
-			//if called card is unplayable at the moment
-			if(eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true)
+            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
+            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
+
+            //if called card is unplayable at the moment
+            if (eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true)
             {
+                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
+                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
 				eventData.pointerDrag.transform.localScale = Vector3.one;
@@ -39,7 +45,9 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 				//calls card effect
 				//eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
 				eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
-			}
+
+                
+            }
 			//else if card played is hardware failure AND enemy has an asset card in play
 			else if(eventData.pointerDrag.gameObject.GetComponent<ThisCard>().thisId == 19)
             {
@@ -57,6 +65,9 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 				}
 
                 //else
+                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
+                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
                 eventData.pointerDrag.transform.localScale = Vector3.one;
@@ -65,6 +76,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 //calls card effect
                 //eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
                 eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
+
+                
 
             }
 			//else if card played is forgot to patch AND there are at least two cards in play OR Security Training in play
@@ -96,6 +109,9 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 }
 
                 //else
+                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
+                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
                 eventData.pointerDrag.transform.localScale = Vector3.one;
@@ -104,6 +120,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 //calls card effect
                 //eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
                 eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
+
+                
             }
 			else
             {
@@ -115,33 +133,54 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     {
                         if(playerDefenseArea.transform.GetChild(i).GetComponent<ThisCard>().thisId == eventData.pointerDrag.GetComponent<ThisCard>().thisId)
                         {
+                            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
+                            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
                             eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                             eventData.pointerDrag.transform.SetParent(playercardArea.transform);
                             eventData.pointerDrag.transform.localScale = Vector3.one;
                             eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                             eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
+
+                            
                             return;
                         }
                     }
+
+                    Destroy(eventData.pointerDrag.gameObject.GetComponent<Drag>());
+                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
+                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
 
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Defense Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Defense Area").transform);
                     eventData.pointerDrag.transform.localScale = Vector3.one;
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
+
+                    
                 }
                 //attack card
                 else if (eventData.pointerDrag.GetComponent<ThisCard>().thisId >= 4 && eventData.pointerDrag.GetComponent<ThisCard>().thisId <= 13)
                 {
+                    Destroy(eventData.pointerDrag.gameObject.GetComponent<Drag>());
+                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
+                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Attack Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Attack Area").transform);
                     eventData.pointerDrag.transform.localScale = Vector3.one;
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
+
+                    
                 }
                 //asset card
                 else
                 {
+                    Destroy(eventData.pointerDrag.gameObject.GetComponent<Drag>());
+                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
+                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Asset Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Asset Area").transform);
                     eventData.pointerDrag.transform.localScale = Vector3.one;

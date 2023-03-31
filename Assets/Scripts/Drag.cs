@@ -30,6 +30,8 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 			//trying to fix drag/drop
 			parentToReturnTo = this.transform.parent;
 			this.transform.SetParent(this.transform.parent.parent );
+
+			LeanTween.scale(this.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0.5f).setEase(LeanTweenType.easeOutElastic);
 		}
 		
 	}
@@ -37,9 +39,9 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 	public void OnEndDrag(PointerEventData eventData)
 	{
 		canvasGroup.blocksRaycasts = true;
-		//
-		//this.transform.SetParent(parentToReturnTo);
-	}
+        //
+        //this.transform.SetParent(parentToReturnTo);
+    }
 	
 	public void OnDrag(PointerEventData eventData)
 	{

@@ -18,6 +18,8 @@ public class CardToHand : MonoBehaviour
 		It.transform.localScale = Vector3.one;
 		It.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		It.transform.eulerAngles = new Vector3(25, 0, 0);
+        LeanTween.scale(It, new Vector3(1.7f, 1.7f, 1.7f), 0);
+        LeanTween.scale(It, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutBounce);
         Hand.transform.GetComponent<PlayerCardArea>().checkForDefense();
 
         StartCoroutine(addSprite());

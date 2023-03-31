@@ -39,10 +39,13 @@ public class CardToPlay : MonoBehaviour
         validCard = Hand.GetComponent<EnemyPlayArea>().checkDefenseEnemy(It);
         
         if(validCard){
+            LeanTween.scale(It, new Vector3(1.7f, 1.7f, 1.7f), 0);
+            LeanTween.scale(It, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
             It.transform.SetParent(Hand.transform);
-		It.transform.localScale = Vector3.one;
-		It.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
-		It.transform.eulerAngles = new Vector3(25, 0, 0);
+		    It.transform.localScale = Vector3.one;
+		    It.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
+		    It.transform.eulerAngles = new Vector3(25, 0, 0);
             It.SetActive(true);
             StartCoroutine(addSprite());
             //Debug.Log("Card ID being played: " + It.GetComponent<ThisCardEnemy>().thisId);
