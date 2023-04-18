@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
+using UnityEngine.UI;
 
 /*Script that allows card objects to be dragged around*/
 public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
@@ -13,12 +15,14 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 	[SerializeField] private Canvas canvas;
 
 	public Transform parentToReturnTo = null;
-	
+
+
 	private void Awake()
 	{
 		rectTransform = GetComponent<RectTransform>();
 		canvasGroup = GetComponent<CanvasGroup>();
 		canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+		
 	}
 	
 	public void OnBeginDrag(PointerEventData eventData)
@@ -27,11 +31,13 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 		{
 			canvasGroup.blocksRaycasts = false;
 
-			//trying to fix drag/drop
+			
+
+			this.gameObject.GetComponent<CardHover>().beingDragged = true;
 			parentToReturnTo = this.transform.parent;
 			this.transform.SetParent(this.transform.parent.parent );
-
-			LeanTween.scale(this.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+			Debug.Log("this drag");
+			LeanTween.scale(this.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0.05f).setEase(LeanTweenType.easeOutElastic);
 		}
 		
 	}
@@ -39,6 +45,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 	public void OnEndDrag(PointerEventData eventData)
 	{
 		canvasGroup.blocksRaycasts = true;
+        this.gameObject.GetComponent<CardHover>().beingDragged = false;
         //
         //this.transform.SetParent(parentToReturnTo);
     }
