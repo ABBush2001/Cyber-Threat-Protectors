@@ -22,12 +22,17 @@ public class InitialDeal : MonoBehaviour
 	
 	IEnumerator StartGame()
 	{
-		for(int i = 0; i < 4; i++)
+        Cursor.lockState = CursorLockMode.Locked;       //for card anim
+        Cursor.visible = false;                         //card anim
+
+        for (int i = 0; i < 4; i++)
 		{
 			yield return new WaitForSeconds(1);
 			Instantiate(CardToHand, transform.position, transform.rotation);
             Instantiate(CardToHandEnemy, transform.position, transform.rotation);
-
 		}
-	}
+
+        Cursor.lockState = CursorLockMode.None;         //card anim
+        Cursor.visible = true;                          //card anim
+    }
 }

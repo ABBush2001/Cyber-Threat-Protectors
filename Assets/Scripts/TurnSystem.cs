@@ -954,12 +954,18 @@ public class TurnSystem : MonoBehaviour
         int curCount = playerCardArea.transform.childCount;
         Debug.Log("current count is " + curCount);
         yield return new WaitForSeconds(1);
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;         //card anim
+        UnityEngine.Cursor.visible = false;                          //card anim
+
         for (int i = curCount; i < 4; i++)
         {
             Instantiate(CardToHand, transform.position, transform.rotation);
             yield return new WaitForSeconds(1);
         }
         button.enabled = true;
+
+        UnityEngine.Cursor.lockState = CursorLockMode.None;         //card anim
+        UnityEngine.Cursor.visible = true;                          //card anim
     }
 
     IEnumerator waitAMin()

@@ -27,15 +27,13 @@ public class PlayDrop : MonoBehaviour, IDropHandler
         canvasGroup.blocksRaycasts = true;
 		if(eventData.pointerDrag != null && eventData.pointerDrag.gameObject.GetComponent<Drag>())
 		{
-            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+            //StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
 
 
             //if called card is unplayable at the moment
             if (eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true)
             {
-                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+                StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
 
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
@@ -65,8 +63,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 				}
 
                 //else
-                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+                StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
 
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
@@ -109,8 +106,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 }
 
                 //else
-                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-                LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+                StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
 
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
@@ -133,8 +129,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     {
                         if(playerDefenseArea.transform.GetChild(i).GetComponent<ThisCard>().thisId == eventData.pointerDrag.GetComponent<ThisCard>().thisId)
                         {
-                            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-                            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+                            StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
 
                             eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                             eventData.pointerDrag.transform.SetParent(playercardArea.transform);
@@ -148,8 +143,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     }
 
                     Destroy(eventData.pointerDrag.gameObject.GetComponent<Drag>());
-                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+                    StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1.5f, 1, 1)));
 
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Defense Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Defense Area").transform);
@@ -163,8 +157,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 else if (eventData.pointerDrag.GetComponent<ThisCard>().thisId >= 4 && eventData.pointerDrag.GetComponent<ThisCard>().thisId <= 13)
                 {
                     Destroy(eventData.pointerDrag.gameObject.GetComponent<Drag>());
-                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+                    StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1.5f, 1, 1)));
 
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Attack Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Attack Area").transform);
@@ -178,8 +171,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 else
                 {
                     Destroy(eventData.pointerDrag.gameObject.GetComponent<Drag>());
-                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-                    LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+                    StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1.5f, 1, 1)));
 
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Asset Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Asset Area").transform);
@@ -210,6 +202,20 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 		
 
 	}
+
+    IEnumerator animWaitForHover(GameObject it, Vector3 newScale)
+    {
+        Cursor.lockState = CursorLockMode.Locked;         //card anim
+        Cursor.visible = false;                          //card anim
+
+        LeanTween.scale(it, new Vector3(1.7f, 1.7f, 1.7f), 0);
+        LeanTween.scale(it, newScale, 0.5f).setEase(LeanTweenType.easeOutElastic);
+        yield return new WaitForSeconds(0.8f);
+        it.GetComponent<CardHover>().originalScale = newScale;
+
+        Cursor.lockState = CursorLockMode.None;         //card anim
+        Cursor.visible = true;                          //card anim
+    }
 
 	void Update(){
 		

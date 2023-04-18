@@ -40,7 +40,7 @@ public class CardToPlay : MonoBehaviour
         
         if(validCard){
             LeanTween.scale(It, new Vector3(1.7f, 1.7f, 1.7f), 0);
-            LeanTween.scale(It, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+            LeanTween.scale(It, new Vector3(1.5f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
 
             It.transform.SetParent(Hand.transform);
 		    It.transform.localScale = Vector3.one;

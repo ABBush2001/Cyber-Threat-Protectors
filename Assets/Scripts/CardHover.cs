@@ -8,8 +8,9 @@ public class CardHover : MonoBehaviour
 {
     public GameObject enlargedCardPrefab;
     private GameObject enlargedCardInstance;
-    private Vector3 originalScale;
+    public Vector3 originalScale;
     private bool isHovering = false;
+    public bool dropFinished;
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
@@ -18,29 +19,36 @@ public class CardHover : MonoBehaviour
     {
         originalScale = transform.localScale;
         Cursor.visible = true;
+        dropFinished = true;
     }
 
     public void OnMouseEnter()
     {
         //Debug.Log("Mouse over card");
-        if (enlargedCardPrefab != null && !isHovering)
+        if (!isHovering && dropFinished)
         {
             isHovering = true;
-            enlargedCardInstance = Instantiate(enlargedCardPrefab, transform.position + Vector3.up * 230.5f, Quaternion.identity);
+            LeanTween.scale(this.gameObject, new Vector3(6f, 6f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+            LeanTween.moveLocalY(this.gameObject, 60, 0.5f);
+            Debug.Log(originalScale);
+            /*enlargedCardInstance = Instantiate(enlargedCardPrefab, transform.position + Vector3.up * 230.5f, Quaternion.identity);
             enlargedCardInstance.transform.localScale = originalScale * 5.0f;
             enlargedCardInstance.GetComponent<cardHoverInfo>().cardName = "" + GetComponent<ThisCard>().cardName;
             enlargedCardInstance.GetComponent<cardHoverInfo>().cardDesc = "" + GetComponent<ThisCard>().cardDesc;
-            enlargedCardInstance.GetComponent<Image>().sprite = GetComponent<Image>().sprite;
+            enlargedCardInstance.GetComponent<Image>().sprite = GetComponent<Image>().sprite;*/
         }
     }
 
     public void OnMouseExit()
     {
         //Debug.Log("Mouse exit card");
-        if (enlargedCardInstance != null)
+        LeanTween.scale(this.gameObject, originalScale, 0.5f);
+        LeanTween.moveLocalY(this.gameObject, 17, 0.5f);
+        isHovering = false;
+        /*if (enlargedCardInstance != null)
         {
             isHovering = false;
             Destroy(enlargedCardInstance);
-        }
+        }*/
     }
 }
