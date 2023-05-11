@@ -16,12 +16,16 @@ public class MainMenu : MonoBehaviour
 
 	[SerializeField] private TMP_Text aiName;
 	[SerializeField] private int aiNamePosition;
+
+	public float vol;
 	
 	string[] aiType;
 
 	void Start()
 	{
 		aiType = new string[] {"Defensive", "Aggresive", "Chaotic"};
+		AudioListener.volume = .5f;
+		vol = AudioListener.volume;
 		//aiName.text = aiType[aiNamePosition];
 	}
     public void PlayGame()
@@ -66,6 +70,13 @@ public class MainMenu : MonoBehaviour
 			aiNamePosition = 2;
 		}
 		aiName.text = aiType[aiNamePosition];
+	}
+	public void VolumeReset(){
+		volumeTextValue.text = vol.ToString("0.0");
+		volumeSlider.value = vol;
+	}
+	public void getVolume(){
+		vol = AudioListener.volume;
 	}
 
 
