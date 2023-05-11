@@ -20,29 +20,25 @@ public class CardHover : MonoBehaviour
     {
         originalScale = transform.localScale;
         Cursor.visible = true;
-        dropFinished = true;
+        dropFinished = false;
         beingDragged = false;
     }
 
     public void OnMouseEnter()
     {
-        //Debug.Log("Mouse over card");
-        if (!isHovering && dropFinished && !beingDragged)
+       
+        if (!isHovering && !dropFinished && !beingDragged)
         {
             isHovering = true;
             LeanTween.scale(this.gameObject, new Vector3(6f, 6f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
             LeanTween.moveLocalY(this.gameObject, 80, 0.5f);
-            Debug.Log(originalScale);
-            /*enlargedCardInstance = Instantiate(enlargedCardPrefab, transform.position + Vector3.up * 230.5f, Quaternion.identity);
-            enlargedCardInstance.transform.localScale = originalScale * 5.0f;
-            enlargedCardInstance.GetComponent<cardHoverInfo>().cardName = "" + GetComponent<ThisCard>().cardName;
-            enlargedCardInstance.GetComponent<cardHoverInfo>().cardDesc = "" + GetComponent<ThisCard>().cardDesc;
-            enlargedCardInstance.GetComponent<Image>().sprite = GetComponent<Image>().sprite;*/
+            StartCoroutine(FadeOut());
         }
         else if(!isHovering && dropFinished)
         {
             isHovering = true;
-            LeanTween.scale(this.gameObject, new Vector3(6f, 6f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+            LeanTween.scale(this.gameObject, new Vector3(6f, 3.5f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+            StartCoroutine(FadeOut());
         }
     }
 
@@ -53,17 +49,113 @@ public class CardHover : MonoBehaviour
         {
             LeanTween.scale(this.gameObject, originalScale, 0.5f);
             LeanTween.moveLocalY(this.gameObject, 17, 0.5f);
+            if(isHovering)
+            {
+                StartCoroutine(FadeIn());
+            }
             isHovering = false;
         }
         else
         {
             LeanTween.scale(this.gameObject, originalScale, 0.5f);
+            StartCoroutine(FadeIn());
             isHovering = false;
         }
-        /*if (enlargedCardInstance != null)
+        
+    }
+
+    IEnumerator FadeOut()
+    {
+        //if in card area
+        if (!dropFinished)
         {
-            isHovering = false;
-            Destroy(enlargedCardInstance);
-        }*/
+            for (float i = 0; i < 0.5f; i += Time.deltaTime)
+            {
+                GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                yield return null;
+            }
+        }
+        else
+        {
+            //if attack card
+            if(this.gameObject.GetComponent<ThisCard>().thisId >= 4 && this.gameObject.GetComponent<ThisCard>().thisId <= 13)
+            {
+                for (float i = 0; i < 0.5f; i += Time.deltaTime)
+                {
+                    GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                    GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                    yield return null;
+                }
+            }
+            //if defense card
+            else if (this.gameObject.GetComponent<ThisCard>().thisId >= 0 && this.gameObject.GetComponent<ThisCard>().thisId <= 3)
+            {
+                for (float i = 0; i < 0.5f; i += Time.deltaTime)
+                {
+                    GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                    GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                    yield return null;
+                }
+            }
+            //if asset card
+            else if (this.gameObject.GetComponent<ThisCard>().thisId >= 14 && this.gameObject.GetComponent<ThisCard>().thisId <= 18)
+            {
+                for (float i = 0; i < 0.5f; i += Time.deltaTime)
+                {
+                    GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                    GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                    yield return null;
+                }
+            }
+        }
+    }
+
+    IEnumerator FadeIn()
+    {
+        if (!dropFinished)
+        {
+            for (float i = 0; i < 1; i += Time.deltaTime)
+            {
+                GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1f, i / 0.5f);
+                yield return null;
+            }
+        }
+        else
+        {
+            //if attack card
+            if (this.gameObject.GetComponent<ThisCard>().thisId >= 4 && this.gameObject.GetComponent<ThisCard>().thisId <= 13)
+            {
+                for (float i = 0; i < 0.5f; i += Time.deltaTime)
+                {
+                    GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                    GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                    yield return null;
+                }
+            }
+            //if defense card
+            else if (this.gameObject.GetComponent<ThisCard>().thisId >= 0 && this.gameObject.GetComponent<ThisCard>().thisId <= 3)
+            {
+                for (float i = 0; i < 0.5f; i += Time.deltaTime)
+                {
+                    GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                    GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                    yield return null;
+                }
+            }
+            //if asset card
+            else if (this.gameObject.GetComponent<ThisCard>().thisId >= 14 && this.gameObject.GetComponent<ThisCard>().thisId <= 18)
+            {
+                for (float i = 0; i < 0.5f; i += Time.deltaTime)
+                {
+                    GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                    GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                    yield return null;
+                }
+            }
+        }
     }
 }

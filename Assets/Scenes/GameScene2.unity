@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 57662329}
   - component: {fileID: 57662328}
   - component: {fileID: 57662327}
+  - component: {fileID: 57662332}
   m_Layer: 5
   m_Name: Enemy Attack Area
   m_TagString: Untagged
@@ -301,6 +302,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57662325}
   m_CullTransparentMesh: 1
+--- !u!225 &57662332
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57662325}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &84843738
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,8 +374,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -844,7 +857,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 8a2b9e2a607dd2143b58c44bc32410b4, type: 3}
+    m_Font: {fileID: 12800000, guid: 5dd49b3eacc540408c98eee0de38e0f1, type: 3}
     m_FontSize: 14
     m_FontStyle: 3
     m_BestFit: 0
@@ -2220,6 +2233,7 @@ GameObject:
   - component: {fileID: 830463481}
   - component: {fileID: 830463480}
   - component: {fileID: 830463479}
+  - component: {fileID: 830463483}
   m_Layer: 6
   m_Name: Player Asset Area Parent
   m_TagString: Untagged
@@ -2333,6 +2347,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830463477}
   m_CullTransparentMesh: 1
+--- !u!225 &830463483
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830463477}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &885783321
 GameObject:
   m_ObjectHideFlags: 0
@@ -3265,6 +3291,7 @@ GameObject:
   - component: {fileID: 1212205447}
   - component: {fileID: 1212205446}
   - component: {fileID: 1212205445}
+  - component: {fileID: 1212205449}
   m_Layer: 6
   m_Name: Player Attack Area Parent
   m_TagString: Untagged
@@ -3378,6 +3405,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1212205443}
   m_CullTransparentMesh: 1
+--- !u!225 &1212205449
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212205443}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1258309982
 GameObject:
   m_ObjectHideFlags: 0
@@ -3518,8 +3557,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3843,6 +3882,7 @@ GameObject:
   - component: {fileID: 1278226076}
   - component: {fileID: 1278226075}
   - component: {fileID: 1278226074}
+  - component: {fileID: 1278226079}
   m_Layer: 5
   m_Name: Enemy Defense Area
   m_TagString: Untagged
@@ -3961,6 +4001,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278226072}
   m_CullTransparentMesh: 1
+--- !u!225 &1278226079
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278226072}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1299316995
 GameObject:
   m_ObjectHideFlags: 0
@@ -4466,6 +4518,7 @@ GameObject:
   - component: {fileID: 1540333697}
   - component: {fileID: 1540333696}
   - component: {fileID: 1540333695}
+  - component: {fileID: 1540333699}
   m_Layer: 6
   m_Name: Player Defense Area Parent
   m_TagString: Untagged
@@ -4579,6 +4632,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540333693}
   m_CullTransparentMesh: 1
+--- !u!225 &1540333699
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540333693}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1649654468
 GameObject:
   m_ObjectHideFlags: 0
@@ -4862,6 +4927,7 @@ GameObject:
   - component: {fileID: 1697954963}
   - component: {fileID: 1697954964}
   - component: {fileID: 1697954965}
+  - component: {fileID: 1697954966}
   m_Layer: 5
   m_Name: Enemy Asset Area
   m_TagString: Untagged
@@ -4980,6 +5046,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136cc20364758bc48b9a580ff03f5bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1697954966
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697954959}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1729717685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5158,8 +5236,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5427,8 +5505,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Player Points:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6259,8 +6337,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Enemy Points:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
-  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

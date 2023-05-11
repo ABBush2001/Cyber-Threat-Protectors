@@ -208,10 +208,17 @@ public class PlayDrop : MonoBehaviour, IDropHandler
         Cursor.lockState = CursorLockMode.Locked;         //card anim
         Cursor.visible = false;                          //card anim
 
+        //reset opacity
+        GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = 1f;
+        GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = 1f;
+        GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = 1f;
+
+
         LeanTween.scale(it, new Vector3(1.7f, 1.7f, 1.7f), 0);
         LeanTween.scale(it, newScale, 0.5f).setEase(LeanTweenType.easeOutElastic);
         yield return new WaitForSeconds(0.8f);
         it.GetComponent<CardHover>().originalScale = newScale;
+        it.GetComponent<CardHover>().dropFinished = true;
 
         Cursor.lockState = CursorLockMode.None;         //card anim
         Cursor.visible = true;                          //card anim
