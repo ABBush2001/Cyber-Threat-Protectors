@@ -1060,6 +1060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 377232590}
   - component: {fileID: 377232589}
+  - component: {fileID: 377232591}
   m_Layer: 0
   m_Name: MainMenuController
   m_TagString: Untagged
@@ -1099,6 +1100,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &377232591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377232588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a4cccfa7334ca949a6c6c10a6e23cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialToChange: {fileID: 367567587}
+  duration: 20
+  targetColor: {r: 0, g: 0.24100828, b: 1, a: 1}
+  targetColor2: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &393240750
 GameObject:
   m_ObjectHideFlags: 0
