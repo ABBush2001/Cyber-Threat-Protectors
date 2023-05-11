@@ -967,7 +967,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4cccfa7334ca949a6c6c10a6e23cbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bg: {fileID: 233091354}
+  materialToChange: {fileID: 233091354}
+  duration: 20
+  targetColor: {r: 0.42954636, g: 1, b: 0, a: 0}
+  targetColor2: {r: 1, g: 0, b: 0.97747326, a: 0}
 --- !u!1 &266155128
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Globalization;
 
 public class MainMenu : MonoBehaviour
 {
@@ -35,11 +36,12 @@ public class MainMenu : MonoBehaviour
 	}
 
 	public void SetVolume(float volume){
-		AudioListener.volume = volume;
+		//AudioListener.volume = volume;
 		volumeTextValue.text = volume.ToString("0.0");
 	}
 
 	public void VolumeApply(){
+		AudioListener.volume = float.Parse(volumeTextValue.text);
 		PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
 		//show prompt
 		StartCoroutine(ConfirmationBox());
