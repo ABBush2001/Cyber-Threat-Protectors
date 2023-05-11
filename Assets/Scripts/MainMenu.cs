@@ -22,7 +22,7 @@ public class MainMenu : MonoBehaviour
 	void Start()
 	{
 		aiType = new string[] {"Defensive", "Aggresive", "Chaotic"};
-		aiName.text = aiType[aiNamePosition];
+		//aiName.text = aiType[aiNamePosition];
 	}
     public void PlayGame()
 	{
