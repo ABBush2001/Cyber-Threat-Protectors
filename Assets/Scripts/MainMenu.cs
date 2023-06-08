@@ -30,7 +30,7 @@ public class MainMenu : MonoBehaviour
 	}
     public void PlayGame()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
 	}
 	
 	public void QuitGame()
@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
 		AudioListener.volume = float.Parse(volumeTextValue.text);
 		PlayerPrefs.SetFloat("masterVolume", AudioListener.volume);
 		//show prompt
-		StartCoroutine(ConfirmationBox());
+		//StartCoroutine(ConfirmationBox());
 	}
 
 	public IEnumerator ConfirmationBox(){
