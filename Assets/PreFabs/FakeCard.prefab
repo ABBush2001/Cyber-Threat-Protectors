@@ -299,9 +299,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac1c9efac00dd9c41a6da463ba07b9a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enlargedCardPrefab: {fileID: 1501995504976720624, guid: 39b85df7555fae64caffc93d181c35c6, type: 3}
+  originalScale: {x: 0, y: 0, z: 0}
   nameText: {fileID: 0}
   descriptionText: {fileID: 0}
+  blankCard: {fileID: 1901475081029691327, guid: f7c8d9f4cf6a565448392142381f5931, type: 3}
+  forgotToPatchStarted: 0
 --- !u!114 &-2140933977906323664
 MonoBehaviour:
   m_ObjectHideFlags: 0

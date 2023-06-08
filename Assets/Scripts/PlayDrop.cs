@@ -17,7 +17,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
     public GameObject enemyAssetArea;
 
     public GameObject hardwareScreen;
-	public GameObject forgotToPatchScreen;
+
+    public GameObject eventSystem;
 
     private CanvasGroup canvasGroup;
 
@@ -80,43 +81,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 			//else if card played is forgot to patch AND there are at least two cards in play OR Security Training in play
 			else if(eventData.pointerDrag.gameObject.GetComponent<ThisCard>().thisId == 20)
 			{
-                int j;
-
-                for (j = 0; j < enemyDefenseArea.transform.childCount; j++)
-                {
-                    if (enemyDefenseArea.transform.GetChild(j).GetComponent<ThisCardEnemy>().thisId == 3 || enemyAttackArea.transform.childCount + enemyAssetArea.transform.childCount + enemyDefenseArea.transform.childCount >= 2)
-                    {
-                        //check if security training in play
-                        int i;
-
-                        for (i = 0; i < enemyDefenseArea.transform.childCount; i++)
-                        {
-                            if (enemyDefenseArea.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 3)
-                            {
-                                enemyDefenseArea.transform.GetChild(i).GetComponent<ForgotToPatchDestroy>().secTrain = true;
-                                break;
-                            }
-                        }
-
-                        //call forgot to patch script
-                        forgotToPatchScreen.GetComponent<ForgotToPatch>().StartUI();
-                        Destroy(eventData.pointerDrag.gameObject);
-                        return;
-                    }
-                }
-
-                //else
-                StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
-
-                eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
-                eventData.pointerDrag.transform.SetParent(playercardArea.transform);
-                eventData.pointerDrag.transform.localScale = Vector3.one;
-                eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
-                eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
-                //calls card effect
-                //eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
-                eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
-
+                eventSystem.GetComponent<ForgotToPatch>().StartUI();
+                Destroy(eventData.pointerDrag.gameObject);
                 
             }
 			else
@@ -219,6 +185,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
         yield return new WaitForSeconds(0.8f);
         it.GetComponent<CardHover>().originalScale = newScale;
         it.GetComponent<CardHover>().dropFinished = true;
+        it.GetComponent<CardHover>().beingDragged = false;
 
         Cursor.lockState = CursorLockMode.None;         //card anim
         Cursor.visible = true;                          //card anim

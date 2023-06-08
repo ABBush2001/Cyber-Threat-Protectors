@@ -598,7 +598,7 @@ MonoBehaviour:
   enemyDefenseArea: {fileID: 1278226072}
   enemyAssetArea: {fileID: 1697954959}
   hardwareScreen: {fileID: 266155128}
-  forgotToPatchScreen: {fileID: 266155128}
+  eventSystem: {fileID: 266155128}
 --- !u!114 &108773500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,7 +1195,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forgotToPatchScreen: {fileID: 2048977147}
+  enemyHand: {fileID: 1729717685}
   j: 0
+  enemyDefensePanel: {fileID: 1278226072}
+  UIStarted: 0
 --- !u!1 &357060674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,8 +1472,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: If Security Training in play, send this card and Security Training to the
-    discard - Else, choose 2 cards from opponents hand and remove them
+  m_text: Choose two cards from your opponent's hand to remove!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2219,7 +2221,7 @@ MonoBehaviour:
   enemyDefenseArea: {fileID: 1278226072}
   enemyAssetArea: {fileID: 1697954959}
   hardwareScreen: {fileID: 266155128}
-  forgotToPatchScreen: {fileID: 266155128}
+  eventSystem: {fileID: 266155128}
 --- !u!1 &830463477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2282,7 +2284,7 @@ MonoBehaviour:
   enemyDefenseArea: {fileID: 1278226072}
   enemyAssetArea: {fileID: 1697954959}
   hardwareScreen: {fileID: 1277222181}
-  forgotToPatchScreen: {fileID: 0}
+  eventSystem: {fileID: 266155128}
 --- !u!114 &830463480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3340,7 +3342,7 @@ MonoBehaviour:
   enemyDefenseArea: {fileID: 0}
   enemyAssetArea: {fileID: 1697954959}
   hardwareScreen: {fileID: 1277222181}
-  forgotToPatchScreen: {fileID: 0}
+  eventSystem: {fileID: 266155128}
 --- !u!114 &1212205446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4567,7 +4569,7 @@ MonoBehaviour:
   enemyDefenseArea: {fileID: 1278226072}
   enemyAssetArea: {fileID: 1697954959}
   hardwareScreen: {fileID: 1277222181}
-  forgotToPatchScreen: {fileID: 0}
+  eventSystem: {fileID: 266155128}
 --- !u!114 &1540333696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5071,7 +5073,7 @@ GameObject:
   - component: {fileID: 1729717687}
   - component: {fileID: 1729717690}
   - component: {fileID: 1729717691}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Enemy Card Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5157,7 +5159,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1729717685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -5165,8 +5167,8 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 0
+  m_ChildAlignment: 3
+  m_Spacing: -80
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -6816,7 +6818,7 @@ MonoBehaviour:
   enemyDefenseArea: {fileID: 1278226072}
   enemyAssetArea: {fileID: 1697954959}
   hardwareScreen: {fileID: 266155128}
-  forgotToPatchScreen: {fileID: 266155128}
+  eventSystem: {fileID: 266155128}
 --- !u!114 &2122834649
 MonoBehaviour:
   m_ObjectHideFlags: 0

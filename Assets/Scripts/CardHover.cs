@@ -12,6 +12,8 @@ public class CardHover : MonoBehaviour
     private bool isHovering = false;
     public bool dropFinished;
     public bool beingDragged;
+    private bool colorChanged;
+    private bool clickedOnce;
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
@@ -22,23 +24,42 @@ public class CardHover : MonoBehaviour
         Cursor.visible = true;
         dropFinished = false;
         beingDragged = false;
+        colorChanged = false;
+        clickedOnce = false;
+    }
+
+    private void Update()
+    {
+        if(colorChanged)
+        {
+            if(Input.GetMouseButtonDown(0) && clickedOnce == false)
+            {
+                clickedOnce = true;
+                if (!isHovering && !dropFinished && !beingDragged)
+                {
+                    this.gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
+                    isHovering = true;
+                    LeanTween.scale(this.gameObject, new Vector3(6f, 6f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+                    LeanTween.moveLocalY(this.gameObject, 80, 0.5f);
+                    StartCoroutine(FadeOut());
+                }
+                else if (!isHovering && dropFinished)
+                {
+                    this.gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
+                    isHovering = true;
+                    LeanTween.scale(this.gameObject, new Vector3(6f, 3.5f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+                    StartCoroutine(FadeOut());
+                }
+            }
+        }
     }
 
     public void OnMouseEnter()
     {
-       
-        if (!isHovering && !dropFinished && !beingDragged)
+        if (!colorChanged)
         {
-            isHovering = true;
-            LeanTween.scale(this.gameObject, new Vector3(6f, 6f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
-            LeanTween.moveLocalY(this.gameObject, 80, 0.5f);
-            StartCoroutine(FadeOut());
-        }
-        else if(!isHovering && dropFinished)
-        {
-            isHovering = true;
-            LeanTween.scale(this.gameObject, new Vector3(6f, 3.5f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
-            StartCoroutine(FadeOut());
+            this.gameObject.GetComponent<Image>().color = new Color(0, 255, 1);
+            colorChanged = true;
         }
     }
 
@@ -47,6 +68,8 @@ public class CardHover : MonoBehaviour
         //Debug.Log("Mouse exit card");
         if (!beingDragged)
         {
+            clickedOnce = false;
+            this.gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
             LeanTween.scale(this.gameObject, originalScale, 0.5f);
             LeanTween.moveLocalY(this.gameObject, 17, 0.5f);
             if(isHovering)
@@ -54,12 +77,17 @@ public class CardHover : MonoBehaviour
                 StartCoroutine(FadeIn());
             }
             isHovering = false;
+            colorChanged = false;
+            
         }
         else
         {
+            clickedOnce = false;
+            this.gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
             LeanTween.scale(this.gameObject, originalScale, 0.5f);
             StartCoroutine(FadeIn());
             isHovering = false;
+            colorChanged = false;
         }
         
     }

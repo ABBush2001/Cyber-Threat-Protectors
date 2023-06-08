@@ -400,6 +400,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enlargedCardPrefab: {fileID: 1501995504976720624, guid: 39b85df7555fae64caffc93d181c35c6, type: 3}
+  originalScale: {x: 0, y: 0, z: 0}
+  dropFinished: 0
+  beingDragged: 0
   nameText: {fileID: 0}
   descriptionText: {fileID: 0}
 --- !u!61 &5217656919523342979

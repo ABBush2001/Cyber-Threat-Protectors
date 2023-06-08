@@ -13,6 +13,9 @@ public class CardHoverEnemy : MonoBehaviour
 
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descriptionText;
+    public GameObject blankCard;
+
+    public bool forgotToPatchStarted = false;
 
     private void Start()
     {
@@ -23,7 +26,7 @@ public class CardHoverEnemy : MonoBehaviour
     public void OnMouseEnter()
     {
         //Debug.Log("Mouse over card");
-        if (!isHovering)
+        if (!isHovering && !forgotToPatchStarted && !blankCard.GetComponent<ForgotToPatchRemove>().discarded)
         {
             isHovering = true;
             LeanTween.scale(this.gameObject, new Vector3(3f, 3f, 3f), 0.5f);
@@ -37,13 +40,10 @@ public class CardHoverEnemy : MonoBehaviour
 
     public void OnMouseExit()
     {
-        //Debug.Log("Mouse exit card");
-        LeanTween.scale(this.gameObject, originalScale, 0.5f);
-        isHovering=false;
-        /*if (enlargedCardInstance != null)
+        if (!blankCard.GetComponent<ForgotToPatchRemove>().discarded)
         {
+            LeanTween.scale(this.gameObject, originalScale, 0.5f);
             isHovering = false;
-            Destroy(enlargedCardInstance);
-        }*/
+        }
     }
 }

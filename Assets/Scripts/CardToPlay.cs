@@ -37,25 +37,35 @@ public class CardToPlay : MonoBehaviour
         
         It.SetActive(false);
         validCard = Hand.GetComponent<EnemyPlayArea>().checkDefenseEnemy(It);
-        
-        if(validCard){
-            LeanTween.scale(It, new Vector3(1.7f, 1.7f, 1.7f), 0);
-            LeanTween.scale(It, new Vector3(1.5f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
 
-            It.transform.SetParent(Hand.transform);
-		    It.transform.localScale = Vector3.one;
-		    It.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
-		    It.transform.eulerAngles = new Vector3(25, 0, 0);
+        if (!GameObject.Find("EventSystem").GetComponent<ForgotToPatch>().UIStarted)
+        {
+            if (validCard)
+            {
+                LeanTween.scale(It, new Vector3(1.7f, 1.7f, 1.7f), 0);
+                LeanTween.scale(It, new Vector3(1.5f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+
+                It.transform.SetParent(Hand.transform);
+                It.transform.localScale = Vector3.one;
+                It.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
+                It.transform.eulerAngles = new Vector3(25, 0, 0);
+                It.SetActive(true);
+                StartCoroutine(addSprite());
+                //Debug.Log("Card ID being played: " + It.GetComponent<ThisCardEnemy>().thisId);
+            }
+            else
+            {
+                //It.GetComponent<Card>().addToDeck(false);
+                //Debug.Log("Card ID being sent to discard: " + It.GetComponent<ThisCardEnemy>().thisId);
+                Deck.staticEnemyDeck.Add(new Card(enemyCard.thisId, enemyCard.cardTypeID, enemyCard.cardName, enemyCard.cardDamage,
+                 enemyCard.cardPoints, enemyCard.cardDefense, enemyCard.cardDesc, enemyCard.numberOfCardsInDeck));
+                Destroy(It); //need to make it so it adds it back to the deck
+            }
+        }
+        else
+        {
             It.SetActive(true);
             StartCoroutine(addSprite());
-            //Debug.Log("Card ID being played: " + It.GetComponent<ThisCardEnemy>().thisId);
-        }
-        else{
-            //It.GetComponent<Card>().addToDeck(false);
-            //Debug.Log("Card ID being sent to discard: " + It.GetComponent<ThisCardEnemy>().thisId);
-            Deck.staticEnemyDeck.Add(new Card(enemyCard.thisId, enemyCard.cardTypeID, enemyCard.cardName, enemyCard.cardDamage,
-             enemyCard.cardPoints, enemyCard.cardDefense, enemyCard.cardDesc, enemyCard.numberOfCardsInDeck));
-            Destroy(It); //need to make it so it adds it back to the deck
         }
     }
 
