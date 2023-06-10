@@ -26,6 +26,8 @@ public class ForgotToPatchRemove : MonoBehaviour
         {
             discarded = true;
             this.GetComponent<CanvasGroup>().alpha = 0;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             //set blank to not active
             //spawn in next card from deck, do animation to show the card
@@ -75,5 +77,8 @@ public class ForgotToPatchRemove : MonoBehaviour
         }
 
         eventSystem.GetComponent<ForgotToPatch>().count++;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

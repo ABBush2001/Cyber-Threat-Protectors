@@ -38,7 +38,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
-				eventData.pointerDrag.transform.localScale = Vector3.one;
+				//eventData.pointerDrag.transform.localScale = Vector3.one;
 				eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
 				eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
 				//calls card effect
@@ -68,7 +68,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
-                eventData.pointerDrag.transform.localScale = Vector3.one;
+                //eventData.pointerDrag.transform.localScale = Vector3.one;
                 eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                 eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
                 //calls card effect
@@ -99,7 +99,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 
                             eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                             eventData.pointerDrag.transform.SetParent(playercardArea.transform);
-                            eventData.pointerDrag.transform.localScale = Vector3.one;
+                            //eventData.pointerDrag.transform.localScale = Vector3.one;
                             eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                             eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
 
@@ -113,7 +113,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Defense Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Defense Area").transform);
-                    eventData.pointerDrag.transform.localScale = Vector3.one;
+                    //eventData.pointerDrag.transform.localScale = Vector3.one;
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
 
@@ -127,7 +127,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Attack Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Attack Area").transform);
-                    eventData.pointerDrag.transform.localScale = Vector3.one;
+                    //eventData.pointerDrag.transform.localScale = Vector3.one;
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
 
@@ -141,7 +141,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 
                     eventData.pointerDrag.GetComponent<ThisCard>().lastParent = GameObject.Find("Player Asset Area").transform.name;
                     eventData.pointerDrag.transform.SetParent(GameObject.Find("Player Asset Area").transform);
-                    eventData.pointerDrag.transform.localScale = Vector3.one;
+                    //eventData.pointerDrag.transform.localScale = Vector3.one;
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
                 }
