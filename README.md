@@ -3,10 +3,8 @@
 Welcome to the cyber threat protectors repo! Stay tuned for future updates.
 
 **known issues for the game**
-- need to revise in-game visuals
-- minor gameplay bug found related to forgot to patch and card zoom
-- need to finish/revise menues
+- minor gameplay bug found related to card zoom
 
-**Current Version One Release Goal: Late Spring**
+**Current Version One Release Goal: Early-Mid June**
 
 Play the current alpha release [here.](https://nipshot.itch.io/cyber-threat-protectors-digital-alpha)
