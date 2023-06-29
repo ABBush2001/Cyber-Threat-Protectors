@@ -702,7 +702,7 @@ public class TurnSystem : MonoBehaviour
 
          //Debug.Log("number of cards in hand: " + playerHand.transform.childCount);
          //StartCoroutine(drawCard());
-        if(playerAssetArea.transform.childCount + playerAttackArea.transform.childCount + playerDefenseArea.transform.childCount < maxHand){
+        if(playerCardArea.transform.childCount < maxHand){
             button.enabled = false;
             StartCoroutine(drawCard());
         }

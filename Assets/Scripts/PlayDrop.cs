@@ -64,7 +64,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 				}
 
                 //else
-                StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
+                //StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
 
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);
