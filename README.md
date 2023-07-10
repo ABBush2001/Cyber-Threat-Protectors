@@ -3,7 +3,9 @@
 Welcome to the cyber threat protectors repo! Stay tuned for future updates.
 
 **known issues for the game**
-- minor gameplay bug found related to card zoom
+- Minor UI revisions could be made
+- User study/post-mortem needs to be conducted to find areas for improvement
+- Game needs to be refactored
 
 **Current Version One Release Goal: Mid-Late July**
 
