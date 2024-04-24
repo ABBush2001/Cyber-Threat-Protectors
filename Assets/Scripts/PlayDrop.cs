@@ -180,7 +180,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
         GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = 1f;
 
 
-        LeanTween.scale(it, new Vector3(1.7f, 1.7f, 1.7f), 0);
+        LeanTween.scale(it, new Vector3(2f, 2f, 2f), 0);
         LeanTween.scale(it, newScale, 0.5f).setEase(LeanTweenType.easeOutElastic);
         yield return new WaitForSeconds(0.8f);
         it.GetComponent<CardHover>().originalScale = newScale;

@@ -12,7 +12,7 @@ public class WrongDrop : MonoBehaviour, IDropHandler
         if (eventData.pointerDrag != null && eventData.pointerDrag.gameObject.GetComponent<Drag>())
         {
             LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(3f, 3f, 3f), 0.5f).setEase(LeanTweenType.easeOutElastic);
 
             eventData.pointerDrag.transform.SetParent(GameObject.Find(eventData.pointerDrag.GetComponent<ThisCard>().lastParent).transform);
             eventData.pointerDrag.transform.localScale = Vector3.one;

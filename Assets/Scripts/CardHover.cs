@@ -39,15 +39,28 @@ public class CardHover : MonoBehaviour
                 {
                     this.gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
                     isHovering = true;
-                    LeanTween.scale(this.gameObject, new Vector3(6f, 6f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
-                    LeanTween.moveLocalY(this.gameObject, 80, 0.5f);
+                    LeanTween.scale(this.gameObject, new Vector3(10f, 10f, 10f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+                    LeanTween.moveLocalY(this.gameObject, 100, 0.5f);
                     StartCoroutine(FadeOut());
                 }
                 else if (!isHovering && dropFinished)
                 {
                     this.gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
                     isHovering = true;
-                    LeanTween.scale(this.gameObject, new Vector3(6f, 3.5f, 6f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+                    LeanTween.scale(this.gameObject, new Vector3(15f, 10f, 10f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+
+                    //asset
+                    if(this.gameObject.GetComponent<ThisCard>().thisId > 13 && this.gameObject.GetComponent<ThisCard>().thisId < 19)
+                    {
+                        LeanTween.moveLocalY(this.gameObject, 80, 0.5f);    
+                    }
+                    //defense
+                    else if(this.gameObject.GetComponent<ThisCard>().thisId < 4)
+                    {
+                        LeanTween.moveLocalY(this.gameObject, 50, 0.5f);
+                    }
+
+
                     StartCoroutine(FadeOut());
                 }
             }

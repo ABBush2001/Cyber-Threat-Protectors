@@ -18,7 +18,7 @@ public class CardToHand : MonoBehaviour
 		//It.transform.localScale = Vector3.one;
 		It.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		It.transform.eulerAngles = new Vector3(25, 0, 0);
-        StartCoroutine(animWaitForHover(It, new Vector3(1, 1, 1)));
+        StartCoroutine(animWaitForHover(It, new Vector3(3, 3, 3)));
         Hand.transform.GetComponent<PlayerCardArea>().checkForDefense();
 
         StartCoroutine(addSprite());
@@ -39,7 +39,7 @@ public class CardToHand : MonoBehaviour
     IEnumerator animWaitForHover(GameObject it, Vector3 newScale)
     {
         LeanTween.scale(it, new Vector3(1.7f, 1.7f, 1.7f), 0);
-        LeanTween.scale(it, newScale, 0.5f).setEase(LeanTweenType.easeOutElastic);
+        LeanTween.scale(it, newScale, 1f).setEase(LeanTweenType.easeOutElastic);
         yield return new WaitForSeconds(0.8f);
         it.GetComponent<CardHover>().originalScale = newScale;
     }

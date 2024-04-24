@@ -959,7 +959,8 @@ public class TurnSystem : MonoBehaviour
 
         for (int i = curCount; i < 4; i++)
         {
-            Instantiate(CardToHand, transform.position, transform.rotation);
+            GameObject card = Instantiate(CardToHand, transform.position, transform.rotation);
+            LeanTween.scale(card, new Vector3(2, 2, 2), 0.001f);
             yield return new WaitForSeconds(1);
         }
         button.enabled = true;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6422,6 +6422,7 @@ GameObject:
   - component: {fileID: 1299317000}
   - component: {fileID: 1299316999}
   - component: {fileID: 1299317001}
+  - component: {fileID: 1299317002}
   m_Layer: 6
   m_Name: Player Card Area Parent
   m_TagString: Untagged
@@ -6500,6 +6501,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136cc20364758bc48b9a580ff03f5bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1299317002
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299316995}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1312547894
 GameObject:
   m_ObjectHideFlags: 0

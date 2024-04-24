@@ -28,9 +28,13 @@ public class InitialDeal : MonoBehaviour
         for (int i = 0; i < 4; i++)
 		{
 			yield return new WaitForSeconds(1);
-			Instantiate(CardToHand, transform.position, transform.rotation);
-            Instantiate(CardToHandEnemy, transform.position, transform.rotation);
-		}
+			GameObject card = Instantiate(CardToHand, transform.position, transform.rotation);
+            GameObject enemyCard = Instantiate(CardToHandEnemy, transform.position, transform.rotation);
+
+            Debug.Log("Working");
+
+            
+        }
 
         Cursor.lockState = CursorLockMode.None;         //card anim
         Cursor.visible = true;                          //card anim

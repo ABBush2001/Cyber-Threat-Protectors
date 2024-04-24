@@ -13,7 +13,7 @@ public class HandDrop : MonoBehaviour
 		{
 			eventData.pointerDrag.GetComponent<ThisCard>().lastParent = cardArea.transform.name;
 			eventData.pointerDrag.transform.SetParent(cardArea.transform);
-			eventData.pointerDrag.transform.localScale = Vector3.one;
+			eventData.pointerDrag.transform.localScale = new Vector3(3, 3, 3);
 			eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
 			eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
 			//calls card effect
