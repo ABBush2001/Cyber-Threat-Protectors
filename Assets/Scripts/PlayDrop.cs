@@ -130,7 +130,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     //eventData.pointerDrag.transform.localScale = Vector3.one;
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
-
+                    
                     
                 }
                 //asset card
@@ -145,15 +145,6 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
                 }
-
-                /*eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playArea.transform.name;
-                eventData.pointerDrag.transform.SetParent(playArea.transform);
-				eventData.pointerDrag.transform.localScale = Vector3.one;
-				eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
-				eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);*/
-                //calls card effect
-                //eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
-                //eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
 
                 //destroy card's drag component
                 Destroy(eventData.pointerDrag.gameObject.GetComponent<Drag>());

@@ -158,6 +158,21 @@ public class CardHoverEnemy : MonoBehaviour
                 yield return null;
             }
         }
+        //special
+        else
+        {
+            for (float i = 0; i < 0.5f; i += Time.deltaTime)
+            {
+                GameObject.Find("Enemy Defense Area").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                GameObject.Find("Enemy Asset Area").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+                GameObject.Find("Player Card Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(1, 0.1f, i / 0.5f);
+
+                yield return null;
+            }
+        }
     }
 
     IEnumerator FadeIn()
@@ -198,6 +213,20 @@ public class CardHoverEnemy : MonoBehaviour
             {
                 GameObject.Find("Enemy Asset Area").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
                 GameObject.Find("Enemy Attack Area").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                GameObject.Find("Player Card Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                yield return null;
+            }
+        }
+        //special
+        else
+        {
+            for (float i = 0; i < 1; i += Time.deltaTime)
+            {
+                GameObject.Find("Enemy Asset Area").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
+                GameObject.Find("Enemy Defense Area").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
                 GameObject.Find("Player Attack Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
                 GameObject.Find("Player Defense Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);
                 GameObject.Find("Player Asset Area Parent").GetComponent<CanvasGroup>().alpha = Mathf.Lerp(0.1f, 1, i / 0.5f);

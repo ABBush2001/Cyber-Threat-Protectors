@@ -52,6 +52,7 @@ public class TurnSystem : MonoBehaviour
     bool doublef = false;
 
     int turn = 1;
+    int enemyHandCount;
 
     public string cardPref;
 
@@ -61,6 +62,7 @@ public class TurnSystem : MonoBehaviour
     {
 
         isYourTurn = true;
+        enemyHandCount = 4;
         yourTurn = 1;
         enemyTurn = 0;
         maxHand = 7;
@@ -220,6 +222,14 @@ public class TurnSystem : MonoBehaviour
     {
 
         //disable all special cards in hand to start, if the associated defense card is not in play
+        for(int i = 0; i < playerCardArea.transform.childCount; i++)
+        {
+            if(playerCardArea.transform.GetChild(i).GetComponent<ThisCard>().thisId == 5 || playerCardArea.transform.GetChild(i).GetComponent<ThisCard>().thisId == 11 || playerCardArea.transform.GetChild(i).GetComponent<ThisCard>().thisId == 13)
+            {
+                playerCardArea.transform.GetChild(i).GetComponent<ThisCard>().isBlocked = true;
+            }
+        }
+
         if (encryp == false)
         {
             for (int i = 0; i < playerAttackArea.transform.childCount; i++)
@@ -259,6 +269,7 @@ public class TurnSystem : MonoBehaviour
             //Anti-Malware
             if (enemyDefenseArea.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 0)
             {
+                //in play
                 for (int j = 0; j < playerAttackArea.transform.childCount; j++)
                 {
                     if (playerAttackArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13)
@@ -271,12 +282,27 @@ public class TurnSystem : MonoBehaviour
 
                     }
                 }
+                //in hand
+                for (int j = 0; j < playerCardArea.transform.childCount; j++)
+                {
+                    //trojan horse and i love you virus
+                    if (playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 6 || playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 10)
+                    {
+                        playerCardArea.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                    }
+                    //malware rules not updated
+                    if(playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 13)
+                    {
+                        playerCardArea.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
+                    }
+                }
             }
             
 
-            //Weak Encryption Key
+            //Encryption
             if (enemyDefenseArea.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 1)
             {
+                //in play
                 for (int j = 0; j < playerAttackArea.transform.childCount; j++)
                 {
                     if (playerAttackArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5)
@@ -289,14 +315,31 @@ public class TurnSystem : MonoBehaviour
 
                     }
                 }
+                //in hand
+                for (int j = 0; j < playerCardArea.transform.childCount; j++)
+                {
+                    //wireless sniffing
+                    if (playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 4)
+                    {
+                        playerCardArea.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                    }
+                    //weak encryption key
+                    if(playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 5)
+                    {
+                        playerCardArea.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
+                    }
+                }
+
             }
             
             
-            //Firewall Rules
+            //Firewall
             if (enemyDefenseArea.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 2)
             {
+                //in play
                 for (int j = 0; j < playerAttackArea.transform.childCount; j++)
                 {
+                    //firewall rules not updated
                     if (playerAttackArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11)
                     {
                         if(doublef == false)
@@ -306,8 +349,38 @@ public class TurnSystem : MonoBehaviour
                         }
                         
                     }
+                    
+                }
+                //in hand
+                for(int j = 0; j < playerCardArea.transform.childCount; j++)
+                {
+                    //ip spoofing and denial of service
+                    if (playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 9 || playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 12)
+                    {
+                        playerCardArea.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                    }
+                    //firewall rules not updated
+                    if(playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 11)
+                    {
+                        playerCardArea.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = false;
+                    }
                 }
             }
+
+            //Security Training
+            if(enemyDefenseArea.transform.GetChild(i).GetComponent<ThisCardEnemy>().thisId == 3)
+            {
+                //in hand
+                for (int j = 0; j < playerCardArea.transform.childCount; j++)
+                {
+                    //phishing and password cracked
+                    if (playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 7 || playerCardArea.transform.GetChild(j).GetComponent<ThisCard>().thisId == 8)
+                    {
+                        playerCardArea.transform.GetChild(j).gameObject.GetComponent<ThisCard>().isBlocked = true;
+                    }
+                }
+            }
+
             
         }
     }
@@ -467,7 +540,8 @@ public class TurnSystem : MonoBehaviour
         enemyTurn += 1; 
         turnText.text = "Opponent Turn";
         //getScore();
-        
+        enemyHandCount = 4;
+
         EnemyTurn();
     }
 
@@ -717,28 +791,41 @@ public class TurnSystem : MonoBehaviour
         /*Check if card is valid, then if so check if it matches pref. If not, go to next card. 
          * If none match pref, do a second loop and find the first card that is valid and play it*/
 
-        bool foundCardPref;
+        /*New code (4/25/2024): AI should continue this process until the max number of cards are in play*/
+
         bool validCard = true;
-        int cardCount;
 
-        foundCardPref = false;
-        cardCount = 0;
+        //foundCardPref = false;
 
-        
-
-        while (cardCount < 5 && foundCardPref == false)
+        /*IDEA: See how many cards are in hand - play random number of cards from hand*/
+        for(int i = 0; i < enemyHandCount; i++)
         {
             //grab first card from deck, pass it into checkDefense
-       
+
             GameObject temp = new GameObject();
             temp.AddComponent<ThisCardEnemy>();
-            temp.GetComponent<ThisCardEnemy>().SetIDAndType(Deck.staticEnemyDeck[cardCount].id, Deck.staticEnemyDeck[cardCount].cardType);
+            temp.GetComponent<ThisCardEnemy>().SetIDAndType(Deck.staticEnemyDeck[i].id, Deck.staticEnemyDeck[i].cardType);
+
             //check if card we are checking is attack, defense or asset
 
             //defense
-            if(temp.GetComponent<ThisCardEnemy>().thisId >= 0 && temp.GetComponent<ThisCardEnemy>().thisId <= 3)
+            if (temp.GetComponent<ThisCardEnemy>().thisId >= 0 && temp.GetComponent<ThisCardEnemy>().thisId <= 3)
             {
-                validCard = enemyDefenseArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
+                //for weak encryption key and firewall, have to check if necessary conditions are met
+                //weak encryption
+                if (temp.GetComponent<ThisCardEnemy>().thisId == 1 && playerAttackArea.GetComponentInChildren<ThisCard>().thisId != 5)
+                {
+                    Debug.Log("Enemy tried to play encryption but was unable!");
+                }
+                //firewall
+                else if (temp.GetComponent<ThisCardEnemy>().thisId == 2 && playerAttackArea.GetComponentInChildren<ThisCard>().thisId != 11)
+                {
+                    Debug.Log("Enemy tried to play firewall but was unable!");
+                }
+                else
+                {
+                    validCard = enemyDefenseArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
+                }
             }
             //attack
             else if (temp.GetComponent<ThisCardEnemy>().thisId >= 4 && temp.GetComponent<ThisCardEnemy>().thisId <= 13)
@@ -753,93 +840,38 @@ public class TurnSystem : MonoBehaviour
             //special
             else
             {
-                validCard = enemyAttackArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
-            }
-            //validCard = playAreaEnemy.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
-            //if card is valid, check preference - else, continue
-            if(validCard)
-            {
-                if (string.Equals(temp.GetComponent<ThisCardEnemy>().cardTypeID, cardPref))
+                //for special cards, need to check if special conditions are met
+                //hardware failure
+                if (temp.GetComponent<ThisCardEnemy>().thisId == 19 && playerAssetArea.transform.childCount == 0)
                 {
-                    foundCardPref = true;
-                    //swap card to index 0 in deck, then instantiate and break out of loop
-                    if(string.Equals(temp.GetComponent<ThisCardEnemy>().thisId, Deck.staticEnemyDeck[0].id))
-                    {
-                        Instantiate(CardToPlay, transform.position, transform.rotation);
-                    }
-                    else
-                    {
-                        Card swap = Deck.staticEnemyDeck[0];
-                        Deck.staticEnemyDeck[0] = Deck.staticEnemyDeck[cardCount];
-                        Deck.staticEnemyDeck[cardCount] = swap;
-                        Instantiate(CardToPlay, transform.position, transform.rotation);
-                    }
+                    Debug.Log("Enemy tried to play Hardware Failure but was unable!");
                 }
-            }
-
-            cardCount++;
-            Destroy(temp);
-        }
-
-        cardCount = 0;
-
-        //if no card with pref is found, play first valid card
-        if (foundCardPref == false)
-        {
-            validCard = false;
-
-            while (cardCount < 5 && validCard == false)
-            {
-                //grab first card from deck, pass it into checkDefense
-
-                GameObject temp = new GameObject();
-                temp.AddComponent<ThisCardEnemy>();
-                temp.GetComponent<ThisCardEnemy>().SetIDAndType(Deck.staticEnemyDeck[cardCount].id, Deck.staticEnemyDeck[cardCount].cardType);
-                //check if card we are checking is attack, defense or asset
-
-                //defense
-                if (temp.GetComponent<ThisCardEnemy>().thisId >= 0 && temp.GetComponent<ThisCardEnemy>().thisId <= 3)
+                //forgot to patch
+                else if (temp.GetComponent<ThisCardEnemy>().thisId == 20 && (playerDefenseArea.GetComponentInChildren<ThisCard>().thisId != 3 || playerCardArea.gameObject.transform.childCount < 2))
                 {
-                    validCard = enemyDefenseArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
+                    Debug.Log("Enemy tried to play Forgot to Patch but was unable!");
                 }
-                //attack
-                else if (temp.GetComponent<ThisCardEnemy>().thisId >= 4 && temp.GetComponent<ThisCardEnemy>().thisId <= 13)
-                {
-                    validCard = enemyAttackArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
-                }
-                //asset
-                else if (temp.GetComponent<ThisCardEnemy>().thisId >= 14 && temp.GetComponent<ThisCardEnemy>().thisId <= 18)
-                {
-                    validCard = enemyAssetArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
-                }
-                //special
                 else
                 {
                     validCard = enemyAttackArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
                 }
-                //validCard = playAreaEnemy.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
+            }
 
-                //if card is valid, check preference - else, continue
-                if (validCard)
+            if (validCard)
+            {
+                //swap card to index 0 in deck, then instantiate
+                if (string.Equals(temp.GetComponent<ThisCardEnemy>().thisId, Deck.staticEnemyDeck[0].id))
                 {
-
-                    //swap card to index 0 in deck, then instantiate and break out of loop
-                    if (string.Equals(temp.GetComponent<ThisCardEnemy>().thisId, Deck.staticEnemyDeck[0].id))
-                    {
-                        Instantiate(CardToPlay, transform.position, transform.rotation);
-                    }
-                    else
-                    {
-                        Card swap = Deck.staticEnemyDeck[0];
-                        Deck.staticEnemyDeck[0] = Deck.staticEnemyDeck[cardCount];
-                        Deck.staticEnemyDeck[cardCount] = swap;
-                        Instantiate(CardToPlay, transform.position, transform.rotation);
-                    }
-
+                    Instantiate(CardToPlay, transform.position, transform.rotation);
                 }
-
-                cardCount++;
-                Destroy(temp);
+                else
+                {
+                    Card swap = Deck.staticEnemyDeck[0];
+                    Deck.staticEnemyDeck[0] = Deck.staticEnemyDeck[i];
+                    Deck.staticEnemyDeck[i] = swap;
+                    Instantiate(CardToPlay, transform.position, transform.rotation);
+                    enemyHandCount--;
+                }
             }
         }
 
@@ -850,105 +882,6 @@ public class TurnSystem : MonoBehaviour
 
         StartCoroutine(EnemyEndTurn());
     }
-
-
-    /*IEnumerator waitCoroutine()
-    {
-        //Debug.Log("Started enemy turn at timestamp: " + Time.time);
-        yield return new WaitForSeconds(1);
-
-        //instantiate card from enemy deck to play
-        bool foundCardPref;
-        int cardCount;
-
-        foundCardPref = false;
-        cardCount = 0;
-
-        //check for preference - goes through card in hand, if card matches pref play it, else cycle until end
-        while (cardCount < 5 && foundCardPref == false){
-
-            Instantiate(CardToPlay, transform.position, transform.rotation);
-            yield return new WaitForSeconds(2);
-            if (playAreaEnemy.transform.childCount > 0)
-            {
-
-                int lastChildIndex = playAreaEnemy.transform.childCount - 1;
-
-                ThisCardEnemy recentCardPlayed = playAreaEnemy.transform.GetChild(lastChildIndex).GetComponent<ThisCardEnemy>();
-                recentCardPlayed.gameObject.SetActive(false);
-                if (string.Equals(recentCardPlayed.cardTypeID, cardPref))
-                {
-                    foundCardPref = true;
-                    Debug.Log("Card matches card pref: " + recentCardPlayed.cardTypeID);
-                    recentCardPlayed.gameObject.SetActive(true);
-                }
-                else
-                {
-                    cardCount++;
-                    //Deck.staticEnemyDeck.Add(new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
-                    //recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
-                    Deck.staticEnemyDeck.Insert(4, new Card(recentCardPlayed.thisId, recentCardPlayed.cardTypeID, recentCardPlayed.cardName, recentCardPlayed.cardDamage,
-                 recentCardPlayed.cardPoints, recentCardPlayed.cardDefense, recentCardPlayed.cardDesc, recentCardPlayed.numberOfCardsInDeck));
-                    Destroy(recentCardPlayed.gameObject);
-                }
-            }
-            
-        }
-
-        Debug.Log(playAreaEnemy.transform.childCount);
-
-        if(foundCardPref == false){
-            Debug.Log("couldn't find card pref, playing next available card");
-            Instantiate(CardToPlay, transform.position, transform.rotation);
-        }
-
-
-       
-
-        yield return new WaitForSeconds(1);
-
-        //Debug.Log("Ended enemy turn at timestamp : " + Time.time);
-        
-        EnemyEndTurn();
-    }*/
-
-    /*public void getScore(){
-        //int numOfPlayerChildren = playArea.transform.childCount;
-        //int numOfEnemyChildren = playAreaEnemy.transform.childCount;
-        int pDefense = 0;
-        int pAttack = 0;
-        int eDefense = 0;
-        int eAttack = 0;
-
-        foreach (Transform child in playArea.transform)
-        {
-            playerCurPoints += child.GetComponent<ThisCard>().cardPoints;
-            pAttack += child.GetComponent<ThisCard>().cardDamage;
-            pDefense += child.GetComponent<ThisCard>().cardDefense; 
-        }
-        foreach (Transform child in playAreaEnemy.transform)
-        {
-            enemyCurPoints += child.GetComponent<ThisCardEnemy>().cardPoints;
-            eAttack += child.GetComponent<ThisCardEnemy>().cardDamage;
-            eDefense += child.GetComponent<ThisCardEnemy>().cardDefense; 
-        }
-        if(pDefense >= eAttack){
-            pDefense=0;
-            eAttack=0;
-        }
-        if(eDefense >= pAttack){
-            eDefense=0;
-            pAttack=0;
-        }
-        playerCurPoints = playerCurPoints - (eAttack - pDefense);
-        enemyCurPoints = enemyCurPoints - (pAttack - eDefense);
-        
-        }
-        playerPointText.text = playerCurPoints.ToString();
-        enemyPointText.text = enemyCurPoints.ToString();
-
-
-    }*/
 
     IEnumerator drawCard(){
         int curCount = playerCardArea.transform.childCount;
