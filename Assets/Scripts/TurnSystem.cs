@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
+using System;
 
 public class TurnSystem : MonoBehaviour
 {
@@ -711,48 +712,16 @@ public class TurnSystem : MonoBehaviour
                     Debug.Log("Security Training not found!");
 
                     //if security training not found, grab up to two random cards from player's hand and destroy them
-                    if(playerAssetArea.transform.childCount + playerAttackArea.transform.childCount + playerDefenseArea.transform.childCount >= 2)
+                    if(playerCardArea.transform.childCount >= 2)
                     {
-                        //destroy an asset and attack card
-                        if (playerAssetArea.transform.childCount > 0)
-                        {
-                            Destroy(playerAssetArea.transform.GetChild(0).gameObject);
-                        }
-                        else if (playerDefenseArea.transform.childCount > 0)
-                        {
-                            Destroy(playerDefenseArea.transform.GetChild(0).gameObject);
-                        }
+                        yield return new WaitForSeconds(3);
 
-
-                        if (playerAttackArea.transform.childCount > 0)
-                        {
-                            Destroy(playerAttackArea.transform.GetChild(0).gameObject);
-                        }
-                        else if(playerDefenseArea.transform.childCount > 0)
-                        {
-                            Destroy(playerDefenseArea.transform.GetChild(0).gameObject);
-                        }
+                        int position = UnityEngine.Random.Range(0, playerCardArea.transform.childCount);
+                        Destroy(playerCardArea.transform.GetChild(position).gameObject);
+                        position = UnityEngine.Random.Range(0, playerCardArea.transform.childCount);
+                        Destroy(playerCardArea.transform.GetChild(position).gameObject);
 
                         Destroy(enemyAttackArea.transform.GetChild(j).gameObject);
-                        break;
-                    }
-                    else if(playerAssetArea.transform.childCount + playerAttackArea.transform.childCount + playerDefenseArea.transform.childCount == 1)
-                    {
-                        if (playerAssetArea.transform.childCount > 0)
-                        {
-                            Destroy(playerAssetArea.transform.GetChild(0).gameObject);
-                        }
-                        else if (playerDefenseArea.transform.childCount > 0)
-                        {
-                            Destroy(playerDefenseArea.transform.GetChild(0).gameObject);
-                        }
-                        else if (playerAttackArea.transform.childCount > 0)
-                        {
-                            Destroy(playerAttackArea.transform.GetChild(0).gameObject);
-                        }
-
-                        Destroy(enemyAttackArea.transform.GetChild(j).gameObject);
-                        break;
                     }
                 }
             }
@@ -804,25 +773,33 @@ public class TurnSystem : MonoBehaviour
 
             GameObject temp = new GameObject();
             temp.AddComponent<ThisCardEnemy>();
-            temp.GetComponent<ThisCardEnemy>().SetIDAndType(Deck.staticEnemyDeck[i].id, Deck.staticEnemyDeck[i].cardType);
+            try
+            {
+                temp.GetComponent<ThisCardEnemy>().SetIDAndType(Deck.staticEnemyDeck[i].id, Deck.staticEnemyDeck[i].cardType);
+            }
+            catch(Exception e)
+            {
+                Debug.Log("Index Out of Bounds Exception");
+            }
 
             //check if card we are checking is attack, defense or asset
 
             //defense
             if (temp.GetComponent<ThisCardEnemy>().thisId >= 0 && temp.GetComponent<ThisCardEnemy>().thisId <= 3)
             {
-                //for weak encryption key and firewall, have to check if necessary conditions are met
-                //weak encryption
-                if (temp.GetComponent<ThisCardEnemy>().thisId == 1 && playerAttackArea.GetComponentInChildren<ThisCard>().thisId != 5)
+                bool foundDef = false;
+
+                //check that the same defense card is not already in play
+                for(int a = 0; a < enemyDefenseArea.transform.childCount; a++)
                 {
-                    Debug.Log("Enemy tried to play encryption but was unable!");
+                    if (temp.GetComponent<ThisCardEnemy>().thisId == enemyDefenseArea.transform.GetChild(a).GetComponent<ThisCardEnemy>().thisId)
+                    {
+                        Debug.Log("Enemy tried to play defense card but was unable!");
+                        foundDef = true;
+                        break;
+                    }
                 }
-                //firewall
-                else if (temp.GetComponent<ThisCardEnemy>().thisId == 2 && playerAttackArea.GetComponentInChildren<ThisCard>().thisId != 11)
-                {
-                    Debug.Log("Enemy tried to play firewall but was unable!");
-                }
-                else
+                if(foundDef == false)
                 {
                     validCard = enemyDefenseArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
                 }
@@ -830,7 +807,38 @@ public class TurnSystem : MonoBehaviour
             //attack
             else if (temp.GetComponent<ThisCardEnemy>().thisId >= 4 && temp.GetComponent<ThisCardEnemy>().thisId <= 13)
             {
-                validCard = enemyAttackArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
+                bool excepFound = false;
+
+                //special attack cards
+                for(int a = 0; a < playerDefenseArea.transform.childCount; a++)
+                {
+                    //weak encryption key
+                    if (temp.GetComponent<ThisCardEnemy>().thisId == 5 && playerDefenseArea.GetComponentInChildren<ThisCard>().thisId != 1)
+                    {
+                        Debug.Log("Tried to play weak encryption key but was unable!");
+                        excepFound = true;
+                        break;
+                    }
+                    //firewall rules
+                    else if (temp.GetComponent<ThisCardEnemy>().thisId == 11 && playerDefenseArea.GetComponentInChildren<ThisCard>().thisId != 2)
+                    {
+                        Debug.Log("Tried to play firewall rules but was unable!");
+                        excepFound = true;
+                        break;
+                    }
+                    //anti-malware
+                    else if (temp.GetComponent<ThisCardEnemy>().thisId == 13 && playerDefenseArea.GetComponentInChildren<ThisCard>().thisId != 0)
+                    {
+                        Debug.Log("Tried to play anti-malware but was unable!");
+                        excepFound = true;
+                        break;
+                    }
+                }
+
+                if (excepFound == false)
+                {
+                    validCard = enemyAttackArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
+                }
             }
             //asset
             else if (temp.GetComponent<ThisCardEnemy>().thisId >= 14 && temp.GetComponent<ThisCardEnemy>().thisId <= 18)
@@ -840,18 +848,27 @@ public class TurnSystem : MonoBehaviour
             //special
             else
             {
+                bool specialCardUnable = false;
+
                 //for special cards, need to check if special conditions are met
                 //hardware failure
                 if (temp.GetComponent<ThisCardEnemy>().thisId == 19 && playerAssetArea.transform.childCount == 0)
                 {
                     Debug.Log("Enemy tried to play Hardware Failure but was unable!");
+                    specialCardUnable = true;
                 }
                 //forgot to patch
-                else if (temp.GetComponent<ThisCardEnemy>().thisId == 20 && (playerDefenseArea.GetComponentInChildren<ThisCard>().thisId != 3 || playerCardArea.gameObject.transform.childCount < 2))
+                for(int a = 0; a < playerDefenseArea.transform.childCount; a++)
                 {
-                    Debug.Log("Enemy tried to play Forgot to Patch but was unable!");
+                    if (temp.GetComponent<ThisCardEnemy>().thisId == 20 && (playerDefenseArea.transform.GetChild(a).GetComponent<ThisCard>().thisId != 3 && playerCardArea.gameObject.transform.childCount < 2))
+                    {
+                        Debug.Log("Enemy tried to play Forgot to Patch but was unable!");
+                        specialCardUnable = true;
+                        break;
+                    }
                 }
-                else
+                
+                if(specialCardUnable == false)
                 {
                     validCard = enemyAttackArea.GetComponent<EnemyPlayArea>().checkDefenseEnemy(temp);
                 }
