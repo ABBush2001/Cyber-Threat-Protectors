@@ -3,7 +3,11 @@
 Welcome to the cyber threat protectors repo! Stay tuned for future updates.
 
 **known issues for the game**
-- Minor UI revisions could be made
+- The win/loss UI needs to be updated
+- Music and SFX need to be replaced
+- Enemy AI needs to be refined
+- Pause/Settings menu options need to be finished
+- Tutorial level could be made
 - User study/post-mortem needs to be conducted to find areas for improvement
 - Game needs to be refactored
 
