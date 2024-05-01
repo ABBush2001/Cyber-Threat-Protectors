@@ -105,6 +105,18 @@ public class TurnSystem : MonoBehaviour
 
     public void PlayerTurn()
     {
+        //check to make sure forgot to patch is not left in enemy play
+        if (enemyAttackArea.transform.childCount > 0)
+        {
+            for (int i = 0; i < enemyAttackArea.transform.childCount; i++)
+            {
+                if(enemyAttackArea.transform.GetChild(i).gameObject.GetComponent<ThisCardEnemy>().thisId == 20)
+                {
+                    Destroy(enemyAttackArea.transform.GetChild(i).gameObject);
+                }
+            }
+        }
+
 
         //DETERMINING BLOCKED ATTACK CARDS
         
@@ -723,12 +735,12 @@ public class TurnSystem : MonoBehaviour
                     }
                 }
 
-                if(secTrainFound == false)
+                if (secTrainFound == false)
                 {
                     Debug.Log("Security Training not found!");
 
                     //if security training not found, grab up to two random cards from player's hand and destroy them
-                    if(playerCardArea.transform.childCount >= 2)
+                    if (playerCardArea.transform.childCount >= 2)
                     {
                         yield return new WaitForSeconds(3);
 
@@ -740,11 +752,8 @@ public class TurnSystem : MonoBehaviour
                         Destroy(enemyAttackArea.transform.GetChild(j).gameObject);
                     }
                 }
-                else
-                {
-                    yield return new WaitForSeconds(3);
-                    Destroy(enemyAttackArea.transform.GetChild(j).gameObject);
-                }
+                
+                
             }
         }
 
@@ -885,7 +894,7 @@ public class TurnSystem : MonoBehaviour
                     {
                         Debug.Log("Enemy tried to play Forgot to Patch but was unable!");
                         specialCardUnable = true;
-                        break;
+                        //break;
                     }
                 }
                 

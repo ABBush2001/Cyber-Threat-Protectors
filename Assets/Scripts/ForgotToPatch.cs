@@ -17,7 +17,7 @@ public class ForgotToPatch : MonoBehaviour
 
     public int count;
 
-    private Vector3[] positions = new Vector3[4];
+    private Vector3[] positions = new Vector3[5];
     private Vector3[] positionsPanels = new Vector3[4];
 
     private void Start()
@@ -41,7 +41,7 @@ public class ForgotToPatch : MonoBehaviour
 
         int tmp = 500;
 
-        for(int j = 3; j >= 0; j--)
+        for(int j = enemyHand.transform.childCount-1; j >= 0; j--)
         {
             positions[j] = enemyHand.transform.GetChild(j).transform.position;
             LeanTween.moveLocal(enemyHand.transform.GetChild(j).gameObject, new Vector3(tmp, 40, 0), 1);
@@ -62,7 +62,7 @@ public class ForgotToPatch : MonoBehaviour
 
             //call to close pop up, return cards and go back to game as normal
             forgotToPatchScreen.SetActive(false);
-            for(int i = 3; i >= 0; i--)
+            for(int i = enemyHand.transform.childCount - 1; i >= 0; i--)
             {
                 LeanTween.move(enemyHand.transform.GetChild(i).gameObject, positions[i], 1);
             }
