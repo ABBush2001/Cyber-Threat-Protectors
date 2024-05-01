@@ -724,6 +724,11 @@ public class TurnSystem : MonoBehaviour
                         Destroy(enemyAttackArea.transform.GetChild(j).gameObject);
                     }
                 }
+                else
+                {
+                    yield return new WaitForSeconds(3);
+                    Destroy(enemyAttackArea.transform.GetChild(j).gameObject);
+                }
             }
         }
 

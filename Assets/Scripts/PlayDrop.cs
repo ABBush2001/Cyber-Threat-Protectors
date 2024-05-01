@@ -34,7 +34,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
             //if called card is unplayable at the moment
             if (eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true)
             {
-                StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
+                StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(3, 3, 3)));
 
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                 eventData.pointerDrag.transform.SetParent(playercardArea.transform);

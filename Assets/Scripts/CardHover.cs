@@ -35,12 +35,12 @@ public class CardHover : MonoBehaviour
             if(Input.GetMouseButtonDown(0) && clickedOnce == false)
             {
                 clickedOnce = true;
-                if (!isHovering && !dropFinished && !beingDragged)
+                if ((!isHovering && (!dropFinished || this.gameObject.GetComponent<ThisCard>().isBlocked) && !beingDragged) || this.gameObject.transform.parent.name == "Player Card Area")
                 {
                     this.gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
                     isHovering = true;
-                    LeanTween.scale(this.gameObject, new Vector3(10f, 10f, 10f), 0.5f).setEase(LeanTweenType.easeOutCirc);
-                    LeanTween.moveLocalY(this.gameObject, 100, 0.5f);
+                    LeanTween.scale(this.gameObject, new Vector3(15f, 15f, 15f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+                    LeanTween.moveLocalY(this.gameObject, 200, 0.5f);
                     StartCoroutine(FadeOut());
                 }
                 else if (!isHovering && dropFinished)

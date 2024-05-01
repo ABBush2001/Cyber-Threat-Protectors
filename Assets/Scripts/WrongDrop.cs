@@ -6,13 +6,17 @@ using UnityEngine.EventSystems;
 public class WrongDrop : MonoBehaviour, IDropHandler
 {
 
+    private Vector3 originalScale;
+
     public void OnDrop(PointerEventData eventData)
     {
 
         if (eventData.pointerDrag != null && eventData.pointerDrag.gameObject.GetComponent<Drag>())
         {
-            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(1.7f, 1.7f, 1.7f), 0);
-            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(3f, 3f, 3f), 0.5f).setEase(LeanTweenType.easeOutElastic);
+            originalScale = eventData.pointerDrag.gameObject.transform.localScale;
+
+            LeanTween.scale(eventData.pointerDrag.gameObject, new Vector3(3f, 3f, 3f), 0);
+            LeanTween.scale(eventData.pointerDrag.gameObject, originalScale, 0.5f).setEase(LeanTweenType.easeOutElastic);
 
             eventData.pointerDrag.transform.SetParent(GameObject.Find(eventData.pointerDrag.GetComponent<ThisCard>().lastParent).transform);
             eventData.pointerDrag.transform.localScale = Vector3.one;
@@ -25,6 +29,7 @@ public class WrongDrop : MonoBehaviour, IDropHandler
             //figured out how to access card and discard it!!!!
             //eventData.pointerDrag.transform.GetComponent<Card>().MoveToDiscardPile();
             //Debug.Log ("Card discarded");
+
         }
     }
 }
