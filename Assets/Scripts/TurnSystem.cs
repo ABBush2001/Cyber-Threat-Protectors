@@ -11,6 +11,9 @@ using System;
 
 public class TurnSystem : MonoBehaviour
 {
+    private int turnTracker;
+
+    public int cardsPlayed;
 
     public GameObject CardToPlay;
 
@@ -61,7 +64,8 @@ public class TurnSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        cardsPlayed = 0;
+        turnTracker = 1;
         isYourTurn = true;
         enemyHandCount = 4;
         yourTurn = 1;
@@ -92,6 +96,11 @@ public class TurnSystem : MonoBehaviour
             defeatScreen.SetActive(true);
         }
 
+    }
+
+    public int getTurnTracker()
+    {
+        return turnTracker;
     }
 
     public void PlayerTurn()
@@ -388,6 +397,11 @@ public class TurnSystem : MonoBehaviour
 
     public void PlayerEndTurn()
     {
+        //go through player hand and destroy remaining cards
+        for(int i = 0; i < playerCardArea.transform.childCount; i++)
+        {
+            Destroy(playerCardArea.transform.GetChild(i).gameObject);
+        }
 
         //variable to hold player points gained or lost in this turn that will be calculated
         int tempPlayerPoints = 0;
@@ -534,7 +548,9 @@ public class TurnSystem : MonoBehaviour
         playerPointText.text = playerCurPoints.ToString();
         enemyPointText.text = enemyCurPoints.ToString();
 
-
+        //update turn counter and reset card count
+        turnTracker++;
+        cardsPlayed = 0;
 
         //change info for enemy turn
         isYourTurn = false;
@@ -912,12 +928,14 @@ public class TurnSystem : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;         //card anim
         UnityEngine.Cursor.visible = false;                          //card anim
 
-        for (int i = curCount; i < 4; i++)
+        
+        for (int i = curCount; i < 5; i++)
         {
             GameObject card = Instantiate(CardToHand, transform.position, transform.rotation);
             LeanTween.scale(card, new Vector3(2, 2, 2), 0.001f);
             yield return new WaitForSeconds(1);
         }
+        
         button.enabled = true;
 
         UnityEngine.Cursor.lockState = CursorLockMode.None;         //card anim

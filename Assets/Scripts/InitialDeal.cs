@@ -25,7 +25,7 @@ public class InitialDeal : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;       //for card anim
         Cursor.visible = false;                         //card anim
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
 		{
 			yield return new WaitForSeconds(1);
 			GameObject card = Instantiate(CardToHand, transform.position, transform.rotation);

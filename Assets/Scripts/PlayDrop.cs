@@ -32,7 +32,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 
 
             //if called card is unplayable at the moment
-            if (eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true)
+            if (eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true || (eventSystem.GetComponent<TurnSystem>().getTurnTracker() == 1 && eventSystem.GetComponent<TurnSystem>().cardsPlayed == 4) || (eventSystem.GetComponent<TurnSystem>().getTurnTracker() > 1 && eventSystem.GetComponent<TurnSystem>().cardsPlayed == 3))
             {
                 StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(3, 3, 3)));
 
@@ -75,7 +75,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                 //eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
                 eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
 
-                
+                //update card counter
+                eventSystem.GetComponent<TurnSystem>().cardsPlayed++;
 
             }
 			//else if card played is forgot to patch AND there are at least two cards in play OR Security Training in play
@@ -83,7 +84,9 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 			{
                 eventSystem.GetComponent<ForgotToPatch>().StartUI();
                 Destroy(eventData.pointerDrag.gameObject);
-                
+                //update card counter
+                eventSystem.GetComponent<TurnSystem>().cardsPlayed++;
+
             }
 			else
             {
@@ -117,7 +120,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
 
-                    
+                    //update card counter
+                    eventSystem.GetComponent<TurnSystem>().cardsPlayed++;
                 }
                 //attack card
                 else if (eventData.pointerDrag.GetComponent<ThisCard>().thisId >= 4 && eventData.pointerDrag.GetComponent<ThisCard>().thisId <= 13)
@@ -130,8 +134,9 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     //eventData.pointerDrag.transform.localScale = Vector3.one;
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
-                    
-                    
+
+                    //update card counter
+                    eventSystem.GetComponent<TurnSystem>().cardsPlayed++;
                 }
                 //asset card
                 else
@@ -144,6 +149,9 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     //eventData.pointerDrag.transform.localScale = Vector3.one;
                     eventData.pointerDrag.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
                     eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
+
+                    //update card counter
+                    eventSystem.GetComponent<TurnSystem>().cardsPlayed++;
                 }
 
                 //destroy card's drag component
