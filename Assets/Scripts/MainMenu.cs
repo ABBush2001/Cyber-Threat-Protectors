@@ -17,6 +17,8 @@ public class MainMenu : MonoBehaviour
 	[SerializeField] private TMP_Text aiName;
 	[SerializeField] private int aiNamePosition;
 
+	[SerializeField] private GameObject credits;
+
 	public float vol;
 	
 	string[] aiType;
@@ -79,5 +81,12 @@ public class MainMenu : MonoBehaviour
 		vol = AudioListener.volume;
 	}
 
-
+	public void openCredits()
+    {
+		credits.SetActive(true);
+    }
+	public void closeCredits()
+    {
+		credits.SetActive(false);
+    }
 }

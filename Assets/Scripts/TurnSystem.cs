@@ -64,6 +64,7 @@ public class TurnSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         cardsPlayed = 0;
         turnTracker = 1;
         isYourTurn = true;
@@ -90,10 +91,12 @@ public class TurnSystem : MonoBehaviour
         if(playerCurPoints >= playerMaxPoints){
             //play victory screen
             victoryScreen.SetActive(true);
+            Time.timeScale = 0;
         }
         if(enemyCurPoints >= enemyMaxPoints){
             //play losing screen
             defeatScreen.SetActive(true);
+            Time.timeScale = 0;
         }
 
     }
