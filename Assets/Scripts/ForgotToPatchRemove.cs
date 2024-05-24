@@ -39,7 +39,7 @@ public class ForgotToPatchRemove : MonoBehaviour
             newCard.transform.localScale += (diff - newCard.transform.localScale);
 
             LeanTween.moveLocalY(newCard, -50, 0.5f);
-            LeanTween.scale(newCard, new Vector3(7, 7, 7), 0.5f);
+            LeanTween.scale(newCard, new Vector3(5, 5, 5), 0.5f);
             StartCoroutine(FadeOut(newCard.gameObject));
         }
     }

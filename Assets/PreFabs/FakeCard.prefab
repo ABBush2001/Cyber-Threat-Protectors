@@ -122,8 +122,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 31, y: 43}
+  m_AnchoredPosition: {x: 0.005524, y: 0.007080078}
+  m_SizeDelta: {x: 141.0196, y: 198.875}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1901475081029691324
 CanvasRenderer:
@@ -239,7 +239,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 140, y: 200}
+  m_Size: {x: 200, y: 250}
   m_EdgeRadius: 0
 --- !u!114 &-3529403801234087664
 MonoBehaviour:
@@ -300,10 +300,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originalScale: {x: 0, y: 0, z: 0}
+  forgotToPatchStarted: 0
   nameText: {fileID: 0}
   descriptionText: {fileID: 0}
   blankCard: {fileID: 1901475081029691327, guid: f7c8d9f4cf6a565448392142381f5931, type: 3}
-  forgotToPatchStarted: 0
 --- !u!114 &-2140933977906323664
 MonoBehaviour:
   m_ObjectHideFlags: 0

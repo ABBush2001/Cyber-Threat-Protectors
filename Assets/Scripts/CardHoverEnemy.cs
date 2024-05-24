@@ -73,8 +73,8 @@ public class CardHoverEnemy : MonoBehaviour
                 {
                     this.gameObject.GetComponent<Image>().color = new Color(255, 255, 255);
                     isHovering = true;
-                    LeanTween.scale(this.gameObject, new Vector3(10.5f, 8f, 10f), 0.5f).setEase(LeanTweenType.easeOutCirc);
-                    LeanTween.moveLocalY(this.gameObject, -80, 0.5f);
+                    LeanTween.scale(this.gameObject, new Vector3(6f, 4f, 4f), 0.5f).setEase(LeanTweenType.easeOutCirc);
+                    LeanTween.moveLocalY(this.gameObject, -250, 0.5f);
                     StartCoroutine(FadeOut());
                 }
             }
@@ -105,7 +105,7 @@ public class CardHoverEnemy : MonoBehaviour
         if (isHovering)
         {
             StartCoroutine(FadeIn());
-            LeanTween.moveLocalY(this.gameObject, 5, 0.5f);
+            LeanTween.moveLocalY(this.gameObject, 1, 0.5f);
         }
         isHovering = false;
         colorChanged = false;

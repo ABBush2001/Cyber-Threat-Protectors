@@ -34,6 +34,8 @@ public class PlayDrop : MonoBehaviour, IDropHandler
             //if called card is unplayable at the moment
             if (eventData.pointerDrag.gameObject.GetComponent<ThisCard>().isBlocked == true || (eventSystem.GetComponent<TurnSystem>().getTurnTracker() == 1 && eventSystem.GetComponent<TurnSystem>().cardsPlayed == 4) || (eventSystem.GetComponent<TurnSystem>().getTurnTracker() > 1 && eventSystem.GetComponent<TurnSystem>().cardsPlayed == 3))
             {
+                Debug.Log("Card could not be played");
+
                 StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(3, 3, 3)));
 
                 eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
@@ -43,7 +45,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
 				eventData.pointerDrag.transform.eulerAngles = new Vector3(25, 0, 0);
 				//calls card effect
 				//eventData.pointerDrag.transform.GetComponent<Card>().cardActive = true;
-				eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = this.transform;
+				eventData.pointerDrag.transform.GetComponent<Drag>().parentToReturnTo = playercardArea.transform;
 
                 
             }
@@ -98,7 +100,7 @@ public class PlayDrop : MonoBehaviour, IDropHandler
                     {
                         if(playerDefenseArea.transform.GetChild(i).GetComponent<ThisCard>().thisId == eventData.pointerDrag.GetComponent<ThisCard>().thisId)
                         {
-                            StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(1, 1, 1)));
+                            StartCoroutine(animWaitForHover(eventData.pointerDrag.gameObject, new Vector3(3, 3, 3)));
 
                             eventData.pointerDrag.GetComponent<ThisCard>().lastParent = playercardArea.transform.name;
                             eventData.pointerDrag.transform.SetParent(playercardArea.transform);

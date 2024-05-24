@@ -17,8 +17,8 @@ public class CardToHandEnemy : MonoBehaviour
 		It.transform.localScale = Vector3.one;
 		It.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
 		It.transform.eulerAngles = new Vector3(25, 0, 0);
-        LeanTween.scale(It, new Vector3(1.7f, 1.7f, 1.7f), 0);
-        LeanTween.scale(It, new Vector3(1f, 1f, 1f), 0.5f).setEase(LeanTweenType.easeOutBounce);
+        LeanTween.scale(It, new Vector3(5f, 5f, 5f), 0);
+        LeanTween.scale(It, new Vector3(3f, 3f, 3f), 0.5f).setEase(LeanTweenType.easeOutBounce);
 
         StartCoroutine(addSprite());
     }

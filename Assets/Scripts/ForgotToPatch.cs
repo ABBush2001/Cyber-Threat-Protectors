@@ -39,7 +39,7 @@ public class ForgotToPatch : MonoBehaviour
 
         forgotToPatchScreen.SetActive(true);
 
-        int tmp = 500;
+        int tmp = 1000;
 
         for(int j = enemyHand.transform.childCount-1; j >= 0; j--)
         {
